@@ -1,0 +1,78 @@
+.TitleContainer {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  background-color: #c62641;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.TitleNameContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 55%;
+  max-width: 55%;
+  height: 55%;
+}
+
+.TitleText {
+  color: white;
+  text-transform: uppercase;
+  font-size: 3vw;
+  font-weight: bold;
+  text-align: center;
+  word-wrap: break-word;
+  line-height: 1.25;
+  letter-spacing: 3.5px;
+  margin: 0;
+}
+
+.TitleTextBackground {
+  font-size: 25vw;
+  font-weight: bold;
+  position: absolute;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.ReadContainer {
+  width: 25%;
+  height: 10%;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 1%;
+  justify-content: space-around;
+  margin: 0;
+}
+
+.ReadButton {
+  width: 35%;
+  height: 70%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c62641;
+  z-index: 2;
+}
+
+.AuthorContainer {
+  width: 25%;
+  height: 7%;
+  display: flex;
+  z-index: 2;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  font-size: 1.15rem;
+}

@@ -14,14 +14,14 @@
   align-items: flex-end;
   justify-content: center;
   width: 55%;
-  max-width: 55%;
   height: 55%;
 }
 
 .TitleText {
   color: white;
   text-transform: uppercase;
-  font-size: 3vw;
+  /* font-size: 3vw; */
+  font-size: max(min(32px, 12vw), 3vw);
   font-weight: bold;
   text-align: center;
   word-wrap: break-word;
@@ -31,16 +31,16 @@
 }
 
 .TitleTextBackground {
-  font-size: 25vw;
   font-weight: bold;
   position: absolute;
   line-height: 1.2;
   color: rgba(0, 0, 0, 0.1);
   z-index: 1;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
+  font-size: max(20rem, 25vw);
 }
 
 .ReadContainer {
@@ -74,5 +74,21 @@
   justify-content: center;
   color: white;
   text-align: center;
-  font-size: 1.15rem;
+  font-size: max(16px, 1.2vw);
+}
+
+/* For Mobile */
+
+@media screen and (max-width: 650px) {
+  .TitleContainer {
+    height: 100vh;
+  }
+  .TitleNameContainer {
+    padding-bottom: 10%;
+  }
+
+  .TitleTextBackground {
+    top: 50%;
+    font-size: 90vw;
+  }
 }

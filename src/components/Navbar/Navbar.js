@@ -9,6 +9,7 @@ class Navbar extends Component {
     this.state = {
       prevScrollpos: window.pageYOffset,
       visible: true,
+      sidebar: false,
     };
   }
 
@@ -34,6 +35,14 @@ class Navbar extends Component {
     });
   };
 
+  showSideBar = () => {
+    this.setState((prevState) => {
+      return {
+        sidebar: !prevState.sidebar,
+      };
+    });
+  };
+
   render() {
     return (
       <header
@@ -43,7 +52,17 @@ class Navbar extends Component {
       >
         <nav className="navbarContainer">
           <div className="navbarLogo">Logo</div>
-          <ul class="navigationLinks">
+          <ul
+            className={classnames("navigationLinks", {
+              "navbar--active": this.state.sidebar,
+            })}
+          >
+            <li className="sidebarBanner">
+              <div className="closeButton" onClick={this.showSideBar}>
+                <div className="close_line1"></div>
+                <div className="close_line2"></div>
+              </div>
+            </li>
             <li>
               <a href="#">Home</a>
             </li>
@@ -57,6 +76,11 @@ class Navbar extends Component {
               <a href="#">Contact</a>
             </li>
           </ul>
+          <div className="burger" onClick={this.showSideBar}>
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
+          </div>
         </nav>
       </header>
     );

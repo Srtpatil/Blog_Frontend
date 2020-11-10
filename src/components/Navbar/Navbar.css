@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   transition: top 0.6s;
-  background-color: #c62641;
+  background-color: var(--primary-color);
   height: 8%;
   z-index: 5;
   display: flex;
@@ -20,6 +20,19 @@
   padding: 0;
   list-style: none;
   display: flex;
+  transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.navigationLinks li {
+  /* background-color: red; */
+  padding: 12px 10px;
+}
+
+.navigationLinks li:hover {
+  /* background-color: var(--secondary-color); */
+  border-bottom: 1px solid white;
+  margin-bottom: -1px;
+  /* outline: 1px solid white; */
 }
 
 .navigationLinks a {
@@ -43,7 +56,6 @@
   font-size: max(1.8vw, 28px);
   margin-right: auto;
   font-weight: bold;
-  
 }
 
 /* For Mobile View */
@@ -62,6 +74,7 @@
   height: 3px;
   background-color: white;
   margin: 4px;
+  border-radius: 8px;
 }
 
 @media screen and (max-width: 700px) {
@@ -75,8 +88,9 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
-    transform: translateX(100%);
-    transition: transform 0.4s ease-in;
+    transform: translateX(130%);
+    transition: transform 0.35s ease-out;
+    box-shadow: -30px 0px 45px 0px rgba(50, 50, 50, 0.4);
   }
 
   .navigationLinks li {
@@ -86,12 +100,16 @@
     border-bottom: 0.5px solid rgba(144, 144, 144, 0.45);
   }
 
+  .navigationLinks li:hover {
+    border-bottom: 0.5px solid rgba(144, 144, 144, 0.45);
+  }
+
   .navigationLinks li a {
     color: black;
   }
 
   .navigationLinks li a:hover {
-    color: #c62641;
+    color: var(--primary-color);
   }
 
   .burger {
@@ -100,7 +118,7 @@
   }
 
   .burger:hover {
-    background-color: #db3753;
+    background-color: var(--secondary-color);
     -webkit-box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
     -moz-box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
     box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
@@ -110,14 +128,14 @@
     display: block;
     width: 100%;
     height: 10%;
-    background-color: #c62641;
+    background-color: var(--primary-color);
     box-shadow: 2px 2px 27px 0px rgba(50, 50, 50, 0.4);
   }
 
   .closeButton {
     display: flex;
     flex-direction: column;
-    width: 18%;
+    width: 16%;
     height: 100%;
     margin-left: auto;
     cursor: pointer;
@@ -127,24 +145,16 @@
   }
 
   .closeButton:hover {
-    background-color: #db3753;
-    -webkit-box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
-    -moz-box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
-    box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.4);
+    background-color: var(--secondary-color);
+    box-shadow: 2px 12px 27px 0px rgba(50, 50, 50, 0.35);
   }
 
-  .closeButton div {
-    width: 55%;
-    height: 5%;
-    background-color: white;
+  .navbarLogo {
+    font-size: 1.5rem;
   }
 
-  .close_line1 {
-    transform:  rotate(45deg) translate(-1px);
-  }
-
-  .close_line2 {
-    transform: rotate(-45deg) translate(1px, -3px) ;
+  .navbar {
+    height: 60px;
   }
 }
 

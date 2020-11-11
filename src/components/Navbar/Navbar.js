@@ -43,7 +43,7 @@ class Navbar extends Component {
 
   handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
-    let visible = currentScrollPos > 400;
+    let visible = currentScrollPos > 450;
 
     if (currentScrollPos <= 40) {
       visible = true;
@@ -68,6 +68,7 @@ class Navbar extends Component {
       <header
         className={classnames("navbar", {
           "navbar--hidden": !this.state.visible && !this.state.sidebar,
+          "navbar--opacity" : this.state.visible && (this.state.prevScrollpos >= 400)
         })}
       >
         <nav className="navbarContainer">

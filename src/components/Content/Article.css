@@ -19,30 +19,39 @@
   /* background-color: burlywood; */
 }
 
+.DatePointContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .DateContainerMob {
   display: none;
 }
 
 .PointContainer {
   position: absolute;
-  left: 97.2%;
-  top: 10%;
   width: 13px;
   height: 13px;
   border-radius: 20px;
   background-color: #c62641;
   z-index: 2;
+  right: -6.5px;
 }
 
 .date-day {
   color: #c62641;
   font-size: 4rem;
   margin-right: 10%;
+  margin-left: auto;
 }
 
 .date-month {
   font-size: 1rem;
   margin-right: 10%;
+  margin-left: auto;
 }
 
 .PostContainer {

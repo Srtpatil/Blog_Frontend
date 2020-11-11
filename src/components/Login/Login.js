@@ -2,7 +2,7 @@ import "./Login.css";
 import React, { Component } from "react";
 import Title from "../Title/Title";
 import Navbar from "../Navbar/Navbar";
-import LoginForm from "../Forms/LoginForm/LoginForm";
+import LoginForm from "../Forms/LoginForm";
 
 class Login extends Component {
   render() {

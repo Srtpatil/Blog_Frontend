@@ -7,9 +7,11 @@ const Article = (props) => {
     <div>
       <div className="ArticleContainer">
         <div className="DateContainer">
+          <div className="DatePointContainer">
           <div className="PointContainer"></div>
           <span className="date-day">{blog.day}</span>
           <span className="date-month">{blog.month}</span>
+          </div>
         </div>
 
         <div className="PostContainer">

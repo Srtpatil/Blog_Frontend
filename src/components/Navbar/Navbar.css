@@ -3,16 +3,21 @@
   position: fixed;
   top: 0;
   transition: top 0.6s;
-  background-color: var(--primary-color);
-  height: 70px;
+  background-color: rgba(0, 0, 0, 0);
+  height: 60px;
   z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 400ms ease-in;
 }
 
 .navbar--hidden {
   top: -10%;
+}
+
+.navbar--opacity {
+  background-color: var(--primary-color);
 }
 
 .navigationLinks {

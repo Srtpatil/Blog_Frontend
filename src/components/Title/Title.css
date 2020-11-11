@@ -88,6 +88,7 @@
   }
 
   .TitleTextBackground {
+    display: none;
     top: 50%;
     font-size: 80vw;
   }

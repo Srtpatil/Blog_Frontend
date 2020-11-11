@@ -1,0 +1,48 @@
+.ContentContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  width: max(min(1100px, 90vw), 60vw);
+  /* height: 1000px; */
+  position: absolute;
+  top: 60vh;
+  z-index: 2;
+  box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
+  background-color: #ffffff;
+}
+
+.TitleContentContainer {
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TitleBorder {
+  margin-top: 20px;
+  border-width: 0;
+  width: 50px;
+  height: 1px;
+  background-color: #cccccc;
+}
+
+/* For Mobile */
+@media screen and (max-width: 650px) {
+  .Main {
+    top: 95vh;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .TitleContentContainer {
+    margin-top: 60px;
+  }
+
+  .TitleBorder {
+    margin-top: 10px;
+  }
+}

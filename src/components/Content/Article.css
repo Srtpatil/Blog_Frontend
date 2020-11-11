@@ -1,0 +1,124 @@
+.ArticleContainer {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: antiquewhite; */
+  /* height: 200px; */
+  width: 100%;
+  /* border-bottom: 1px solid #aaaaaa; */
+}
+
+.DateContainer {
+  position: relative;
+  /* height: 200px; */
+  width: 30vw;
+  /* border-right: 1px solid #e7e7e7; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* background-color: burlywood; */
+}
+
+.DateContainerMob {
+  display: none;
+}
+
+.PointContainer {
+  position: absolute;
+  left: 97.2%;
+  top: 10%;
+  width: 13px;
+  height: 13px;
+  border-radius: 20px;
+  background-color: #c62641;
+  z-index: 2;
+}
+
+.date-day {
+  color: #c62641;
+  font-size: 4rem;
+  margin-right: 10%;
+}
+
+.date-month {
+  font-size: 1rem;
+  margin-right: 10%;
+}
+
+.PostContainer {
+  /* height: 200px; */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: aqua; */
+}
+
+.PostContainer::before {
+  content: "";
+  height: 90%;
+  position: absolute;
+  width: 1px;
+  background-color: rgb(236, 236, 236);
+  left: 23%;
+  top: 290px;
+  display: block;
+}
+
+.PostHeader {
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 80%;
+}
+
+.PostLink {
+  text-decoration: none;
+  font-size: 2.1rem;
+}
+
+.PostLink:link,
+:active,
+:visited {
+  color: black;
+}
+
+.PostLink:hover {
+  color: #c62641;
+}
+
+.AuthorLink {
+  text-decoration: none;
+  color: #aaaaaa;
+}
+
+.AuthorLink:hover {
+  color: black;
+  border-bottom: 1px solid black;
+}
+
+.PostContent {
+  width: 80%;
+  font-size: large;
+  color: #333333;
+  margin-bottom: 5%;
+}
+
+@media screen and (max-width: 650px) {
+  .DateContainer {
+    display: none;
+  }
+
+  .DateContainerMob {
+    display: block;
+    color: #c62641;
+    margin-bottom: 5%;
+  }
+
+  .PostContainer::before {
+    display: none;
+  }
+
+  .PointContainer {
+    display: none;
+  }
+}

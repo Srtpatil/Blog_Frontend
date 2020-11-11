@@ -13,8 +13,11 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  justify-content: center;
+  align-items: center;
   width: 55%;
   height: 55%;
+  flex-direction: column;
 }
 
 .TitleText {
@@ -36,19 +39,25 @@
   line-height: 1.2;
   color: rgba(0, 0, 0, 0.1);
   z-index: 1;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  /* top: 60%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
   user-select: none;
   font-size: max(20rem, 25vw);
 }
 
 .ReadContainer {
-  width: 25%;
+  width: 50%;
   height: 10%;
   display: flex;
   align-items: flex-end;
-  margin-top: 1%;
+  margin-top: 2%;
   justify-content: space-around;
   margin: 0;
 }
@@ -62,6 +71,20 @@
   align-items: center;
   color: var(--primary-color);
   z-index: 2;
+  cursor: pointer;
+}
+
+.ReadLaterButton {
+  width: 35%;
+  height: 70%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  border: 1px solid white;
+  z-index: 2;
+  cursor: pointer;
 }
 
 .AuthorContainer {
@@ -79,16 +102,43 @@
 
 /* For Mobile */
 
+@media screen and (max-width: 1350px) {
+  .ReadContainer {
+    width: 60%;
+    height: 10%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .ReadContainer {
+    width: 70%;
+    height: 10%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .ReadContainer {
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 650px) {
   .TitleContainer {
     height: 100vh;
   }
   .TitleNameContainer {
     padding-bottom: 10%;
+    width: 95%;
   }
 
   .TitleTextBackground {
-    top: 50%;
-    font-size: 80vw;
+    font-size: 350px;
+    justify-content: center;
+  }
+  .ReadContainer {
+    width: 85%;
+  }
+  .ReadButton {
+    height: 40px;
   }
 }

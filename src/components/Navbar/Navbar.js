@@ -2,7 +2,25 @@ import "./Navbar.css";
 import React, { Component } from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+function NavItem(props) {
+  return (
+    <li className="nav-item">
+      <a href="#">{props.title}</a>
+    </li>
+  );
+}
+
+function Burger(props) {
+  return (
+    <div className="burger" onClick={props.showSideBar}>
+      <div className="line1"></div>
+      <div className="line2"></div>
+      <div className="line3"></div>
+    </div>
+  );
+}
 
 class Navbar extends Component {
   constructor(props) {
@@ -68,24 +86,12 @@ class Navbar extends Component {
                 />
               </div>
             </li>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Portfolio</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
+            <NavItem title="Home" />
+            <NavItem title="About" />
+            <NavItem title="Portfolio" />
+            <NavItem title="Contact" />
           </ul>
-          <div className="burger" onClick={this.showSideBar}>
-            <div className="line1"></div>
-            <div className="line2"></div>
-            <div className="line3"></div>
-          </div>
+          <Burger showSideBar={this.showSideBar} />
         </nav>
       </header>
     );

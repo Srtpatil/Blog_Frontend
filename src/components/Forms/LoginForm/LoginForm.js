@@ -19,26 +19,6 @@ class LoginForm extends Component {
         </div>
 
         {/* Main Login Form start */}
-        {/* <form action="fakeurl.php" className="form">
-          <label className="emailLabel">Email : </label>
-          <input
-            type="email"
-            name="user-email"
-            id="user-email"
-            placeholder="Type your email"
-          />
-          <label className="passwordLabel">Password : </label>
-          <input
-            type="password"
-            name="user-password"
-            id="user-password"
-            placeholder="Type your password"
-          />
-          <div className="formButtonsContainer">
-            <div className="loginButton">Login</div>
-            <div className="signUpButton">Sign Up</div>
-          </div>
-        </form> */}
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={Yup.object().shape({

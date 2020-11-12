@@ -5,11 +5,12 @@ import Title from "../Title/Title";
 import "./Post.css";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
+import Footer from "../Footer/Footer";
 
 class Post extends Component {
   render() {
     return (
-      <>
+      <div>
         <Navbar />
         <Title
           homepage={false}
@@ -27,9 +28,40 @@ class Post extends Component {
               data={PostData.PostContent}
               readOnly={true}
             />
+
+            <div
+              className="TitleContentContainer"
+              style={{
+                marginTop: 0,
+              }}
+            >
+              <p>About the author</p>
+              <hr className="TitleBorder" />
+            </div>
+            <div className="AboutAuthorContainer">
+              <div className="AboutAuthorImageContainer">
+                <div className="AboutAuthorImage"></div>
+              </div>
+              <div className="AboutAuthorDescription">
+                <div className="AboutAuthorName">
+                  <p
+                    style={{
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {PostData.Author}
+                  </p>
+                </div>
+                <p className="AboutAuthorDescriptionText">
+                  {PostData.AuthorDescription}
+                </p>
+              </div>
+            </div>
           </div>
+
+          <Footer />
         </div>
-      </>
+      </div>
     );
   }
 }

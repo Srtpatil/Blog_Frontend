@@ -16,6 +16,7 @@ function HomePage() {
         divider={false}
       />
       <Content />
+      
     </div>
   );
 }

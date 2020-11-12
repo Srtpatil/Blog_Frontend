@@ -1,19 +1,26 @@
 .Footer {
-  padding: 20px;
-  background-color: var(--primary-color);
-  color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  color: #aaaaaa;
   text-align: center;
-  margin-top: 5%;
-  font-size: 20px;
+  margin-top: 90px;
+  font-size: 1.4rem;
   font-weight: bold;
+  width: 100%;
 }
 
-.sticky--footer {
-  padding: 20px;
-  background-color: var(--primary-color);
+.FooterBottomText {
   text-align: center;
-  margin-top: 5%;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* For Mobile */
+@media screen and (max-width: 650px) {
+  .Footer {
+    font-size: 1.2rem;
+  }
+  .FooterBottomText {
+    font-size: 16px;
+    line-height: 1.3;
+  }
 }

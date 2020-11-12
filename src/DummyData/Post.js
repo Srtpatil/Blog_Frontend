@@ -2,6 +2,8 @@ export let PostData = {
   Title: "What is Lorem ipsum ? ",
   Author: "Samarth",
   Likes: 40,
+  AuthorDescription:
+    "I get my inspiration from the fictional world. I'm a social geek. Completely exploit 24/365 catalysts for change whereas high standards in action items. Conveniently whiteboard multifunctional benefits without enabled leadership.",
   PostContent: {
     time: 1556098174501,
     blocks: [

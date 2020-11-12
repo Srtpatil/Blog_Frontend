@@ -1,12 +1,17 @@
 .SinglePostContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  width: 100%;
+  top: 58vh;
 }
 
 #editor-js {
   position: relative;
   background-color: #fff;
-  z-index: 4;
+  z-index: 2;
   font-size: 1.2rem;
 }
 
@@ -14,26 +19,101 @@
   display: flex;
   flex-direction: column;
   width: max(min(1100px, 90vw), 60vw);
-  /* height: 1000px; */
-  position: absolute;
-  top: 58vh;
+  /* position: absolute; */
+
   z-index: 2;
   box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
   background-color: #ffffff;
+  padding-bottom: 20px;
+}
+
+/* About Author Styles */
+.AboutAuthorContainer {
+  width: 100%;
+  display: flex;
+  padding: 0 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.AboutAuthorImageContainer {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+.AboutAuthorImage {
+  width: 100px;
+  height: 100px;
+  background-color: indigo;
+  background: url("https://simpleicon.com/wp-content/uploads/user-5.png");
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.AboutAuthorName {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.AboutAuthorDescription {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  padding-top: 20px;
+}
+
+.AboutAuthorDescriptionText {
+  line-height: 1.4;
 }
 
 /* For Mobile */
 @media screen and (max-width: 650px) {
-  .SinglePostContent {
+  .SinglePostContainer {
     top: 100vh;
+  }
+  .SinglePostContent {
     width: 100%;
     padding: 0 10px;
   }
   .PostContentContainer {
-      width: 100%;
+    width: 100%;
   }
 
   #editor-js {
     font-size: 1rem;
+  }
+
+  /* For Mobile About Author */
+
+  .AboutAuthorContainer {
+    padding: 0;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .AboutAuthorDescription {
+    width: 85%;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  .AboutAuthorName {
+    font-size: 1.5rem;
+  }
+
+  .AboutAuthorImage {
+    width: 60px;
+    height: 60px;
+    background-color: indigo;
+    border-radius: 50%;
   }
 }

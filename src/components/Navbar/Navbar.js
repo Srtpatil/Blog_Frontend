@@ -3,11 +3,12 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function NavItem(props) {
   return (
     <li className="nav-item">
-      <a href="#">{props.title}</a>
+      <Link to={props.path}>{props.title}</Link>
     </li>
   );
 }
@@ -68,11 +69,15 @@ class Navbar extends Component {
       <header
         className={classnames("navbar", {
           "navbar--hidden": !this.state.visible && !this.state.sidebar,
-          "navbar--opacity" : this.state.visible && (this.state.prevScrollpos >= 400)
+          "navbar--opacity":
+            this.state.visible && this.state.prevScrollpos >= 400,
         })}
       >
         <nav className="navbarContainer">
-          <div className="navbarLogo">Logo</div>
+          <div className="navbarLogo">
+            {/* <Link to="/">Logo</Link> */}
+            Logo
+          </div>
           <ul
             className={classnames("navigationLinks", {
               "navbar--active": this.state.sidebar,
@@ -87,10 +92,10 @@ class Navbar extends Component {
                 />
               </div>
             </li>
-            <NavItem title="Home" />
-            <NavItem title="About" />
-            <NavItem title="Portfolio" />
-            <NavItem title="Contact" />
+            <NavItem title="Home" path="/" />
+            <NavItem title="Our Story" path="/about" />
+            <NavItem title="Log in" path="/login" />
+            <NavItem title="Get Started" path="/signup" />
           </ul>
           <Burger showSideBar={this.showSideBar} />
         </nav>

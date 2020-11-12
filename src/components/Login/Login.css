@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .mainContainer {
@@ -37,7 +38,7 @@
       rgba(198, 38, 65, 0.65) 3%,
       rgba(75, 65, 65, 0.3) 91%
     ),
-    url("https://unsplash.com/photos/mq6GbT4E8e8/download?force=true");
+    url("../../assets/login-bg.jpg");
   background-position: center;
   background-size: cover;
   display: flex;

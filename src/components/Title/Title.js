@@ -8,15 +8,10 @@ class Title extends Component {
 
     this.firstLetter = this.props.title ? this.props.title[0] : null;
   }
-
-  TitleContainerStyles = !this.props.homepage
-    ? { height: "100%" }
-    : { height: "100%" };
-
   render() {
     return (
       <div className="TitleContainer">
-        <div className="TitleNameContainer" style={this.TitleContainerStyles}>
+        <div className="TitleNameContainer">
           <h1 className="TitleText">
             {this.props.title ? this.props.title : null}
           </h1>

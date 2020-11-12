@@ -18,7 +18,7 @@
 }
 
 .TitleContainer::after {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .TitleContainer::after {
@@ -33,12 +33,13 @@
 
 .TitleNameContainer {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
   justify-content: center;
   align-items: center;
   width: 55%;
+  height: 70vh;
   flex-direction: column;
+  position: fixed;
+  z-index: 2;
 }
 
 .TitleText {
@@ -52,7 +53,7 @@
   line-height: 1.25;
   letter-spacing: 3.5px;
   margin: 0;
-  z-index: 2;
+  z-index: 4;
 }
 
 .TitleTextBackground {
@@ -151,6 +152,8 @@
   .TitleNameContainer {
     padding-bottom: 10%;
     width: 95%;
+    position: relative;
+    height: 100%;
   }
 
   .TitleTextBackground {

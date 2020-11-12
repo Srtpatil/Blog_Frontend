@@ -17,7 +17,6 @@
   background-size: cover;
 }
 
-
 .TitleNameContainer {
   display: flex;
   justify-content: center;
@@ -64,6 +63,14 @@
   font-size: max(20rem, 25vw);
   user-select: none;
   z-index: 1;
+}
+
+.TitleTextBackground:active {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.firstLetterBackground:active {
+  color: rgba(0, 0, 0, 0.1);
 }
 
 .ReadContainer {
@@ -114,6 +121,10 @@
   z-index: 2;
 }
 
+.AuthorContainer:active {
+  color: white;
+}
+
 .AuthorText:active {
   color: white;
 }
@@ -157,6 +168,7 @@
   .TitleTextBackground {
     font-size: 350px;
     justify-content: center;
+    position: absolute;
   }
   .ReadContainer {
     width: 90%;

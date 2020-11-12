@@ -12,7 +12,7 @@ function HomePage() {
       <Title
         title="Knights, I bid you welcome to your new home"
         author="Lorem ipsum"
-        homepage={false}
+        homepage={true}
         divider={false}
       />
       <Content />

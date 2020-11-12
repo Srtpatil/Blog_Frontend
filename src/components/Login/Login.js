@@ -17,9 +17,9 @@ class Login extends Component {
               <LoginForm />
             </section>
             {/* Second image Section */}
-            <section class="imageWrapper">
-              <div class="imageMessage">
-                <div class="imageText">
+            <div className="imageWrapper">
+              <div className="imageMessage">
+                <div className="imageText">
                   <h2>Start your journey now</h2>
                   <p>
                     Start create your amazing Content with us! Login into your
@@ -27,7 +27,7 @@ class Login extends Component {
                   </p>
                 </div>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>

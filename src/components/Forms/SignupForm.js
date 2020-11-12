@@ -1,34 +1,43 @@
+import "./SignupForm.css";
 import React, { Component } from "react";
-import "./LoginForm.css";
-import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import * as Yup from "yup";
 
-class LoginForm extends Component {
+class SignupForm extends Component {
   render() {
     return (
       <div className="formContainer">
         {/* Form Message  */}
         <div class="formMessages">
-          <h2>Login</h2>
-          <p>
-            Welcome! Please, fill username and password to sign in into your
-            account.
-          </p>
+          <h2>Create Your Account</h2>
+          <p>Welcome! Please, fill the details to create new account..</p>
         </div>
 
-        {/* Main Login Form start */}
+        {/* Main Signup Form start */}
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
           validationSchema={Yup.object().shape({
+            username: Yup.string().required("Required"),
             email: Yup.string()
               .email("Invalid email address")
               .required("Required"),
             password: Yup.string()
               .min(8, "Must be more than 8 characters")
               .required("Required"),
+            confirmPassword: Yup.string().when("password", {
+              is: (password) =>
+                password && password.length > 0 ? true : false,
+              then: Yup.string()
+                .oneOf([Yup.ref("password")], "Password Doesn't match")
+                .required("Required"),
+            }),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -40,6 +49,17 @@ class LoginForm extends Component {
         >
           {({ isSubmitting }) => (
             <Form className="form">
+              <label className="nameLabel">Username : </label>
+              <Field
+                type="text"
+                name="username"
+                placeholder="Type your username"
+              />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="errorMessage"
+              />
               <label className="emailLabel" htmlFor="email">
                 Email :{" "}
               </label>
@@ -60,18 +80,25 @@ class LoginForm extends Component {
                 component="div"
                 className="errorMessage"
               />
+              <label className="passwordLabel">Confirm Password : </label>
+              <Field
+                type="password"
+                name="confirmPassword"
+                placeholder="Type your password again"
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="errorMessage"
+              />
               <div className="formButtonsContainer">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="loginButton"
+                  className="signUpButton"
                 >
-                  Login
+                  Sign Up
                 </button>
-                {/* <div className="loginButton">Login</div> */}
-                <div className="signUpButton">
-                  <Link to="/signup">Sign Up</Link>
-                </div>
               </div>
             </Form>
           )}
@@ -108,4 +135,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default SignupForm;

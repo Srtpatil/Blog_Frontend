@@ -3,7 +3,7 @@
   width: 100%;
   height: 80vh;
   position: absolute;
-  top: 10%;
+  top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@
 .mainContainer {
   /* Login Box */
   width: 65%;
-  height: 600px;
+  height: 550px;
   background-color: white;
   box-shadow: -5px 9px 29px 0px rgba(50, 50, 50, 0.3);
   display: flex;
@@ -96,17 +96,22 @@
 @media screen and (max-width: 550px) {
   .mainContainer {
     width: 94%;
-    height: 510px;
-    /* border-radius: 8px; */
-    /* align-items: center; */
-    /* justify-content: center; */
+    /* height: 510px; */
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
     flex-direction: column-reverse;
   }
-  
+
+  .backgroundBox {
+    top : 50px;
+    height: calc(100vh - 60px);
+    align-items: center;
+    display: flex;
+  }
 
   .mainContainer .imageWrapper {
-    height:150px;
-    /* display: none; */
+    display: none;
   }
 
   .mainContainer .imageWrapper .imageMessage {
@@ -116,18 +121,15 @@
   .mainContainer .imageWrapper .imageMessage .imageText h2 {
     font-weight: bold;
   }
-  .backgroundBox {
-    top: 120px;
-  }
-
+  
 
   .mainContainer .imageWrapper {
     background: linear-gradient(
-      187deg,
-      rgba(198, 38, 65, 0.7) 3%,
-      rgba(75, 65, 65, 0.3) 91%
-    ),
-    url("https://unsplash.com/photos/mq6GbT4E8e8/download?force=true");
+        187deg,
+        rgba(198, 38, 65, 0.7) 3%,
+        rgba(75, 65, 65, 0.3) 91%
+      ),
+      url("../../assets/login-bg.jpg");
     background-position: center;
     background-size: cover;
   }

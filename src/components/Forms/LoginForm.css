@@ -16,6 +16,7 @@
 .passwordLabel {
   padding: 10px 0;
   display: block;
+  margin-top: 20px;
 }
 
 .formMessages h2 {
@@ -43,7 +44,7 @@
   margin-right: auto;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -79,6 +80,7 @@
   margin-bottom: 10px;
   color: red;
   padding-left: 10px;
+  position: absolute;
 }
 
 .loginButton a {

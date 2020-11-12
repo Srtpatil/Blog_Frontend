@@ -95,7 +95,7 @@ class Navbar extends Component {
             <NavItem title="Home" path="/" />
             <NavItem title="Our Story" path="/about" />
             <NavItem title="Log in" path="/login" />
-            <NavItem title="Get Started" path="/signup" />
+            <NavItem title="Get Started" path="/post" />
           </ul>
           <Burger showSideBar={this.showSideBar} />
         </nav>

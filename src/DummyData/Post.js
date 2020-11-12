@@ -1,157 +1,115 @@
 export let PostData = {
-  blocks: [
-    {
-      key: "cb66d",
-      text: "Hello This is test for Dante2",
-      type: "header-one",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "eqf6g",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "crg13",
-      text: "This is a sample quote ",
-      type: "blockquote",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "l6tu",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "fbveq",
-      text: "What is Lorem Ipsum?",
-      type: "header-three",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 0, length: 20, style: "BOLD" },
-        { offset: 0, length: 20, style: "CUSTOM_COLOR_#000000" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "13h2f",
-      text:
-        "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more  recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 0, length: 11, style: "BOLD" },
-        { offset: 452, length: 5, style: "BOLD" },
-        { offset: 0, length: 582, style: "CUSTOM_COLOR_#000000" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "o8ig",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "8p4tp",
-      text: "Where does it come from?",
-      type: "header-three",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 0, length: 24, style: "BOLD" },
-        { offset: 0, length: 24, style: "CUSTOM_COLOR_#000000" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "7vr9l",
-      text:
-        'Contrary to popular belief, Lorem Ipsum is not simply random text. It  has roots in a piece of classical Latin literature from 45 BC, making  it over 2000 years old. Richard McClintock, a Latin professor at  Hampden-Sydney College in Virginia, looked up one of the more obscure  Latin words, consectetur, from a Lorem Ipsum passage, and going through  the cites of the word in classical literature, discovered the  undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33  of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by  Cicero, written in 45 BC. This book is a treatise on the theory of  ethics, very popular during the Renaissance. The first line of Lorem  Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section  1.10.32.',
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "1apen",
-      text:
-        'The standard chunk of Lorem Ipsum used since the 1500s is  reproduced below for those interested. Sections 1.10.32 and 1.10.33  from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in  their exact original form, accompanied by English versions from the 1914  translation by H. Rackham.',
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "1fhjr",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "3m5kq",
-      text: "Why do we use it?",
-      type: "header-three",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 0, length: 17, style: "BOLD" },
-        { offset: 0, length: 17, style: "CUSTOM_COLOR_#000000" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "iif3",
-      text:
-        "It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout. The point of  using Lorem Ipsum is that it has a more-or-less normal distribution of  letters, as opposed to using 'Content here, content here', making it  look like readable English. Many desktop publishing packages and web  page editors now use Lorem Ipsum as their default model text, and a  search for 'lorem ipsum' will uncover many web sites still in their  infancy. Various versions have evolved over the years, sometimes by  accident, sometimes on purpose (injected humour and the like).",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "34kt2",
-      text: 'console.log("Hello World");',
-      type: "code-block",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: { syntax: "javascript" },
-    },
-    {
-      key: "e5r9b",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-  entityMap: {},
+  Title: "What is Lorem ipsum ? ",
+  Author: "Samarth",
+  Likes: 40,
+  PostContent: {
+    time: 1556098174501,
+    blocks: [
+      {
+        type: "header",
+        data: {
+          text: "Editor.js",
+          level: 2,
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text.",
+        },
+      },
+      {
+        type: "header",
+        data: {
+          text: "Key features",
+          level: 3,
+        },
+      },
+      {
+        type: "list",
+        data: {
+          style: "unordered",
+          items: [
+            "It is a block-styled editor",
+            "It returns clean data output in JSON",
+            "Designed to be extendable and pluggable with a simple API",
+          ],
+        },
+      },
+      {
+        type: "header",
+        data: {
+          text: "What does it mean «block-styled editor»",
+          level: 3,
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            'Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class="cdx-marker">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor\'s Core.',
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            'There are dozens of <a href="https://github.com/editor-js">ready-to-use Blocks</a> and the <a href="https://editorjs.io/creating-a-block-tool">simple API</a> for creation any Block you need. For example, you can implement Blocks for Tweets, Instagram posts, surveys and polls, CTA-buttons and even games.',
+        },
+      },
+      {
+        type: "header",
+        data: {
+          text: "What does it mean clean data output",
+          level: 3,
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            "Classic WYSIWYG-editors produce raw HTML-markup with both content data and content appearance. On the contrary, Editor.js outputs JSON object with data of each Block. You can see an example below",
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            'Given data can be used as you want: render with HTML for <code class="inline-code">Web clients</code>, render natively for <code class="inline-code">mobile apps</code>, create markup for <code class="inline-code">Facebook Instant Articles</code> or <code class="inline-code">Google AMP</code>, generate an <code class="inline-code">audio version</code> and so on.',
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            "Clean data is useful to sanitize, validate and process on the backend.",
+        },
+      },
+      {
+        type: "delimiter",
+        data: {},
+      },
+      {
+        type: "paragraph",
+        data: {
+          text:
+            "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏",
+        },
+      },
+      {
+        type: "image",
+        data: {
+          file: {
+            url: "https://static.toiimg.com/photo/72975551.cms",
+          },
+          caption: "",
+          withBorder: true,
+          stretched: false,
+          withBackground: false,
+        },
+      },
+    ],
+    version: "2.12.4",
+  },
 };

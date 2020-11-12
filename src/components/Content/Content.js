@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Content.css";
+import Footer from "../Footer/Footer";
 import Article from "./Article";
 
 const blog = {
@@ -28,6 +29,7 @@ class Content extends Component {
           <Article blog={blog} />
           <Article blog={blog} />
         </div>
+        <Footer />
       </div>
     );
   }

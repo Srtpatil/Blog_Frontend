@@ -1,18 +1,21 @@
 .ContentContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  width: 100%;
+  top: 58vh;
 }
 
 .Main {
   display: flex;
   flex-direction: column;
   width: max(min(1100px, 90vw), 60vw);
-  /* height: 1000px; */
-  position: absolute;
-  top: 58vh;
   z-index: 2;
   box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
   background-color: #ffffff;
+  padding-bottom: 20px;
 }
 
 .TitleContentContainer {
@@ -33,10 +36,12 @@
 
 /* For Mobile */
 @media screen and (max-width: 650px) {
-  .Main {
+  .ContentContainer {
     top: 100vh;
+  }
+  .Main {
     width: 100%;
-    margin-left: 0;
+    padding: 0 10px;
   }
 
   .TitleContentContainer {

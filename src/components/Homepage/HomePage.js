@@ -1,8 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import Title from "../Title/Title";
 import "./Homepage.css";
-import Footer from "../Footer/Footer";
-
 import Content from "../Content/Content";
 
 function HomePage() {
@@ -16,7 +14,6 @@ function HomePage() {
         divider={false}
       />
       <Content />
-      
     </div>
   );
 }

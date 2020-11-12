@@ -2,13 +2,13 @@
   width: 100%;
   height: 70vh;
   display: flex;
-  /* background-color: var(--primary-color); */
+  background-color: var(--primary-color);
   flex-direction: column;
   align-items: center;
   position: relative;
   font-family: "Josefin Sans", sans-serif;
   user-select: none;
-  background: url("../../assets/homepage.jpg");
+  /* background: url("../../assets/homepage.jpg"); */
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -17,9 +17,9 @@
   background-size: cover;
 }
 
-.TitleContainer::after {
-  background: rgba(0, 0, 0, 0.65);
-}
+/* .TitleContainer::after {
+  background: rgba(0, 0, 0, 0.1);
+} */
 
 .TitleContainer::after {
   content: "";
@@ -53,6 +53,10 @@
   letter-spacing: 3.5px;
   margin: 0;
   z-index: 2;
+}
+
+.TitleText:active {
+  color: white;
 }
 
 .TitleTextBackground {
@@ -122,6 +126,9 @@
   z-index: 2;
 }
 
+.AuthorText:active {
+  color: white;
+}
 /* For Mobile */
 
 @media screen and (max-width: 1350px) {

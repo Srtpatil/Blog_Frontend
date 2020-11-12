@@ -61,6 +61,15 @@
   font-size: max(1.8vw, 28px);
   margin-right: auto;
   font-weight: bold;
+  text-decoration: none;
+}
+
+.navbarLogo:active {
+  color: white;
+}
+
+.logo-link {
+  text-decoration: none;
 }
 
 /* For Mobile View */

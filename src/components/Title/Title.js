@@ -42,8 +42,8 @@ class Title extends Component {
             </div>
           ) : null}
         </div>
-        {/* <div className="TitleTextBackground"><p style={{
-        }}>{this.firstLetter}</p></div> */}
+        <div className="TitleTextBackground"><p style={{
+        }}>{this.firstLetter}</p></div>
       </div>
     );
   }

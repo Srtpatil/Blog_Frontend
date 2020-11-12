@@ -25,7 +25,7 @@ class Post extends Component {
             <EditorJs
               tools={EDITOR_JS_TOOLS}
               data={PostData.PostContent}
-              readOnly={true}
+              readOnly={false}
             />
           </div>
         </div>

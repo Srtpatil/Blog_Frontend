@@ -75,8 +75,7 @@ class Navbar extends Component {
       >
         <nav className="navbarContainer">
           <div className="navbarLogo">
-            {/* <Link to="/">Logo</Link> */}
-            Logo
+            <Link to="/">Logo</Link>
           </div>
           <ul
             className={classnames("navigationLinks", {

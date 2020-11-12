@@ -1,16 +1,4 @@
-.backgroundBox {
-  background-color: rgba(0, 0, 0, 0);
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  top: 5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.mainContainer {
+.mainContainer2 {
   /* Login Box */
   width: 65%;
   /* height: 100%; */
@@ -20,19 +8,18 @@
   justify-content: space-between;
 }
 
-.mainContainer a {
+.mainContainer2 a {
   text-decoration: none;
 }
 
-.mainContainer .formWrapper {
+.mainContainer2 .formWrapper {
   min-width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-/* Image Section Styles */
 
-.mainContainer .imageWrapper {
+.mainContainer2 .imageWrapper {
   background: linear-gradient(
       53deg,
       rgba(198, 38, 65, 0.65) 3%,
@@ -46,7 +33,7 @@
   justify-content: flex-end;
 }
 
-.mainContainer .imageWrapper .imageMessage {
+.mainContainer2 .imageWrapper .imageMessage {
   color: #fff;
   line-height: 20px;
 
@@ -56,37 +43,34 @@
   flex-direction: row;
 }
 
-.mainContainer .imageWrapper .imageMessage .imageText h2 {
+.mainContainer2 .imageWrapper .imageMessage .imageText h2 {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 15px;
 }
 
-/* Media Queries */
 @media screen and (max-width: 1500px) {
-  .mainContainer {
+  .mainContainer2 {
     width: 80%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .mainContainer {
+  .mainContainer2 {
     width: 90%;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .mainContainer {
+  .mainContainer2 {
     width: 90%;
   }
 }
 
 @media screen and (max-width: 800px) {
-  .mainContainer {
+  .mainContainer2 {
     width: 90%;
-  }
-  .mainContainer {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .backgroundBox {
     top: 20%;
@@ -94,7 +78,7 @@
 }
 
 @media screen and (max-width: 550px) {
-  .mainContainer {
+  .mainContainer2 {
     width: 94%;
     /* height: 510px; */
     /* border-radius: 8px; */
@@ -103,23 +87,23 @@
     flex-direction: column-reverse;
   }
 
-  .mainContainer .imageWrapper {
+  .mainContainer2 .imageWrapper {
     /* height: 150px; */
     display: none;
   }
 
-  .mainContainer .imageWrapper .imageMessage {
+  .mainContainer2 .imageWrapper .imageMessage {
     opacity: 0;
   }
 
-  .mainContainer .imageWrapper .imageMessage .imageText h2 {
+  .mainContainer2 .imageWrapper .imageMessage .imageText h2 {
     font-weight: bold;
   }
   .backgroundBox {
     top: 120px;
   }
 
-  .mainContainer .imageWrapper {
+  .mainContainer2 .imageWrapper {
     background: linear-gradient(
       187deg,
       rgba(198, 38, 65, 0.7) 3%,

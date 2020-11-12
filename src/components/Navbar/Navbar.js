@@ -75,8 +75,7 @@ class Navbar extends Component {
       >
         <nav className="navbarContainer">
           <div className="navbarLogo">
-            {/* <Link to="/">Logo</Link> */}
-            Logo
+            <Link to="/">Logo</Link>
           </div>
           <ul
             className={classnames("navigationLinks", {
@@ -93,9 +92,9 @@ class Navbar extends Component {
               </div>
             </li>
             <NavItem title="Home" path="/" />
-            <NavItem title="Our Story" path="/about" />
+            <NavItem title="Our Story" path="/post" />
             <NavItem title="Log in" path="/login" />
-            <NavItem title="Get Started" path="/post" />
+            <NavItem title="Get Started" path="/signup" />
           </ul>
           <Burger showSideBar={this.showSideBar} />
         </nav>

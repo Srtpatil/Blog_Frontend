@@ -11,8 +11,8 @@ function HomePage() {
       <Navbar />
       <Title
         title="Knights, I bid you welcome to your new home"
-        author="Samarth"
-        homepage={true}
+        author="Lorem ipsum"
+        homepage={false}
         divider={false}
       />
       <Content />

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import "./Content.css";
 import Footer from "../Footer/Footer";
 import Article from "./Article";
+import {
+  SectionHeader,
+  SectionUnderline,
+} from "../../StyledComponents/Headers";
 
 const blog = {
   title:
@@ -19,10 +23,10 @@ class Content extends Component {
     return (
       <div className="ContentContainer">
         <div className="Main">
-          <div className="TitleContentContainer">
-            <p>LATEST STORIES</p>
-            <hr className="TitleBorder" />
-          </div>
+          <SectionHeader>
+            Latest Stories
+            <SectionUnderline />
+          </SectionHeader>
           <Article blog={blog} />
           <Article blog={blog} />
           <Article blog={blog} />

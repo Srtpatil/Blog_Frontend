@@ -15,9 +15,14 @@
   font-size: 1.2rem;
 }
 
+.codex-editor__redactor {
+  padding-bottom: 100px !important;
+}
+
 .SinglePostContent {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: max(min(1100px, 90vw), 60vw);
   /* position: absolute; */
 
@@ -75,6 +80,31 @@
   line-height: 1.4;
 }
 
+/* Like Post */
+.LikePostContainer {
+  width: 100%;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-top: 10px;
+}
+
+.LikesText {
+  padding-left: 12px;
+}
+
+/* Share Post */
+.SharePostContainer {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+  margin-top: 20px;
+}
+
 /* For Mobile */
 @media screen and (max-width: 650px) {
   .SinglePostContainer {
@@ -115,5 +145,24 @@
     height: 60px;
     background-color: indigo;
     border-radius: 50%;
+  }
+
+  .SharePostContainer {
+    width: 85%;
+  }
+
+  .LikePostContainer {
+    font-size: 1.2rem;
+    font-weight: 450;
+  }
+
+  .LikesText {
+    padding-left: 0px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .SharePostContainer {
+    width: 90%;
   }
 }

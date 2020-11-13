@@ -6,8 +6,85 @@ import "./Post.css";
 import EditorJs from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import Footer from "../Footer/Footer";
+import { SocialButton, StyledLogo } from "../../StyledComponents/Buttons";
+import {
+  SectionHeader,
+  SectionUnderline,
+} from "../../StyledComponents/Headers";
+import {
+  faFacebookF,
+  faRedditAlien,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const SharePost = () => {
+  return (
+    <>
+      <SectionHeader>
+        Share the post
+        <SectionUnderline />
+      </SectionHeader>
+      <div className="SharePostContainer">
+        <SocialButton
+          width="28%"
+          height="80%"
+          background="#3E5B98"
+          as="a"
+          href="/login"
+        >
+          <FontAwesomeIcon
+            icon={faFacebookF}
+            size="2x"
+            style={{
+              color: "white",
+            }}
+          />
+        </SocialButton>
+        <SocialButton
+          width="28%"
+          height="80%"
+          background="#4DA7DE"
+          as="a"
+          href="/login"
+        >
+          <FontAwesomeIcon
+            icon={faTwitter}
+            size="2x"
+            style={{
+              color: "white",
+            }}
+          />
+        </SocialButton>
+        <SocialButton
+          width="28%"
+          height="80%"
+          background="#E74A1E"
+          as="a"
+          href="/login"
+        >
+          <FontAwesomeIcon
+            icon={faRedditAlien}
+            size="2x"
+            style={{
+              color: "white",
+            }}
+          />
+        </SocialButton>
+      </div>
+    </>
+  );
+};
 
 class Post extends Component {
+  constructor() {
+    super();
+    this.state = {
+      liked: false,
+      likesCount: PostData.Likes,
+    };
+  }
+
   render() {
     return (
       <div>
@@ -26,18 +103,44 @@ class Post extends Component {
             <EditorJs
               tools={EDITOR_JS_TOOLS}
               data={PostData.PostContent}
-              readOnly={false}
+              readOnly={true}
             />
 
-            <div
-              className="TitleContentContainer"
-              style={{
-                marginTop: 0,
-              }}
-            >
-              <p>About the author</p>
-              <hr className="TitleBorder" />
+            <SectionHeader marginTop="0px">
+              Like the post
+              <SectionUnderline />
+            </SectionHeader>
+
+            <div className="LikePostContainer">
+              <StyledLogo
+                isLiked={this.state.liked}
+                onClick={() => {
+                  this.setState((prevState) => {
+                    let cnt = prevState.likesCount;
+                    if (prevState.liked) {
+                      cnt--;
+                    } else {
+                      cnt++;
+                    }
+                    return {
+                      liked: !prevState.liked,
+                      likesCount: cnt,
+                    };
+                  });
+                }}
+              />
+              <span
+                className="LikesText"
+              >
+                {this.state.likesCount} Likes
+              </span>
             </div>
+
+            <SharePost />
+            <SectionHeader>
+              About the author
+              <SectionUnderline />
+            </SectionHeader>
             <div className="AboutAuthorContainer">
               <div className="AboutAuthorImageContainer">
                 <div className="AboutAuthorImage"></div>

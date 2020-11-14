@@ -2,21 +2,15 @@
   margin-top: 80px;
   display: flex;
   flex-direction: row;
-  /* background-color: antiquewhite; */
-  /* height: 200px; */
   width: 100%;
-  /* border-bottom: 1px solid #aaaaaa; */
 }
 
 .DateContainer {
   position: relative;
-  /* height: 200px; */
   width: 30vw;
-  /* border-right: 1px solid #e7e7e7; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* background-color: burlywood; */
 }
 
 .DatePointContainer {
@@ -55,7 +49,7 @@
 }
 
 .PostContainer {
-  /* height: 200px; */
+  /* position: relative; */
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -70,7 +64,7 @@
   width: 1px;
   background-color: rgb(236, 236, 236);
   left: 23%;
-  top: 290px;
+  top: 260px;
   display: block;
 }
 

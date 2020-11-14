@@ -6,6 +6,8 @@
   font-size: 1.4rem;
   font-weight: bold;
   width: 100%;
+  position: relative;
+  bottom: 50px;
 }
 
 .FooterBottomText {

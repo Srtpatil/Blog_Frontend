@@ -1,15 +1,79 @@
 import "./Navbar.css";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTimes,
+  faScroll,
+  faUserCircle,
+  faFeatherAlt,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import {} from "@fortawesome/free-regular-svg-icons";
+
 import { Link } from "react-router-dom";
 
-function NavItem(props) {
+class NavItem extends Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseHover = this.handleMouseHover.bind(this);
+    this.state = {
+      isHovering: false,
+    };
+  }
+
+  handleMouseHover() {
+    this.setState(this.toggleHoverState);
+  }
+
+  toggleHoverState(state) {
+    return {
+      isHovering: !state.isHovering,
+    };
+  }
+
+  render() {
+    return (
+      <li className={this.props.className} onClick={this.handleMouseHover}>
+        <Link to={this.props.path}>{this.props.title}</Link>
+        {this.props.children
+          ? React.cloneElement(this.props.children, {
+              isActive: this.state.isHovering,
+            })
+          : null}
+      </li>
+    );
+  }
+}
+
+function DropdownMenu(props) {
+  function DropdownItem(props) {
+    return (
+      <Link
+        to="#"
+        className="dropdown-item"
+        style={{
+          color: "black",
+        }}
+      >
+        {props.children}
+        <span className="dropdown-right-icon">
+          <FontAwesomeIcon icon={props.icon} />
+        </span>
+      </Link>
+    );
+  }
   return (
-    <li className="nav-item">
-      <Link to={props.path}>{props.title}</Link>
-    </li>
+    <div
+      className={classnames("dropdownMenu", {
+        "dropdownMenu--active": props.isActive,
+      })}
+    >
+      <DropdownItem icon={faUserCircle}>Profile</DropdownItem>
+      <DropdownItem icon={faScroll}>Your Drafts</DropdownItem>
+      <DropdownItem icon={faFeatherAlt}>Saved Stories</DropdownItem>
+      <DropdownItem icon={faSignOutAlt}>Logout</DropdownItem>
+    </div>
   );
 }
 
@@ -95,6 +159,10 @@ class Navbar extends Component {
             <NavItem title="Our Story" path="/post" />
             <NavItem title="Log in" path="/login" />
             <NavItem title="Get Started" path="/signup" />
+            <NavItem title="User" path="#" className="user-nav-item">
+              {/* Dropdown goes here */}
+              <DropdownMenu />
+            </NavItem>
           </ul>
           <Burger showSideBar={this.showSideBar} />
         </nav>

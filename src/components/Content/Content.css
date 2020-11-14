@@ -1,14 +1,16 @@
 .ContentContainer {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   flex-direction: column;
   width: 100%;
-  top: 58vh;
+  /* top: -10vh; */
+  /* overflow: hidden; */
 }
 
 .Main {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: max(min(1100px, 90vw), 60vw);
@@ -16,6 +18,8 @@
   box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
   background-color: #ffffff;
   padding-bottom: 20px;
+  top: -10vh;
+  overflow: hidden;
 }
 
 .TitleContentContainer {

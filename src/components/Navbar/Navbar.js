@@ -3,12 +3,15 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function NavItem(props) {
+  const activeClass = props.path === "/" ? "" : "active";
   return (
-    <li className="nav-item">
-      <Link to={props.path}>{props.title}</Link>
+    <li className="nav-items">
+      <NavLink to={props.path} activeClassName={activeClass}>
+        {props.title}
+      </NavLink>
     </li>
   );
 }
@@ -75,7 +78,9 @@ class Navbar extends Component {
       >
         <nav className="navbarContainer">
           <div className="navbarLogo">
-            <Link to="/">Logo</Link>
+            <NavLink to="/" activeClassName="">
+              Logo
+            </NavLink>
           </div>
           <ul
             className={classnames("navigationLinks", {

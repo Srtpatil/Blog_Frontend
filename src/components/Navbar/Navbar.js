@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 class NavItem extends Component {
   constructor(props) {
@@ -33,9 +33,13 @@ class NavItem extends Component {
   }
 
   render() {
+    const activeClass =
+      this.props.path === "/" || this.props.path === "#" ? "" : "active";
     return (
       <li className={this.props.className} onClick={this.handleMouseHover}>
-        <Link to={this.props.path}>{this.props.title}</Link>
+        <NavLink to={this.props.path} activeClassName={activeClass}>
+          {this.props.title}
+        </NavLink>
         {this.props.children
           ? React.cloneElement(this.props.children, {
               isActive: this.state.isHovering,

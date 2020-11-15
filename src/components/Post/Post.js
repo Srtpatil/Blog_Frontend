@@ -83,7 +83,13 @@ class Post extends Component {
       liked: false,
       likesCount: PostData.Likes,
     };
+
+    this.myRef = React.createRef();
   }
+
+  executeScroll = () => {
+    this.myRef.scrollIntoView();
+  };
 
   render() {
     return (
@@ -93,9 +99,11 @@ class Post extends Component {
           homepage={false}
           title={PostData.Title}
           author={PostData.Author}
+          // refProp={this.myRef}
+          onreadClick={this.executeScroll}
         />
         <div className="SinglePostContainer">
-          <div className="SinglePostContent">
+          <div className="SinglePostContent" ref={(ref) => (this.myRef = ref)}>
             <div className="TitleContentContainer">
               <p>ENJOY YOUR READ !</p>
               <hr className="TitleBorder" />
@@ -103,7 +111,7 @@ class Post extends Component {
             <EditorJs
               tools={EDITOR_JS_TOOLS}
               data={PostData.PostContent}
-              readOnly={true}
+              readOnly={false}
             />
 
             <SectionHeader marginTop="0px">
@@ -129,11 +137,7 @@ class Post extends Component {
                   });
                 }}
               />
-              <span
-                className="LikesText"
-              >
-                {this.state.likesCount} Likes
-              </span>
+              <span className="LikesText">{this.state.likesCount} Likes</span>
             </div>
 
             <SharePost />

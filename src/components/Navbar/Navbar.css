@@ -233,6 +233,7 @@
 
   .navbar {
     height: 60px;
+    z-index: 6;
   }
 
   /* Dropdown item */
@@ -263,6 +264,8 @@
     border: 1px solid #aaa;
     width: 95%;
   }
+
+ 
 }
 
 .navbar--active {

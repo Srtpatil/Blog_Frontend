@@ -2,18 +2,19 @@
 
 :root {
   --primary-color: #c62641;
---secondary-color: #db3753
+  --secondary-color: #db3753;
   /* --primary-color: #031E33;
   --secondary-color: #eb3535; */
 }
 
-
-
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 * {
   box-sizing: border-box;

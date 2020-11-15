@@ -10,8 +10,9 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
+import { Backdrop } from "../../StyledComponents/Container.js";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 class NavItem extends Component {
   constructor(props) {
@@ -130,45 +131,51 @@ class Navbar extends Component {
 
   render() {
     return (
-      <header
-        className={classnames("navbar", {
-          "navbar--hidden": !this.state.visible && !this.state.sidebar,
-          "navbar--opacity":
-            this.state.visible && this.state.prevScrollpos >= 400,
-        })}
-      >
-        <nav className="navbarContainer">
-          <div className="navbarLogo">
-            <NavLink to="/" activeClassName="">
-              Logo
-            </NavLink>
-          </div>
-          <ul
-            className={classnames("navigationLinks", {
-              "navbar--active": this.state.sidebar,
-            })}
-          >
-            <li className="sidebarBanner">
-              <div className="closeButton" onClick={this.showSideBar}>
-                <FontAwesomeIcon
-                  icon={faTimes}
-                  size="2x"
-                  style={{ color: "white" }}
-                />
-              </div>
-            </li>
-            <NavItem title="Home" path="/" />
-            <NavItem title="Our Story" path="/post" />
-            <NavItem title="Log in" path="/login" />
-            <NavItem title="Get Started" path="/signup" />
-            <NavItem title="User" path="#" className="user-nav-item">
-              {/* Dropdown goes here */}
-              <DropdownMenu />
-            </NavItem>
-          </ul>
-          <Burger showSideBar={this.showSideBar} />
-        </nav>
-      </header>
+      <>
+        <Backdrop
+          show={this.state.sidebar}
+          onClick={() => this.showSideBar()}
+        />
+        <header
+          className={classnames("navbar", {
+            "navbar--hidden": !this.state.visible && !this.state.sidebar,
+            "navbar--opacity":
+              this.state.visible && this.state.prevScrollpos >= 400,
+          })}
+        >
+          <nav className="navbarContainer">
+            <div className="navbarLogo">
+              <NavLink to="/" activeClassName="">
+                Logo
+              </NavLink>
+            </div>
+            <ul
+              className={classnames("navigationLinks", {
+                "navbar--active": this.state.sidebar,
+              })}
+            >
+              <li className="sidebarBanner">
+                <div className="closeButton" onClick={this.showSideBar}>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    size="2x"
+                    style={{ color: "white" }}
+                  />
+                </div>
+              </li>
+              <NavItem title="Home" path="/" />
+              <NavItem title="Our Story" path="/post" />
+              <NavItem title="Log in" path="/login" />
+              <NavItem title="Get Started" path="/signup" />
+              <NavItem title="User" path="#" className="user-nav-item">
+                {/* Dropdown goes here */}
+                <DropdownMenu />
+              </NavItem>
+            </ul>
+            <Burger showSideBar={this.showSideBar} />
+          </nav>
+        </header>
+      </>
     );
   }
 }

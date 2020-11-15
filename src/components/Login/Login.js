@@ -9,7 +9,7 @@ class Login extends Component {
     return (
       <div>
         <Navbar />
-        <Title homepage={true} divider={false} />
+        <Title />
         <div className="backgroundBox">
           <div className="mainContainer">
             {/* First Form Section */}

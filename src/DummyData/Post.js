@@ -1,5 +1,5 @@
 export let PostData = {
-  Title: "What is Lorem ipsum ? ",
+  Title: "How Lorem ipsum works? ",
   Author: "Samarth",
   Likes: 40,
   AuthorDescription:

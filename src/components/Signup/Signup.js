@@ -9,7 +9,7 @@ class Signup extends Component {
     return (
       <div>
         <Navbar />
-        <Title homepage={true} />
+        <Title />
         <div className="backgroundBox">
           <div className="mainContainer2">
             {/* First image Section */}

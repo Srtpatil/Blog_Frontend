@@ -159,6 +159,7 @@ class Navbar extends Component {
             </li>
             <NavItem title="Home" path="/" />
             <NavItem title="Our Story" path="/post" />
+            <NavItem title="write" path="/new-story" />
             <NavItem title="Log in" path="/login" />
             <NavItem title="Get Started" path="/signup" />
             <NavItem title="User" path="#" className="user-nav-item">

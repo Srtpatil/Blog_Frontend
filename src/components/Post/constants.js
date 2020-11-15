@@ -1,5 +1,6 @@
 import Embed from "@editorjs/embed";
 import Table from "@editorjs/table";
+import Paragraph from "@editorjs/paragraph";
 import List from "@editorjs/list";
 import Warning from "@editorjs/warning";
 import Code from "@editorjs/code";
@@ -17,6 +18,7 @@ import SimpleImage from "@editorjs/simple-image";
 export const EDITOR_JS_TOOLS = {
   embed: Embed,
   table: Table,
+  paragraph: Paragraph,
   marker: Marker,
   list: List,
   warning: Warning,
@@ -29,5 +31,5 @@ export const EDITOR_JS_TOOLS = {
   checklist: CheckList,
   delimiter: Delimiter,
   inlineCode: InlineCode,
-  simpleImage: SimpleImage
+  simpleImage: SimpleImage,
 };

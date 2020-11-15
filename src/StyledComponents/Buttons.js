@@ -1,6 +1,31 @@
 import styled, { css, keyframes } from "styled-components";
 import { ReactComponent as HeartIcon } from "../assets/heart.svg";
 
+export const PrimaryButton = styled.div`
+  width: 35%;
+  height: 70%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  z-index: 3;
+  cursor: pointer;
+`;
+
+export const SecondaryButton = styled.div`
+  width: 35%;
+  height: 70%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  border: 1px solid white;
+  z-index: 3;
+  cursor: pointer;
+`;
+
 export const SocialButton = styled.div`
   display: flex;
   justify-content: center;
@@ -23,13 +48,13 @@ const beating = keyframes`
     transform: scale(1);
   }
   to {
-    transform: scale(1.2);
+    transform: scale(1.3);
   }
 `;
 
 const animation = (props) =>
   css`
-    ${beating} 150ms linear 2 alternate
+    ${beating} 200ms linear 2 alternate
   `;
 
 export const StyledLogo = styled(HeartIcon)`

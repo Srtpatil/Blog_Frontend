@@ -19,6 +19,7 @@ export const EDITOR_JS_TOOLS = {
   embed: Embed,
   table: Table,
   paragraph: Paragraph,
+  marker: Marker,
   list: List,
   warning: Warning,
   code: Code,

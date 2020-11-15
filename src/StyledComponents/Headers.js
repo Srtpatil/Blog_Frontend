@@ -6,6 +6,10 @@ export const SectionHeader = styled.div`
   flex-direction: column;
   align-items: center;
   text-transform: uppercase;
+
+  @media screen and (max-width: 650px) {
+    margin-top: 60px;
+  }
 `;
 
 export const SectionUnderline = styled.hr`
@@ -14,4 +18,8 @@ export const SectionUnderline = styled.hr`
   width: 50px;
   height: 1px;
   background-color: #cccccc;
+
+  @media screen and (max-width: 650px) {
+    margin-top: 10px;
+  }
 `;

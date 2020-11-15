@@ -1,11 +1,11 @@
+import "./Title.css";
 import React, { Component } from "react";
 import Divider from "../Divider/Divider";
-import "./Title.css";
+import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 
 class Title extends Component {
   constructor(props) {
     super(props);
-
     this.firstLetter = this.props.title ? this.props.title[0] : null;
   }
   render() {
@@ -25,9 +25,9 @@ class Title extends Component {
 
             {/* Read and read later buttons */}
 
-            {!this.props.homepage ? (
+            {this.props.addButton ? (
               <div className="ReadContainer">
-                <div
+                {/* <div
                   className="ReadButton"
                   onClick={() => {
                     this.props.onreadClick();
@@ -37,12 +37,24 @@ class Title extends Component {
                 </div>
                 <div className="ReadLaterButton">
                   <p>Read Later</p>
-                </div>
+                </div> */}
+                <PrimaryButton
+                  onClick={() => {
+                    this.props.onreadClick();
+                  }}
+                >
+                  {this.props.red_button}
+                </PrimaryButton>
+                <SecondaryButton>{this.props.white_button}</SecondaryButton>
               </div>
             ) : null}
 
             <div className="TitleTextBackground">
-              <p className="firstLetterBackground">{this.firstLetter}</p>
+              <p className="firstLetterBackground">
+                {this.props.firstLetter
+                  ? this.props.firstLetter.toUpperCase()
+                  : this.firstLetter}
+              </p>
             </div>
           </div>
         ) : null}

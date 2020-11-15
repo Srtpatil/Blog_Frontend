@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 import "./Footer.css";
 
 export default class Footer extends Component {
@@ -8,7 +7,7 @@ export default class Footer extends Component {
       <div className="Footer">
         <h2>Logo</h2>
         <p className="FooterBottomText">
-          Created by Meks · Powered by React <br /> All rights reserved
+          Powered by React <br /> All rights reserved
         </p>
       </div>
     );

@@ -17,6 +17,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Content from "../Content/Content";
 
 const SharePost = () => {
   return (
@@ -88,7 +89,7 @@ class Post extends Component {
   }
 
   executeScroll = () => {
-    this.myRef.scrollIntoView();
+    this.myRef.current.scrollIntoView();
   };
 
   render() {
@@ -96,18 +97,75 @@ class Post extends Component {
       <div>
         <Navbar />
         <Title
-          homepage={false}
+          addButton={true}
+          red_button="Read On"
+          white_button="Read Later"
           title={PostData.Title}
           author={PostData.Author}
           // refProp={this.myRef}
           onreadClick={this.executeScroll}
         />
-        <div className="SinglePostContainer">
-          <div className="SinglePostContent" ref={(ref) => (this.myRef = ref)}>
-            <div className="TitleContentContainer">
-              <p>ENJOY YOUR READ !</p>
-              <hr className="TitleBorder" />
+        <Content title="ENJOY YOUR READ !" refProp={this.myRef}>
+          <EditorJs
+            tools={EDITOR_JS_TOOLS}
+            data={PostData.PostContent}
+            readOnly={false}
+          />
+          <SectionHeader marginTop="0px">
+            Like the post
+            <SectionUnderline />
+          </SectionHeader>
+          <div className="LikePostContainer">
+            <StyledLogo
+              isLiked={this.state.liked}
+              onClick={() => {
+                this.setState((prevState) => {
+                  let cnt = prevState.likesCount;
+                  if (prevState.liked) {
+                    cnt--;
+                  } else {
+                    cnt++;
+                  }
+                  return {
+                    liked: !prevState.liked,
+                    likesCount: cnt,
+                  };
+                });
+              }}
+            />
+            <span className="LikesText">{this.state.likesCount} Likes</span>
+          </div>
+          <SharePost />
+          <SectionHeader>
+            About the author
+            <SectionUnderline />
+          </SectionHeader>
+          <div className="AboutAuthorContainer">
+            <div className="AboutAuthorImageContainer">
+              <div className="AboutAuthorImage"></div>
             </div>
+            <div className="AboutAuthorDescription">
+              <div className="AboutAuthorName">
+                <p
+                  style={{
+                    marginBottom: "4px",
+                  }}
+                >
+                  {PostData.Author}
+                </p>
+              </div>
+              <p className="AboutAuthorDescriptionText">
+                {PostData.AuthorDescription}
+              </p>
+            </div>
+          </div>
+        </Content>
+        {/* <div className="SinglePostContainer">
+          <div className="SinglePostContent">
+            <SectionHeader>
+              <p>ENJOY YOUR READ !</p>
+              <SectionUnderline />
+            </SectionHeader>
             <EditorJs
               tools={EDITOR_JS_TOOLS}
               data={PostData.PostContent}
@@ -167,7 +225,8 @@ class Post extends Component {
           </div>
 
           <Footer />
-        </div>
+        </div> */}
+        <Footer />
       </div>
     );
   }

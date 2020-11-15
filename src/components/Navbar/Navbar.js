@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,10 +9,9 @@ import {
   faFeatherAlt,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-regular-svg-icons";
 import { Backdrop } from "../../StyledComponents/Container.js";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 class NavItem extends Component {
   constructor(props) {
@@ -34,9 +33,13 @@ class NavItem extends Component {
   }
 
   render() {
+    const activeClass =
+      this.props.path === "/" || this.props.path === "#" ? "" : "active";
     return (
       <li className={this.props.className} onClick={this.handleMouseHover}>
-        <Link to={this.props.path}>{this.props.title}</Link>
+        <NavLink to={this.props.path} activeClassName={activeClass}>
+          {this.props.title}
+        </NavLink>
         {this.props.children
           ? React.cloneElement(this.props.children, {
               isActive: this.state.isHovering,
@@ -165,6 +168,7 @@ class Navbar extends Component {
               </li>
               <NavItem title="Home" path="/" />
               <NavItem title="Our Story" path="/post" />
+              <NavItem title="write" path="/new-story" />
               <NavItem title="Log in" path="/login" />
               <NavItem title="Get Started" path="/signup" />
               <NavItem title="User" path="#" className="user-nav-item">

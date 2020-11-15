@@ -1,5 +1,6 @@
 import React from "react";
 import "./Article.css";
+import { SectionUnderline } from "../../StyledComponents/Headers";
 
 const Article = (props) => {
   const { blog } = props;
@@ -8,9 +9,9 @@ const Article = (props) => {
       <div className="ArticleContainer">
         <div className="DateContainer">
           <div className="DatePointContainer">
-          <div className="PointContainer"></div>
-          <span className="date-day">{blog.day}</span>
-          <span className="date-month">{blog.month}</span>
+            <div className="PointContainer"></div>
+            <span className="date-day">{blog.day}</span>
+            <span className="date-month">{blog.month}</span>
           </div>
         </div>
 
@@ -38,7 +39,7 @@ const Article = (props) => {
           </div>
         </div>
       </div>
-      <hr className="TitleBorder" />
+      <SectionUnderline />
     </div>
   );
 };

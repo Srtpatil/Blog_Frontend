@@ -1,6 +1,7 @@
 import React from "react";
 import "./Article.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
+import { PostContainer } from "../../StyledComponents/Container";
 
 const Article = (props) => {
   const { blog } = props;
@@ -15,7 +16,7 @@ const Article = (props) => {
           </div>
         </div>
 
-        <div className="PostContainer">
+        <PostContainer top={props.top}>
           <span className="DateContainerMob">
             {blog.month} {blog.day}, {blog.year}
           </span>
@@ -37,7 +38,7 @@ const Article = (props) => {
           <div className="PostContent">
             <p>{blog.content}</p>
           </div>
-        </div>
+        </PostContainer>
       </div>
       <SectionUnderline />
     </div>

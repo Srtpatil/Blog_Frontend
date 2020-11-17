@@ -54,7 +54,7 @@ function DropdownMenu(props) {
   function DropdownItem(props) {
     return (
       <Link
-        to="#"
+        to={props.to}
         className="dropdown-item"
         style={{
           color: "black",
@@ -73,7 +73,9 @@ function DropdownMenu(props) {
         "dropdownMenu--active": props.isActive,
       })}
     >
-      <DropdownItem icon={faUserCircle}>Profile</DropdownItem>
+      <DropdownItem icon={faUserCircle} to="/profile">
+        Profile
+      </DropdownItem>
       <DropdownItem icon={faScroll}>Your Drafts</DropdownItem>
       <DropdownItem icon={faFeatherAlt}>Saved Stories</DropdownItem>
       <DropdownItem icon={faSignOutAlt}>Logout</DropdownItem>

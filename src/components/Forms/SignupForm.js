@@ -1,9 +1,10 @@
 import "./SignupForm.css";
 import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { API_DEV } from "../../Constants";
+
+import { Link } from "react-router-dom";
+
+import { API_DEV } from "../../Utils";
 import * as Yup from "yup";
 
 class SignupForm extends Component {
@@ -123,41 +124,19 @@ class SignupForm extends Component {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="signUpButton"
+                  className="loginButton"
                 >
                   Sign Up
                 </button>
+
+                <div className="signUpButton">
+                  <Link to="/login">Login</Link>
+                </div>
               </div>
             </Form>
           )}
         </Formik>
         {/* Login Form end */}
-
-        {/* Alternate Login Options */}
-        <div class="loginOptions">
-          <p class="loginOptionsText">You can also login with:</p>
-
-          <div class="loginIcons">
-            <a href="#">
-              <FontAwesomeIcon
-                icon={faFacebookSquare}
-                size="2x"
-                style={{
-                  color: "#c62641",
-                }}
-              />
-            </a>
-            <a href="#">
-              <FontAwesomeIcon
-                icon={faGoogle}
-                size="2x"
-                style={{
-                  color: "#c62641",
-                }}
-              />
-            </a>
-          </div>
-        </div>
       </div>
     );
   }

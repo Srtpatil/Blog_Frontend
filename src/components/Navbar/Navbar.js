@@ -10,8 +10,9 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Backdrop } from "../../StyledComponents/Container.js";
+import UserManager from "../../Utils";
 
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Redirect } from "react-router-dom";
 
 class NavItem extends Component {
   constructor(props) {
@@ -59,6 +60,7 @@ function DropdownMenu(props) {
         style={{
           color: "black",
         }}
+        onClick={props.clicked}
       >
         {props.children}
         <span className="dropdown-right-icon">
@@ -78,7 +80,18 @@ function DropdownMenu(props) {
       </DropdownItem>
       <DropdownItem icon={faScroll}>Your Drafts</DropdownItem>
       <DropdownItem icon={faFeatherAlt}>Saved Stories</DropdownItem>
-      <DropdownItem icon={faSignOutAlt}>Logout</DropdownItem>
+      <DropdownItem
+        icon={faSignOutAlt}
+        clicked={() => {
+          console.log("Logged Out");
+          UserManager.clear();
+
+          //refresh the page
+          window.location.reload(false);
+        }}
+      >
+        Logout
+      </DropdownItem>
     </div>
   );
 }
@@ -170,13 +183,21 @@ class Navbar extends Component {
               </li>
               <NavItem title="Home" path="/" />
               <NavItem title="Our Story" path="/post" />
-              <NavItem title="write" path="/new-story" />
-              <NavItem title="Log in" path="/login" />
-              <NavItem title="Get Started" path="/signup" />
-              <NavItem title="User" path="#" className="user-nav-item">
-                {/* Dropdown goes here */}
-                <DropdownMenu />
-              </NavItem>
+              {UserManager.isLoggedin() ? null : (
+                <>
+                  <NavItem title="Get Started" path="/signup" />
+                  <NavItem title="Log in" path="/login" />
+                </>
+              )}
+              {UserManager.isLoggedin() ? (
+                <>
+                  <NavItem title="write" path="/new-story" />
+                  <NavItem title="User" path="#" className="user-nav-item">
+                    {/* Dropdown goes here */}
+                    <DropdownMenu />
+                  </NavItem>
+                </>
+              ) : null}
             </ul>
             <Burger showSideBar={this.showSideBar} />
           </nav>

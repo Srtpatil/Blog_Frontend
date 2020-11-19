@@ -58,6 +58,10 @@ export const TitleContainer = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media screen and (max-width: 650px) {
+    height: 100vh;
+  }
 `;
 
 export const PostContainer = styled.div`

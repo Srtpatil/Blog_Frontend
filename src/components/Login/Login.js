@@ -2,10 +2,14 @@ import "./Login.css";
 import React, { Component } from "react";
 import Title from "../Title/Title";
 import Navbar from "../Navbar/Navbar";
+import UserManager from "../../Utils";
 import LoginForm from "../Forms/LoginForm";
 
 class Login extends Component {
   render() {
+    if (UserManager.isLoggedin()) {
+      return <div>Already Logged in</div>;
+    }
     return (
       <div>
         <Navbar />
@@ -14,7 +18,7 @@ class Login extends Component {
           <div className="mainContainer">
             {/* First Form Section */}
             <section className="formWrapper">
-              <LoginForm />
+              <LoginForm props={this.props} />
             </section>
             {/* Second image Section */}
             <div className="imageWrapper">

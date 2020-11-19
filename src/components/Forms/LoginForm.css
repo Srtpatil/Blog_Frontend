@@ -42,7 +42,7 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -110,17 +110,17 @@
 }
 
 @media screen and (max-width: 900px) {
-  .mainContainer .formWrapper .formContainer {
+  .formWrapper .formContainer {
     padding: 0px 20px;
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 650px) {
   .loginOptions .loginIcons {
     width: 35%;
   }
 
-  .mainContainer .formWrapper .formContainer {
+  .formWrapper .formContainer {
     padding: 0px 15px;
   }
 

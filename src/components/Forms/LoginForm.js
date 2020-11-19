@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import "./LoginForm.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { API_DEV } from "../../Utils";
 import * as Yup from "yup";
 
 class LoginForm extends Component {
+  loginUser = (values) => {
+    return fetch(`${API_DEV}user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+  };
+
   render() {
     return (
       <div className="formContainer">
@@ -27,15 +38,26 @@ class LoginForm extends Component {
               .email("Invalid email address")
               .required("Required"),
             password: Yup.string()
-              .min(8, "Must be more than 8 characters")
+              .min(6, "Must be more than 6 characters")
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+            this.loginUser(values)
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                setSubmitting(false);
+                //save token
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("user_id", data.user.user_id);
 
-              setSubmitting(false);
-            }, 400);
+                this.props.props.history.replace("/");
+              })
+              .catch((err) => {
+                setSubmitting(false);
+                console.error(err);
+              });
           }}
         >
           {({ isSubmitting }) => (

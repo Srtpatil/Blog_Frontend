@@ -3,9 +3,13 @@ import React, { Component } from "react";
 import Title from "../Title/Title";
 import Navbar from "../Navbar/Navbar";
 import SignupForm from "../Forms/SignupForm";
+import UserManager from "../../Utils";
 
 class Signup extends Component {
   render() {
+    if (UserManager.isLoggedin()) {
+      return <div>Already Logged in</div>;
+    }
     return (
       <div>
         <Navbar />

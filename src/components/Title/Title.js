@@ -2,7 +2,7 @@ import "./Title.css";
 import React, { Component } from "react";
 import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
-
+import { TitleContainer } from "../../StyledComponents/Container";
 class Title extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ class Title extends Component {
   }
   render() {
     return (
-      <div className="TitleContainer">
+      <TitleContainer top={this.props.top}>
         {this.props.title ? (
           <div className="TitleNameContainer">
             <h1 className="TitleText">{this.props.title}</h1>
@@ -58,7 +58,7 @@ class Title extends Component {
             </div>
           </div>
         ) : null}
-      </div>
+      </TitleContainer>
     );
   }
 }

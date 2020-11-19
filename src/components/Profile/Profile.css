@@ -1,0 +1,22 @@
+.authorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authorImage {
+  margin-top: 10vh;
+  width: 100px;
+  height: 100px;
+  background-color: indigo;
+  background: url("https://simpleicon.com/wp-content/uploads/user-5.png");
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.authorDiscription {
+  margin-top: 5vh;
+  width: 60%;
+}

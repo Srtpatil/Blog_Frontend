@@ -23,7 +23,7 @@ class Editor extends Component {
     let newTitle = e.target.value;
     let newFirstLetter = e.target.value[0];
     if (newTitle === "<br>") {
-      newTitle = "";
+      // newTitle = "";
       newFirstLetter = null;
     }
     this.setState({ title: newTitle, firstLetter: newFirstLetter });

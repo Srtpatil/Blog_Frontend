@@ -21,11 +21,13 @@ class Content extends Component {
   render() {
     return (
       <Container ref={this.props.refProp}>
-        <SectionContainer center>
-          <SectionHeader>
-            {this.props.title}
-            <SectionUnderline />
-          </SectionHeader>
+        <SectionContainer>
+          {this.props.title ? (
+            <SectionHeader>
+              {this.props.title}
+              <SectionUnderline />
+            </SectionHeader>
+          ) : null}
           {this.props.children}
         </SectionContainer>
       </Container>

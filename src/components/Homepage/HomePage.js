@@ -4,10 +4,12 @@ import "./Homepage.css";
 import Content from "../Content/Content";
 import Footer from "../Footer/Footer";
 import Article from "../Article/Article";
+import Article2 from "../Article/Article2";
+
 
 const blog = {
   title:
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, similique!",
+    "klorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, similique!",
 
   day: "05",
   month: "NOVEMBER",

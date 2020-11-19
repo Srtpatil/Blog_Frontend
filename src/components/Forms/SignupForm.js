@@ -3,9 +3,25 @@ import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { API_DEV } from "../../Constants";
 import * as Yup from "yup";
 
 class SignupForm extends Component {
+  postData = (values) => {
+    const data = {
+      name: values.name,
+      username: values.username,
+      email: values.email,
+      password: values.password,
+    };
+    return fetch(`${API_DEV}user/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  };
   render() {
     return (
       <div className="formContainer">
@@ -18,18 +34,20 @@ class SignupForm extends Component {
         {/* Main Signup Form start */}
         <Formik
           initialValues={{
+            name: "",
             username: "",
             email: "",
             password: "",
             confirmPassword: "",
           }}
           validationSchema={Yup.object().shape({
+            name: Yup.string().required("Required"),
             username: Yup.string().required("Required"),
             email: Yup.string()
               .email("Invalid email address")
               .required("Required"),
             password: Yup.string()
-              .min(8, "Must be more than 8 characters")
+              .min(6, "Must be more than 8 characters")
               .required("Required"),
             confirmPassword: Yup.string().when("password", {
               is: (password) =>
@@ -40,15 +58,25 @@ class SignupForm extends Component {
             }),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-
-              setSubmitting(false);
-            }, 400);
+            // setTimeout(() => {
+            // alert(JSON.stringify(values, null, 2));
+            this.postData(values)
+              .then((res) => {
+                setSubmitting(false);
+                console.log(res);
+              })
+              .catch((err) => {
+                setSubmitting(false);
+                console.error(err);
+              });
+            // setSubmitting(false);
+            // }, 900);
           }}
         >
           {({ isSubmitting }) => (
             <Form className="form">
+              <label className="nameLabel">Name : </label>
+              <Field type="text" name="name" placeholder="Type your Name" />
               <label className="nameLabel">Username : </label>
               <Field
                 type="text"

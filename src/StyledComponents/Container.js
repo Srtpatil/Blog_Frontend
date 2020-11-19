@@ -24,7 +24,8 @@ export const SectionContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: ${(props) => (props.center ? "center" : "")};
+  /* align-items: ${(props) => (props.center ? "center" : "")}; */
+  /* align-items: center; */
   width: max(min(1100px, 90vw), 60vw);
   z-index: 2;
   box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { API_DEV } from "../../Utils";
 import * as Yup from "yup";
+import { store } from "react-notifications-component";
 
 class LoginForm extends Component {
   loginUser = (values) => {
@@ -48,11 +49,27 @@ class LoginForm extends Component {
               })
               .then((data) => {
                 setSubmitting(false);
-                //save token
-                localStorage.setItem("authToken", data.token);
-                localStorage.setItem("user_id", data.user.user_id);
+                if (data.error) {
+                  //alert
 
-                this.props.props.history.replace("/");
+                  store.addNotification({
+                    title: "Error!",
+                    message: data.error,
+                    type: "warning",
+                    insert: "top",
+                    container: "top-right",
+                    dismiss: {
+                      duration: 3000,
+                      onScreen: false,
+                    },
+                  });
+                } else {
+                  //save token
+                  localStorage.setItem("authToken", data.token);
+                  localStorage.setItem("user_id", data.user.user_id);
+
+                  this.props.props.history.replace("/");
+                }
               })
               .catch((err) => {
                 setSubmitting(false);

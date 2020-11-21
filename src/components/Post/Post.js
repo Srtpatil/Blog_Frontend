@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Content from "../Content/Content";
+import { API_DEV } from "../../Utils";
 
 const SharePost = () => {
   return (
@@ -82,10 +83,38 @@ class Post extends Component {
     super();
     this.state = {
       liked: false,
-      likesCount: PostData.Likes,
+      likesCount: null,
+      PostData: null,
+      loading: true,
     };
 
     this.myRef = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log(this.props.match);
+    const post_id = this.props.match.params.post_id;
+
+    fetch(`${API_DEV}post/${post_id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        const postData = {
+          Title: data.post.title,
+          Author: data.post.user.name,
+          Likes: data.post.likes,
+          AuthorDescription: "Someome",
+          PostContent: data.post.content,
+          AuthorId: data.post.user_id,
+        };
+        this.setState({
+          PostData: postData,
+          likesCount: data.post.likes,
+          loading: false,
+        });
+        console.log(data);
+      });
   }
 
   executeScroll = () => {
@@ -93,6 +122,9 @@ class Post extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>loading</div>;
+    }
     return (
       <div>
         <Navbar />
@@ -100,15 +132,15 @@ class Post extends Component {
           addButton={true}
           red_button="Read On"
           white_button="Read Later"
-          title={PostData.Title}
-          author={PostData.Author}
+          title={this.state.PostData.Title}
+          author={this.state.PostData.Author}
           // refProp={this.myRef}
-          onreadClick={this.executeScroll}
+          onPrimaryClick={this.executeScroll}
         />
         <Content title="ENJOY YOUR READ !" refProp={this.myRef}>
           <EditorJs
             tools={EDITOR_JS_TOOLS}
-            data={PostData.PostContent}
+            data={this.state.PostData.PostContent}
             readOnly={false}
           />
           <SectionHeader marginTop="0px">
@@ -151,11 +183,11 @@ class Post extends Component {
                     marginBottom: "4px",
                   }}
                 >
-                  {PostData.Author}
+                  {this.state.PostData.Author}
                 </p>
               </div>
               <p className="AboutAuthorDescriptionText">
-                {PostData.AuthorDescription}
+                {this.state.PostData.AuthorDescription}
               </p>
             </div>
           </div>

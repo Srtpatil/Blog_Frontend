@@ -5,6 +5,10 @@ const UserManager = () => {
     return localStorage.getItem("authToken");
   };
 
+  const getUserId = () => {
+    return localStorage.getItem("user_id");
+  };
+
   const isLoggedin = () => {
     if (localStorage.getItem("authToken")) {
       return true;
@@ -33,6 +37,7 @@ const UserManager = () => {
     isAuthor,
     isSuperUser,
     clear,
+    getUserId,
   };
 };
 

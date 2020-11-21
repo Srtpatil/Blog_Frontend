@@ -40,7 +40,7 @@ class Title extends Component {
                 </div> */}
                 <PrimaryButton
                   onClick={() => {
-                    this.props.onreadClick();
+                    this.props.onPrimaryClick();
                   }}
                 >
                   {this.props.red_button}

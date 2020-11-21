@@ -4,6 +4,8 @@ import Title from "../Title/Title";
 import Navbar from "../Navbar/Navbar";
 import UserManager from "../../Utils";
 import LoginForm from "../Forms/LoginForm";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 class Login extends Component {
   render() {
@@ -12,6 +14,7 @@ class Login extends Component {
     }
     return (
       <div>
+        <ReactNotification />
         <Navbar />
         <Title />
         <div className="backgroundBox">

@@ -21,7 +21,7 @@ const Article = (props) => {
             {blog.month} {blog.day}, {blog.year}
           </span>
           <div className="PostHeader">
-            <a href="#" className="PostLink">
+            <a href={`post/${blog.post_id}`} className="PostLink">
               {blog.title}
             </a>
             <p
@@ -36,7 +36,7 @@ const Article = (props) => {
             </p>
           </div>
           <div className="PostContent">
-            <p>{blog.content}</p>
+            <p>{blog.summary}</p>
           </div>
         </PostContainer>
       </div>

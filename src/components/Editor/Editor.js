@@ -7,6 +7,7 @@ import EditorJS from "react-editor-js";
 import ContentEditable from "react-contenteditable";
 import Footer from "../Footer/Footer";
 import { PostData } from "../../DummyData/Post";
+import UserManager, { API_DEV } from "../../Utils";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
 class Editor extends Component {
   constructor(props) {
@@ -34,10 +35,37 @@ class Editor extends Component {
   // };
 
   getEditorContext = (api, newData) => {
-    // this.setState({
-    //   blog:
-    // })
+    this.setState({
+      blog: newData,
+    });
+
     console.log(newData);
+  };
+
+  publishPost = () => {
+    const data = {
+      title: this.state.title,
+      content: this.state.blog,
+      summary: "",
+      is_published: true,
+      user_id: UserManager.getUserId(),
+    };
+
+    fetch(`${API_DEV}post/add`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + UserManager.getToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -60,9 +88,10 @@ class Editor extends Component {
           title={customTitle}
           author="Anonymous"
           addButton={true}
-          red_button="Save Draft"
-          white_button="Published"
+          red_button="Publish"
+          white_button="Save as a Draft"
           firstLetter={this.state.firstLetter}
+          onPrimaryClick={this.publishPost}
         />
         <Content title="Write your Story!">
           <EditorJS

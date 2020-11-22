@@ -141,7 +141,7 @@ class Post extends Component {
           <EditorJs
             tools={EDITOR_JS_TOOLS}
             data={this.state.PostData.PostContent}
-            readOnly={false}
+            readOnly={true}
           />
           <SectionHeader marginTop="0px">
             Like the post

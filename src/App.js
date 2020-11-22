@@ -17,6 +17,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/post/:post_id" component={Post} />
         <Route exact path="/new-story" component={Editor} />
+        <Route exact path="/new-story/:post_id" component={Editor} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/profile" component={Profile} />
       </Switch>

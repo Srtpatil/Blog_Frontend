@@ -2,6 +2,28 @@ import React from "react";
 import "./Article.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import { PostContainer } from "../../StyledComponents/Container";
+import UserManager from "../../Utils";
+
+const ArticleHeader = (props) => {
+  const { blog, link } = props;
+  return (
+    <div className="PostHeader">
+      <a href={link} className="PostLink">
+        {blog.title}
+      </a>
+      <p
+        style={{
+          color: "#aaaaaa",
+        }}
+      >
+        By{" "}
+        <a href="#" className="AuthorLink">
+          {blog.author}
+        </a>
+      </p>
+    </div>
+  );
+};
 
 const Article = (props) => {
   const { blog } = props;
@@ -20,21 +42,14 @@ const Article = (props) => {
           <span className="DateContainerMob">
             {blog.month} {blog.day}, {blog.year}
           </span>
-          <div className="PostHeader">
-            <a href={`post/${blog.post_id}`} className="PostLink">
-              {blog.title}
-            </a>
-            <p
-              style={{
-                color: "#aaaaaa",
-              }}
-            >
-              By{" "}
-              <a href="#" className="AuthorLink">
-                {blog.author}
-              </a>
-            </p>
-          </div>
+          {console.log(blog.authorId)}
+          {UserManager.isLoggedin() &&
+          blog.authorId == UserManager.getUserId() ? (
+            <ArticleHeader blog={blog} link={`new-story/${blog.post_id}`} />
+          ) : (
+            <ArticleHeader blog={blog} link={`post/${blog.post_id}`} />
+          )}
+
           <div className="PostContent">
             <p>{blog.summary}</p>
           </div>

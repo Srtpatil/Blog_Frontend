@@ -16,8 +16,39 @@ class Editor extends Component {
       title: "Write title here..",
       firstLetter: "W",
       blog: null,
+      empty: false,
+      loading: true,
+      is_published: false,
+      is_drafted: false,
     };
     this.contentEditable = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log(this.props.match);
+    const post_id = this.props.match.params.post_id;
+
+    if (!post_id) {
+      this.setState({
+        empty: true,
+        loading: false,
+      });
+    } else {
+      fetch(`${API_DEV}post/${post_id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          this.setState({
+            blog: data.post.content,
+            title: data.post.title,
+            loading: false,
+            firstLetter: data.post.title[0],
+            is_published: data.post.is_published,
+          });
+          console.log(data);
+        });
+    }
   }
 
   handleChange = (e) => {
@@ -69,6 +100,9 @@ class Editor extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>loading</div>;
+    }
     const customTitle = (
       <ContentEditable
         className="editable"
@@ -99,8 +133,8 @@ class Editor extends Component {
             // inlineToolbar={true}
             tools={EDITOR_JS_TOOLS}
             onChange={this.getEditorContext}
-            placeholder="Start Writing !"
-            // data={PostData.PostContent}
+            placeholder={this.state.empty ? "Start Writing Here" : null}
+            data={this.state.blog}
           />
         </Content>
         <Footer />

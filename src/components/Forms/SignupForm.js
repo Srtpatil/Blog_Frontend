@@ -48,7 +48,7 @@ class SignupForm extends Component {
               .email("Invalid email address")
               .required("Required"),
             password: Yup.string()
-              .min(6, "Must be more than 8 characters")
+              .min(6, "Must be more than 6 characters")
               .required("Required"),
             confirmPassword: Yup.string().when("password", {
               is: (password) =>

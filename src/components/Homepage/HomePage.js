@@ -28,6 +28,7 @@ function HomePage() {
       .then((res) => res.json())
       .then((data) => {
         let posts = [];
+        console.log(data);
         data.forEach((post) => {
           const postData = {
             post_id: post.post_id,
@@ -37,6 +38,7 @@ function HomePage() {
             year: "2020",
             summary: post.summary,
             author: post.user.name,
+            authorId: post.user_id,
           };
 
           posts.push(<Article blog={postData} />);

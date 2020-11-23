@@ -60,7 +60,7 @@ export const TitleContainer = styled.div`
   background-size: cover;
 
   @media screen and (max-width: 650px) {
-    height: 100vh;
+    height: ${(props) => (props.disableFullScreen ? "60px" : "100vh")};
   }
 `;
 

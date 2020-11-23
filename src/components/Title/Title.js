@@ -10,7 +10,10 @@ class Title extends Component {
   }
   render() {
     return (
-      <TitleContainer top={this.props.top}>
+      <TitleContainer
+        top={this.props.top}
+        disableFullScreen={this.props.disableFullScreen}
+      >
         {this.props.title ? (
           <div className="TitleNameContainer">
             <h1 className="TitleText">{this.props.title}</h1>

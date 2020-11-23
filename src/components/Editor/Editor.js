@@ -8,7 +8,9 @@ import ContentEditable from "react-contenteditable";
 import Footer from "../Footer/Footer";
 import { PostData } from "../../DummyData/Post";
 import UserManager, { API_DEV } from "../../Utils";
+import ReactNotification, { store } from "react-notifications-component";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
+
 class Editor extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,7 @@ class Editor extends Component {
       loading: true,
       is_published: false,
       is_drafted: false,
+      disabled: false,
     };
     this.contentEditable = React.createRef();
   }
@@ -53,17 +56,20 @@ class Editor extends Component {
 
   handleChange = (e) => {
     let newTitle = e.target.value;
+    if (newTitle.length >= 75) {
+      // newTitle = newTitle.slice(0, -1);
+      return;
+    }
+
     let newFirstLetter = e.target.value[0];
     if (newTitle === "<br>") {
       // newTitle = "";
       newFirstLetter = null;
     }
+
+    console.log(newTitle);
     this.setState({ title: newTitle, firstLetter: newFirstLetter });
   };
-
-  // handleBlur = () => {
-  //   console.log(this.contentEditable.current.innerHTML);
-  // };
 
   getEditorContext = (api, newData) => {
     this.setState({
@@ -77,7 +83,8 @@ class Editor extends Component {
     const data = {
       title: this.state.title,
       content: this.state.blog,
-      summary: "",
+      summary:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
       is_published: true,
       user_id: UserManager.getUserId(),
     };
@@ -108,7 +115,7 @@ class Editor extends Component {
         className="editable"
         html={this.state.title}
         innerRef={this.contentEditable}
-        disabled={false}
+        disabled={this.state.disabled}
         onChange={this.handleChange}
         // onFocus={this.handleFocus}
         // onBlur={this.handleBlur}
@@ -117,6 +124,7 @@ class Editor extends Component {
     );
     return (
       <div>
+        <ReactNotification />
         <Navbar />
         <Title
           title={customTitle}

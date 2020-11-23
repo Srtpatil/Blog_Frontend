@@ -42,7 +42,6 @@ const Article = (props) => {
           <span className="DateContainerMob">
             {blog.month} {blog.day}, {blog.year}
           </span>
-          {console.log(blog.authorId)}
           {UserManager.isLoggedin() &&
           blog.authorId == UserManager.getUserId() ? (
             <ArticleHeader blog={blog} link={`new-story/${blog.post_id}`} />

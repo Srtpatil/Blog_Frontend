@@ -30,17 +30,6 @@ class Title extends Component {
 
             {this.props.addButton ? (
               <div className="ReadContainer">
-                {/* <div
-                  className="ReadButton"
-                  onClick={() => {
-                    this.props.onreadClick();
-                  }}
-                >
-                  <p>Read On</p>
-                </div>
-                <div className="ReadLaterButton">
-                  <p>Read Later</p>
-                </div> */}
                 <PrimaryButton
                   onClick={() => {
                     this.props.onPrimaryClick();

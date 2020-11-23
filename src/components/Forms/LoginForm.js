@@ -67,7 +67,8 @@ class LoginForm extends Component {
                   //save token
                   localStorage.setItem("authToken", data.token);
                   localStorage.setItem("user_id", data.user.user_id);
-
+                  
+                  //redirect to home
                   this.props.props.history.replace("/");
                 }
               })

@@ -52,7 +52,7 @@ function HomePage() {
     <div>
       <Navbar />
       <Title
-        title="Knights, I bid you welcome to your new home"
+        title="Optimize It"
         author="Lorem ipsum"
       />
       <Content title="Latest Stories">{content}</Content>

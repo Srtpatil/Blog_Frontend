@@ -1,4 +1,29 @@
+import { store } from "react-notifications-component";
+
 export const API_DEV = "http://localhost:8081/";
+
+export const NotificationManager = () => {
+  const add = (text, type, title, duration) => {
+    store.addNotification({
+      title: title,
+      message: text,
+      type: type,
+      insert: "top",
+      container: "top-right",
+      dismiss: {
+        duration: duration,
+        onScreen: false,
+      },
+    });
+  };
+
+  return {
+    add: (text, type, title, duration) => {
+      console.log(text);
+      return add(text, type, title, duration);
+    },
+  };
+};
 
 const UserManager = () => {
   const getToken = () => {

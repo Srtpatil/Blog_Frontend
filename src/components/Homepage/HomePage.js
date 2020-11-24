@@ -7,6 +7,7 @@ import Article from "../Article/Article";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
 import { API_DEV } from "../../Utils";
+import EmptyContent from "../Static_Pages/EmptyContent";
 
 const blog = {
   title:
@@ -41,7 +42,7 @@ function HomePage() {
             authorId: post.user_id,
           };
 
-          posts.push(<Article blog={postData} />);
+          posts.push(<Article2 blog={postData} />);
         });
 
         setContent(posts);
@@ -51,11 +52,10 @@ function HomePage() {
   return (
     <div>
       <Navbar />
-      <Title
-        title="Optimize It"
-        author="Lorem ipsum"
-      />
-      <Content title="Latest Stories">{content}</Content>
+      <Title title="Optimize It" author="Lorem ipsum" />
+      <Content title="Latest Stories">
+        {content.length === 0 ? <EmptyContent /> : content}
+      </Content>
       <Footer />
     </div>
   );

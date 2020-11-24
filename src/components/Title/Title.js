@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { TitleContainer } from "../../StyledComponents/Container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+
 class Title extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +27,6 @@ class Title extends Component {
               </div>
             ) : null}
 
-            {this.props.divider ? <Divider /> : null}
-
             {/* Read and read later buttons */}
 
             {this.props.addButton ? (
@@ -37,7 +38,12 @@ class Title extends Component {
                 >
                   {this.props.red_button}
                 </PrimaryButton>
-                <SecondaryButton>{this.props.white_button}</SecondaryButton>
+                <SecondaryButton border>
+                  {this.props.secondaryIcon ? (
+                    <FontAwesomeIcon icon={this.props.secondaryIcon} />
+                  ) : null}
+                  {this.props.white_button}
+                </SecondaryButton>
               </div>
             ) : null}
 

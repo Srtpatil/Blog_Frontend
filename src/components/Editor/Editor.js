@@ -10,6 +10,7 @@ import { PostData } from "../../DummyData/Post";
 import UserManager, { API_DEV, NotificationManager } from "../../Utils";
 import ReactNotification, { store } from "react-notifications-component";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 
 class Editor extends Component {
   constructor(props) {

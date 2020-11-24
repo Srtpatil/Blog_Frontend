@@ -3,6 +3,9 @@ import "./Article.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import { PostContainer } from "../../StyledComponents/Container";
 import UserManager from "../../Utils";
+import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ArticleHeader = (props) => {
   const { blog, link } = props;
@@ -14,6 +17,7 @@ const ArticleHeader = (props) => {
       <p
         style={{
           color: "#aaaaaa",
+          fontSize: "0.9rem",
         }}
       >
         By{" "}
@@ -52,8 +56,26 @@ const Article = (props) => {
           <div className="PostContent">
             <p>{blog.summary}</p>
           </div>
+          <div className="ArticleButtonsContainer">
+            <SecondaryButton
+              as="a"
+              href={
+                UserManager.isLoggedin() &&
+                blog.authorId == UserManager.getUserId()
+                  ? `new-story/${blog.post_id}`
+                  : `post/${blog.post_id}`
+              }
+            >
+              Read On
+            </SecondaryButton>
+            <PrimaryButton border>
+              <FontAwesomeIcon icon={faBookmark} />
+              Bookmark
+            </PrimaryButton>
+          </div>
         </PostContainer>
       </div>
+
       <SectionUnderline />
     </div>
   );

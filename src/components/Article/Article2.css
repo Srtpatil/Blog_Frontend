@@ -1,18 +1,19 @@
 .Article2Container {
   margin-top: 80px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
-  justify-content: center;
+  align-items: center;
 }
 
 .Post2Container {
   position: relative;
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5%;
 }
 /* 
 .Date2ContainerMob {
@@ -22,7 +23,8 @@
 .Date2ContainerMob {
   display: block;
   color: #c62641;
-  margin-bottom: 5%;
+  margin-bottom: 75px;
+  text-align: center;
 }
 
 .Post2Header {
@@ -76,6 +78,10 @@
 
   .Post2Content {
     padding: 0;
+  }
+
+  .Date2ContainerMob {
+    margin-bottom: 40px;
   }
 
   .Post2Header {

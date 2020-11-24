@@ -69,7 +69,6 @@
 
 .PostHeader {
   margin-top: 10px;
-  margin-left: 10px;
   width: 80%;
   text-transform: uppercase;
   font-weight: 600;
@@ -78,13 +77,13 @@
 
 .PostLink {
   text-decoration: none;
-  font-size: 2.1rem;
+  font-size: 2.35rem;
 }
 
 .PostLink:link,
 :active,
 :visited {
-  color: black;
+  color: #333333;
 }
 
 .PostLink:hover {
@@ -94,20 +93,26 @@
 .AuthorLink {
   text-decoration: none;
   color: #aaaaaa;
+  text-decoration: none;
 }
 
 .AuthorLink:hover {
   color: black;
-  border-bottom: 1px solid black;
 }
 
 .PostContent {
   width: 80%;
-  font-size: large;
+  font-size: 1rem;
   color: #333333;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
   line-height: 1.4;
-  
+  font-family: "Domine";
+}
+
+.ArticleButtonsContainer {
+  width: 80%;
+  display: flex;
+  margin-bottom: 25px;
 }
 
 @media screen and (max-width: 650px) {
@@ -127,5 +132,25 @@
 
   .PointContainer {
     display: none;
+  }
+
+  .PostLink {
+    text-decoration: none;
+    font-size: 1.8rem;
+  }
+
+  .PostContent {
+    width: 80%;
+    font-size: 0.9rem;
+    color: #333333;
+    margin-bottom: 5%;
+    line-height: 1.4;
+    font-family: "Domine";
+  }
+
+  .AuthorLink {
+    text-decoration: none;
+    color: #aaaaaa;
+    font-size: 0.9rem;
   }
 }

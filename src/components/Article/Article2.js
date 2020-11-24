@@ -2,6 +2,9 @@ import React from "react";
 import "./Article2.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import UserManager from "../../Utils";
+import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Article2Header = (props) => {
   const { blog, link } = props;
@@ -15,6 +18,7 @@ const Article2Header = (props) => {
       <p
         style={{
           color: "#aaaaaa",
+          fontSize: "0.9rem",
         }}
       >
         By{" "}
@@ -31,10 +35,10 @@ const Article2 = (props) => {
   return (
     <div>
       <div className="Article2Container">
+        <span className="Date2ContainerMob">
+          {blog.month} {blog.day}, {blog.year}
+        </span>
         <div className="Post2Container">
-          <span className="Date2ContainerMob">
-            {blog.month} {blog.day}, {blog.year}
-          </span>
           {UserManager.isLoggedin() &&
           blog.authorId == UserManager.getUserId() ? (
             <Article2Header blog={blog} link={`new-story/${blog.post_id}`} />
@@ -43,6 +47,24 @@ const Article2 = (props) => {
           )}
           <div className="Post2Content">
             <p>{blog.summary}</p>
+          </div>
+
+          <div className="ArticleButtonsContainer">
+            <SecondaryButton
+              as="a"
+              href={
+                UserManager.isLoggedin() &&
+                blog.authorId == UserManager.getUserId()
+                  ? `new-story/${blog.post_id}`
+                  : `post/${blog.post_id}`
+              }
+            >
+              Read On
+            </SecondaryButton>
+            <PrimaryButton border>
+              <FontAwesomeIcon icon={faBookmark} />
+              Bookmark
+            </PrimaryButton>
           </div>
         </div>
       </div>

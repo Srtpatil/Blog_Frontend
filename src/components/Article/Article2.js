@@ -3,7 +3,6 @@ import "./Article2.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import UserManager from "../../Utils";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
-import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Article2Header = (props) => {
@@ -62,7 +61,9 @@ const Article2 = (props) => {
               {props.firstButtonContent}
             </SecondaryButton>
             <PrimaryButton border>
-              <FontAwesomeIcon icon={faBookmark} />
+              {props.secondButtonIcon ? (
+                <FontAwesomeIcon icon={props.secondButtonIcon} />
+              ) : null}
               {props.secondButtonContent}
             </PrimaryButton>
           </div>

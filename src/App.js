@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import HomePage from "./components/Homepage/HomePage";
 import Login from "./components/Login/Login";
@@ -17,7 +18,8 @@ function App() {
         </Route>
         <Route exact path="/login" component={Login} />
         <Route exact path="/post/:post_id" component={Post} />
-        <Route exact path="/new-story" component={Editor} />
+        <ProtectedRoute exact path="/new-story" component={Editor} />
+        {/* <Route exact path="/new-story" component={Editor} /> */}
         <Route exact path="/new-story/:post_id" component={Editor} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/profile" component={Profile} />

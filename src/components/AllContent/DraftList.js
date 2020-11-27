@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import Title from "../Title/Title";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const blog = {
   title:
@@ -31,6 +32,7 @@ const DraftList = () => {
           blog={blog}
           firstButtonContent="Read on"
           secondButtonContent="Delete Draft"
+          secondButtonIcon={faTrash}
         />
       );
     }

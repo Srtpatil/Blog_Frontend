@@ -38,7 +38,11 @@ class NavItem extends Component {
       this.props.path === "/" || this.props.path === "#" ? "" : "active";
     return (
       <li className={this.props.className} onClick={this.handleMouseHover}>
-        <NavLink to={this.props.path} activeClassName={activeClass}>
+        <NavLink
+          to={this.props.path}
+          activeClassName={activeClass}
+          className={this.props.className}
+        >
           {this.props.title}
         </NavLink>
         {this.props.children
@@ -187,8 +191,16 @@ class Navbar extends Component {
               <NavItem title="Our Story" path="/post" />
               {UserManager.isLoggedin() ? null : (
                 <>
-                  <NavItem title="Get Started" path="/signup" />
-                  <NavItem title="Log in" path="/login" />
+                  <NavItem
+                    title="Get Started"
+                    path="/signup"
+                    className="NavbarSignupBtn"
+                  />
+                  <NavItem
+                    title="Log in"
+                    path="/login"
+                    className="NavbarLoginBtn"
+                  />
                 </>
               )}
               {UserManager.isLoggedin() ? (

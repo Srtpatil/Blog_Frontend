@@ -16,15 +16,13 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path="/login" component={Login} />
         <Route exact path="/post/:post_id" component={Post} />
         <ProtectedRoute exact path="/new-story" component={Editor} />
-        {/* <Route exact path="/new-story" component={Editor} /> */}
-        <Route exact path="/new-story/:post_id" component={Editor} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/profile" component={Profile} />
-
-        <Route exact path="/drafts/:user_id" component={DraftList} />
+        <ProtectedRoute exact path="/new-story/:post_id" component={Editor} />
+        <ProtectedRoute exact path="/login" component={Login} />
+        <ProtectedRoute exact path="/signup" component={Signup} />
+        <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/drafts/:user_id" component={DraftList} />
       </Switch>
     </Router>
   );

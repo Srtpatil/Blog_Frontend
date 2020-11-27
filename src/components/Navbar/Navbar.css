@@ -82,6 +82,24 @@
   text-decoration: none;
 }
 
+/* For Login Btn */
+
+.NavbarLoginBtn a {
+  background-color: white;
+  border-radius: 6px;
+  padding: 12px 18px;
+  color: var(--primary-color);
+}
+
+/* End Login Btn */
+
+/* For Signup Button */
+.NavbarSignupBtn a {
+  border: 2px solid white;
+  border-radius: 6px;
+}
+/* End Signup Button */
+
 /* For Dropdown menu */
 .dropdownMenu {
   position: absolute;

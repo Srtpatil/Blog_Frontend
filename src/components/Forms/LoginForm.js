@@ -19,6 +19,11 @@ class LoginForm extends Component {
     });
   };
 
+  onEvent = (ev) => {
+    ev.preventDefault();
+    window.open("http://localhost:8081/auth/google", "_self");
+  };
+
   render() {
     return (
       <div className="formContainer">
@@ -67,7 +72,7 @@ class LoginForm extends Component {
                   //save token
                   localStorage.setItem("authToken", data.token);
                   localStorage.setItem("user_id", data.user.user_id);
-                  
+
                   //redirect to home
                   this.props.props.history.replace("/");
                 }
@@ -132,7 +137,7 @@ class LoginForm extends Component {
                 }}
               />
             </a>
-            <a href="#">
+            <a href="#" onClick={this.onEvent}>
               <FontAwesomeIcon
                 icon={faGoogle}
                 size="2x"

@@ -38,6 +38,41 @@ export const EDITOR_JS_TOOLS = {
   image: {
     class: Image,
     inlineToolbar: true,
+    config: {
+      // endpoints: {
+      //   byFile: "http://localhost:5000/image/upload",
+      //   byUrl: "http://localhost:5000/image/upload",
+      // },
+      uploader: {
+        uploadByFile(file) {
+          const img = new FormData();
+          img.append("image", file);
+          // your own uploading logic here
+          return fetch("http://localhost:5000/image/upload", {
+            method: "POST",
+            body: img,
+          })
+            .then((resp) => resp.json())
+            .then((resp) => {
+              return {
+                success: 1,
+                file: {
+                  url: resp.imagePath,
+                },
+              };
+            });
+        },
+        // uploadByUrl(url) {
+        //   console.log("IMAGE URL: ", url);
+        //   return {
+        //     success: 1,
+        //     file: {
+        //       url: url,
+        //     },
+        //   };
+        // },
+      },
+    },
   },
   raw: {
     class: Raw,

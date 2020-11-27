@@ -78,7 +78,9 @@ function DropdownMenu(props) {
       <DropdownItem icon={faUserCircle} to="/profile">
         Profile
       </DropdownItem>
-      <DropdownItem icon={faScroll}>Your Drafts</DropdownItem>
+      <DropdownItem icon={faScroll} to={`drafts/${UserManager.getUserId()}`}>
+        Your Drafts
+      </DropdownItem>
       <DropdownItem icon={faFeatherAlt}>Saved Stories</DropdownItem>
       <DropdownItem
         icon={faSignOutAlt}

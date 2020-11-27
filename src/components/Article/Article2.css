@@ -1,5 +1,5 @@
 .Article2Container {
-  margin-top: 80px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -54,10 +54,13 @@
 
 .Post2Content {
   width: 80%;
-  font-size: large;
   color: #333333;
   margin-bottom: 5%;
   padding: 0 5px;
+
+  line-height: 1.6;
+  font-family: "Domine";
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 1050px) {

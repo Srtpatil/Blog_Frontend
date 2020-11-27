@@ -59,11 +59,11 @@ const Article2 = (props) => {
                   : `post/${blog.post_id}`
               }
             >
-              Read On
+              {props.firstButtonContent}
             </SecondaryButton>
             <PrimaryButton border>
               <FontAwesomeIcon icon={faBookmark} />
-              Bookmark
+              {props.secondButtonContent}
             </PrimaryButton>
           </div>
         </div>

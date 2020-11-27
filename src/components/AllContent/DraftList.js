@@ -1,15 +1,10 @@
+import EmptyContent from "../Static_Pages/EmptyContent";
+import Loader from "../Static_Pages/Loader";
+import Content from "../Content/Content";
 import Navbar from "../Navbar/Navbar";
 import Title from "../Title/Title";
-import "./Homepage.css";
-import Content from "../Content/Content";
-import Footer from "../Footer/Footer";
-import Article from "../Article/Article";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
-import { API_DEV } from "../../Utils";
-import EmptyContent from "../Static_Pages/EmptyContent";
-import FullscreenLoader from "../Static_Pages/FullscreenLoader";
-import Loader from "../Static_Pages/Loader";
 
 const blog = {
   title:
@@ -23,46 +18,31 @@ const blog = {
   author: "Anonymous",
 };
 
-function HomePage() {
+const DraftList = () => {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_DEV}post/latest_posts/1`)
-      .then((res) => res.json())
-      .then((data) => {
-        let posts = [];
-        console.log(data);
-        data.forEach((post) => {
-          const postData = {
-            post_id: post.post_id,
-            title: post.title,
-            day: "05",
-            month: "NOVEMBER",
-            year: "2020",
-            summary: post.summary,
-            author: post.user.name,
-            authorId: post.user_id,
-          };
+    let posts = [];
 
-          posts.push(<Article blog={postData} />);
-        });
-
-        setContent(posts);
-
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-      });
+    for (let i = 0; i < 5; i++) {
+      posts.push(
+        <Article2
+          blog={blog}
+          firstButtonContent="Read on"
+          secondButtonContent="Delete Draft"
+        />
+      );
+    }
+    setLoading(false);
+    setContent(posts);
   }, []);
 
   return (
     <div>
       <Navbar />
-      <Title title="A scarcely ever blog" author="Lorem ipsum" />
-      <Content title="Latest Stories">
+      <Title top="25vh" disableFullScreen={true} />
+      <Content title="Your Drafts">
         {loading ? (
           <Loader />
         ) : content.length === 0 ? (
@@ -71,9 +51,8 @@ function HomePage() {
           content
         )}
       </Content>
-      <Footer />
     </div>
   );
-}
+};
 
-export default HomePage;
+export default DraftList;

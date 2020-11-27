@@ -2,6 +2,13 @@ import { store } from "react-notifications-component";
 
 export const API_DEV = "http://localhost:8081/";
 
+// Random number between range
+export const randomNumber = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 export const NotificationManager = () => {
   const add = (text, type, title, duration) => {
     store.addNotification({

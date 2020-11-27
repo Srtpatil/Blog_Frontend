@@ -6,9 +6,10 @@ import Footer from "../Footer/Footer";
 import Article from "../Article/Article";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
-import { API_DEV } from "../../Utils";
+import { API_DEV, randomNumber } from "../../Utils";
 import EmptyContent from "../Static_Pages/EmptyContent";
 import FullscreenLoader from "../Static_Pages/FullscreenLoader";
+import { Quotes } from "../../DummyData/Quotes";
 import Loader from "../Static_Pages/Loader";
 
 const blog = {
@@ -25,9 +26,15 @@ const blog = {
 
 function HomePage() {
   const [content, setContent] = useState([]);
+  const [quote, setQuote] = useState({
+    text: "A house divided against itself cannot stand.",
+    author: "Abraham Lincoln",
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const randomQuoteIndex = randomNumber(0, Quotes.length - 1);
+
     fetch(`${API_DEV}post/latest_posts/1`)
       .then((res) => res.json())
       .then((data) => {
@@ -49,27 +56,26 @@ function HomePage() {
         });
 
         setContent(posts);
-
+        setQuote(Quotes[randomQuoteIndex]);
         setLoading(false);
       })
       .catch((err) => {
-        setLoading(false);
         console.log(err);
+        setQuote(Quotes[randomQuoteIndex]);
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <h1>LOading</h1>;
+  }
 
   return (
     <div>
       <Navbar />
-      <Title title="A scarcely ever blog" author="Lorem ipsum" />
+      <Title title={`"${quote.text}`} author={quote.author} quote />
       <Content title="Latest Stories">
-        {loading ? (
-          <Loader />
-        ) : content.length === 0 ? (
-          <EmptyContent />
-        ) : (
-          content
-        )}
+        {content.length === 0 ? <EmptyContent /> : content}
       </Content>
       <Footer />
     </div>

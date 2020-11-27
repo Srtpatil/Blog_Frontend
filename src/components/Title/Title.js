@@ -4,12 +4,11 @@ import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { TitleContainer } from "../../StyledComponents/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 
 class Title extends Component {
   constructor(props) {
     super(props);
-    this.firstLetter = this.props.title ? this.props.title[0] : null;
+    this.firstLetter = this.props.title ? this.props.title[1] : null;
   }
   render() {
     return (
@@ -23,7 +22,9 @@ class Title extends Component {
 
             {this.props.author ? (
               <div className="AuthorContainer">
-                <p className="AuthorText">By {this.props.author}</p>
+                <p className="AuthorText">
+                  {this.props.quote ? "-" : "By "} {this.props.author}
+                </p>
               </div>
             ) : null}
 

@@ -40,7 +40,10 @@ class Title extends Component {
                 >
                   {this.props.red_button}
                 </PrimaryButton>
-                <SecondaryButton border>
+                <SecondaryButton
+                  border
+                  onClick={() => this.props.onSecondaryClick()}
+                >
                   {this.props.secondaryIcon ? (
                     <FontAwesomeIcon icon={this.props.secondaryIcon} />
                   ) : null}

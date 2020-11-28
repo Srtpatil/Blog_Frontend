@@ -11,6 +11,7 @@ import UserManager, { API_DEV, NotificationManager } from "../../Utils";
 import ReactNotification, { store } from "react-notifications-component";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
 class Editor extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Editor extends Component {
       blog: null,
       empty: false,
       loading: true,
+      summary: "",
       is_published: false,
       is_drafted: false,
       disabled: false,
@@ -32,7 +34,7 @@ class Editor extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match);
+    console.log("Match: ", this.props.match);
     this.post_id = this.props.match.params.post_id;
 
     if (!this.post_id) {
@@ -46,9 +48,14 @@ class Editor extends Component {
           return res.json();
         })
         .then((data) => {
-          let primaryButtonText, secondaryButtonText;
+          let primaryButtonText = this.state.primaryButtonText,
+            secondaryButtonText = this.state.secondaryButtonText;
           if (data.post.is_published) {
             primaryButtonText = "Update Post";
+          }
+
+          if (data.post.is_drafted) {
+            secondaryButtonText = "Update Draft";
           }
 
           this.setState({
@@ -59,9 +66,10 @@ class Editor extends Component {
             is_published: data.post.is_published,
             is_drafted: data.post.is_drafted,
             primaryButtonText: primaryButtonText,
+            secondaryButtonText: secondaryButtonText,
             authorName: data.post.user.name,
           });
-          console.log(data);
+          console.log("Data from editor: ", data);
         });
     }
   }
@@ -91,6 +99,9 @@ class Editor extends Component {
     const data = {
       title: this.state.title,
       content: this.state.blog,
+      summary: this.state.summary,
+      is_published: true,
+      is_drafted: false,
     };
 
     fetch(`${API_DEV}post/edit/${this.post_id}`, {
@@ -108,12 +119,12 @@ class Editor extends Component {
             "Post Updated Successfully",
             "success",
             "Success",
-            500
+            1000
           );
 
           setTimeout(() => {
             this.props.history.push("/");
-          }, 1000);
+          }, 500);
         }
         console.log(data);
       })
@@ -133,8 +144,94 @@ class Editor extends Component {
       is_drafted: false,
     };
 
-    fetch(`${API_DEV}post/add`, {
-      method: "POST",
+    if (this.state.is_drafted) {
+      this.updatePost();
+    } else {
+      fetch(`${API_DEV}post/add`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + UserManager.getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (!data.error) {
+            NotificationManager().add(
+              "Post Added Successfully",
+              "success",
+              "Success",
+              1000
+            );
+
+            setTimeout(() => {
+              this.props.history.push("/");
+            }, 500);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  publishDraft = () => {
+    const data = {
+      title: this.state.title,
+      content: this.state.blog,
+      summary:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
+      user_id: UserManager.getUserId(),
+      is_published: false,
+      is_drafted: true,
+    };
+
+    if (this.state.is_published) {
+      this.updateDraft();
+    } else {
+      fetch(`${API_DEV}post/add`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + UserManager.getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (!data.error) {
+            NotificationManager().add(
+              "Draft added Successfully",
+              "success",
+              "Success",
+              1000
+            );
+
+            setTimeout(() => {
+              this.props.history.push("/");
+            }, 500);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  updateDraft = () => {
+    const data = {
+      title: this.state.title,
+      content: this.state.blog,
+      summary: this.state.summary,
+      is_published: false,
+      is_drafted: true,
+    };
+
+    fetch(`${API_DEV}post/edit/${this.post_id}`, {
+      method: "PATCH",
       headers: {
         Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
@@ -143,6 +240,18 @@ class Editor extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (!data.error) {
+          NotificationManager().add(
+            "Draft Updated Successfully",
+            "success",
+            "Success",
+            1000
+          );
+
+          setTimeout(() => {
+            this.props.history.push("/");
+          }, 500);
+        }
         console.log(data);
       })
       .catch((err) => {
@@ -188,6 +297,9 @@ class Editor extends Component {
           firstLetter={this.state.firstLetter}
           onPrimaryClick={
             this.state.is_published ? this.updatePost : this.publishPost
+          }
+          onSecondaryClick={
+            this.state.is_drafted ? this.updateDraft : this.publishDraft
           }
         />
         <Content title="Write your Story!">

@@ -22,7 +22,8 @@ class Editor extends Component {
       blog: null,
       empty: false,
       loading: true,
-      summary: "",
+      summary:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
       is_published: false,
       is_drafted: false,
       disabled: false,
@@ -279,7 +280,7 @@ class Editor extends Component {
     const customTitle = (
       <textarea
         className="EditorTitleInputBox"
-        placeholder="Write Title Here"
+        placeholder="Write Title Here..."
         onChange={this.handleChange}
         maxlength="60"
       />

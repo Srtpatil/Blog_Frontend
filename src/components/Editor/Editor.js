@@ -70,12 +70,12 @@ class Editor extends Component {
     let newTitle = e.target.value;
 
     let newFirstLetter = e.target.value[0];
-    if (newTitle === "<br>") {
-      // newTitle = "";
-      newFirstLetter = null;
-    }
+    // if (newTitle === "<br>") {
+    //   // newTitle = "";
+    //   newFirstLetter = null;
+    // }
 
-    console.log(newTitle);
+    // console.log(newTitle);
     this.setState({ title: newTitle, firstLetter: newFirstLetter });
   };
 
@@ -154,16 +154,25 @@ class Editor extends Component {
     if (this.state.loading) {
       return <div>loading</div>;
     }
+    // const customTitle = (
+    //   <ContentEditable
+    //     className="editable"
+    //     html={this.state.title}
+    //     innerRef={this.contentEditable}
+    //     disabled={this.state.disabled}
+    //     onChange={this.handleChange}
+    //     // onFocus={this.handleFocus}
+    //     // onBlur={this.handleBlur}
+    //     tagName=""
+    //   />
+    // );
+
     const customTitle = (
-      <ContentEditable
-        className="editable"
-        html={this.state.title}
-        innerRef={this.contentEditable}
-        disabled={this.state.disabled}
+      <textarea
+        className="EditorTitleInputBox"
+        placeholder="Write Title Here"
         onChange={this.handleChange}
-        // onFocus={this.handleFocus}
-        // onBlur={this.handleBlur}
-        tagName=""
+        maxlength="60"
       />
     );
     return (

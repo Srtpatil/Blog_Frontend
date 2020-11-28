@@ -11,6 +11,7 @@ import EmptyContent from "../Static_Pages/EmptyContent";
 import FullscreenLoader from "../Static_Pages/FullscreenLoader";
 import { Quotes } from "../../DummyData/Quotes";
 import Loader from "../Static_Pages/Loader";
+import UserManager from "../../Utils";
 
 const blog = {
   title:
@@ -24,7 +25,7 @@ const blog = {
   author: "Anonymous",
 };
 
-function HomePage() {
+function HomePage(props) {
   const [content, setContent] = useState([]);
   const [quote, setQuote] = useState({
     text: "A house divided against itself cannot stand.",
@@ -52,7 +53,13 @@ function HomePage() {
             authorId: post.user_id,
           };
 
-          posts.push(<Article blog={postData} />);
+          posts.push(
+            <Article
+              blog={postData}
+              secondButtonText={"Bookmark"}
+              routeProps={props}
+            />
+          );
         });
 
         setContent(posts);

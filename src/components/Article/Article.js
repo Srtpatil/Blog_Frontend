@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Article.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import { PostContainer } from "../../StyledComponents/Container";
-import UserManager from "../../Utils";
+import UserManager, { API_DEV } from "../../Utils";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBookmark as faSolidBookmark,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ArticleHeader = (props) => {
   const { blog, link } = props;
@@ -31,6 +35,39 @@ const ArticleHeader = (props) => {
 
 const Article = (props) => {
   const { blog } = props;
+  const [bookMarkLoading, setBookMarkLoading] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+
+  const addBookmark = (post_id) => {
+    if (UserManager.isLoggedin()) {
+      const data = {
+        post_id: post_id,
+        user_id: UserManager.getUserId(),
+      };
+
+      fetch(`${API_DEV}bookmark/add`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + UserManager.getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (!data.error) {
+            setBookmarked(true);
+            setBookMarkLoading(false);
+          }
+        });
+    } else {
+      props.routeProps.history.push("/login");
+    }
+  };
+
   return (
     <div>
       <div className="ArticleContainer">
@@ -68,9 +105,30 @@ const Article = (props) => {
             >
               Read On
             </SecondaryButton>
-            <PrimaryButton border>
-              <FontAwesomeIcon icon={faBookmark} />
-              Bookmark
+            <PrimaryButton
+              border
+              onClick={() => {
+                setBookMarkLoading(true);
+                if (props.secondButtonClick) {
+                  props.secondButtonClick(blog.post_id);
+                } else {
+                  addBookmark(blog.post_id);
+                }
+              }}
+            >
+              {bookMarkLoading ? (
+                <FontAwesomeIcon icon={faSpinner} spin />
+              ) : bookmarked ? (
+                <>
+                  <FontAwesomeIcon icon={faSolidBookmark} />
+                  Bookmarked
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faBookmark} />
+                  Bookmark
+                </>
+              )}
             </PrimaryButton>
           </div>
         </PostContainer>

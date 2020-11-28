@@ -54,6 +54,7 @@ export const EDITOR_JS_TOOLS = {
           })
             .then((resp) => resp.json())
             .then((resp) => {
+              console.log(resp);
               return {
                 success: 1,
                 file: {

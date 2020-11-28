@@ -13,9 +13,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/post/:post_id" component={Post} />
         <ProtectedRoute exact path="/new-story" component={Editor} />
         <ProtectedRoute exact path="/new-story/:post_id" component={Editor} />

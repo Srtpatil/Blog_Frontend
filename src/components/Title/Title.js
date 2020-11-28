@@ -4,6 +4,7 @@ import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { TitleContainer } from "../../StyledComponents/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 class Title extends Component {
   constructor(props) {

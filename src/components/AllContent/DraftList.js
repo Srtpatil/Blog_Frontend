@@ -6,6 +6,8 @@ import Title from "../Title/Title";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import UserManager, { API_DEV, NotificationManager } from "../../Utils";
+import ReactNotification, { store } from "react-notifications-component";
 
 const blog = {
   title:
@@ -19,29 +21,79 @@ const blog = {
   author: "Anonymous",
 };
 
-const DraftList = () => {
+const secondButtonHandler = (blog) => {
+  const post_id = blog.post_id;
+
+  fetch(`${API_DEV}post/${post_id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + UserManager.getToken(),
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((res) => {
+      // if (!res.error) {
+        NotificationManager().add(
+          "Draft Removed Successfully",
+          "success",
+          "Success",
+          1000
+        );
+
+        // setTimeout(() => {
+        //   props.history.push("/");
+        // }, 500);
+      // }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const DraftList = (props) => {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let posts = [];
+    let user_id = UserManager.getUserId();
 
-    for (let i = 0; i < 5; i++) {
-      posts.push(
-        <Article2
-          blog={blog}
-          firstButtonContent="Read on"
-          secondButtonContent="Delete Draft"
-          secondButtonIcon={faTrash}
-        />
-      );
-    }
-    setLoading(false);
-    setContent(posts);
+    fetch(`${API_DEV}post/draft/${user_id}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        let drafts = [];
+        data.forEach((post) => {
+          console.log(post);
+          const draftData = {
+            post_id: post.post_id,
+            title: post.title,
+            day: "05",
+            month: "NOVEMBER",
+            year: "2020",
+            summary: post.summary,
+            author: post.user.name,
+            authorId: post.user_id,
+          };
+
+          drafts.push(
+            <Article2
+              blog={draftData}
+              firstButtonContent="Read on"
+              secondButtonContent="Delete Draft"
+              secondButtonIcon={faTrash}
+              // secondButtonHandler={() => secondButtonHandler(draftData)}
+            />
+          );
+        });
+        setLoading(false);
+        setContent(drafts);
+        console.log(props.history);
+      });
   }, []);
 
   return (
     <div>
+      <ReactNotification />
       <Navbar />
       <Title top="25vh" disableFullScreen={true} />
       <Content title="Your Drafts">

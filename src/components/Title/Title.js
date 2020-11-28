@@ -4,14 +4,23 @@ import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { TitleContainer } from "../../StyledComponents/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import {
+  faBookmark as faSolidBookmark,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 class Title extends Component {
   constructor(props) {
     super(props);
-    this.firstLetter = this.props.title ? this.props.title[1] : null;
+    this.firstLetter = this.props.title
+      ? this.props.quote
+        ? this.props.title[1]
+        : this.props.title[0]
+      : null;
   }
   render() {
+    console.log("Props -> ", this.props);
     return (
       <TitleContainer
         top={this.props.top}
@@ -44,10 +53,16 @@ class Title extends Component {
                   border
                   onClick={() => this.props.onSecondaryClick()}
                 >
-                  {this.props.secondaryIcon ? (
-                    <FontAwesomeIcon icon={this.props.secondaryIcon} />
-                  ) : null}
-                  {this.props.white_button}
+                  {this.props.bookMarkLoading ? (
+                    <FontAwesomeIcon icon={faSpinner} spin />
+                  ) : (
+                    <>
+                      {this.props.secondaryIcon ? (
+                        <FontAwesomeIcon icon={this.props.secondaryIcon} />
+                      ) : null}
+                      {this.props.white_button}
+                    </>
+                  )}
                 </SecondaryButton>
               </div>
             ) : null}

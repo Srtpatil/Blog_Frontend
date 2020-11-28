@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Article.css";
 import { SectionUnderline } from "../../StyledComponents/Headers";
 import { PostContainer } from "../../StyledComponents/Container";
@@ -10,14 +10,15 @@ import {
   faBookmark as faSolidBookmark,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const ArticleHeader = (props) => {
   const { blog, link } = props;
   return (
     <div className="PostHeader">
-      <a href={link} className="PostLink">
+      <Link to={link} className="PostLink">
         {blog.title}
-      </a>
+      </Link>
       <p
         style={{
           color: "#aaaaaa",
@@ -25,18 +26,52 @@ const ArticleHeader = (props) => {
         }}
       >
         By{" "}
-        <a href="#" className="AuthorLink">
+        <Link to="#" className="AuthorLink">
           {blog.author}
-        </a>
+        </Link>
       </p>
     </div>
   );
 };
 
 const Article = (props) => {
-  const { blog } = props;
+  const { blog, bookmarkedPosts } = props;
   const [bookMarkLoading, setBookMarkLoading] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+
+  useEffect(() => {
+    for (let i = 0; i < bookmarkedPosts.length; i++) {
+      if (bookmarkedPosts[i].data.post_id === blog.post_id) {
+        setBookmarked(true);
+      }
+    }
+  }, []);
+
+  const removeBookmark = (post_id) => {
+    const user_id = UserManager.getUserId();
+
+    fetch(`${API_DEV}bookmark/delete/${post_id}&${user_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + UserManager.getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        if (!data.error) {
+          setBookmarked(false);
+        }
+        setBookMarkLoading(false);
+      })
+      .catch((err) => {
+        setBookMarkLoading(false);
+      });
+  };
 
   const addBookmark = (post_id) => {
     if (UserManager.isLoggedin()) {
@@ -109,10 +144,19 @@ const Article = (props) => {
               border
               onClick={() => {
                 setBookMarkLoading(true);
-                if (props.secondButtonClick) {
-                  props.secondButtonClick(blog.post_id);
+
+                if (bookmarked) {
+                  if (props.secondButtonClick) {
+                    props.secondButtonClick(blog.post_id);
+                  } else {
+                    removeBookmark(blog.post_id);
+                  }
                 } else {
-                  addBookmark(blog.post_id);
+                  if (props.secondButtonClick) {
+                    props.secondButtonClick(blog.post_id);
+                  } else {
+                    addBookmark(blog.post_id);
+                  }
                 }
               }}
             >

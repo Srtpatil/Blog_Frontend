@@ -17,7 +17,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Write title here..",
+      title: "",
       firstLetter: "W",
       blog: null,
       empty: false,
@@ -138,8 +138,6 @@ class Editor extends Component {
     const data = {
       title: this.state.title,
       content: this.state.blog,
-      summary:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
       user_id: UserManager.getUserId(),
       is_published: true,
       is_drafted: false,
@@ -182,8 +180,6 @@ class Editor extends Component {
     const data = {
       title: this.state.title,
       content: this.state.blog,
-      summary:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
       user_id: UserManager.getUserId(),
       is_published: false,
       is_drafted: true,
@@ -192,6 +188,7 @@ class Editor extends Component {
     if (this.state.is_published) {
       this.updateDraft();
     } else {
+      console.log(data);
       fetch(`${API_DEV}post/add`, {
         method: "POST",
         headers: {
@@ -264,18 +261,6 @@ class Editor extends Component {
     if (this.state.loading) {
       return <div>loading</div>;
     }
-    // const customTitle = (
-    //   <ContentEditable
-    //     className="editable"
-    //     html={this.state.title}
-    //     innerRef={this.contentEditable}
-    //     disabled={this.state.disabled}
-    //     onChange={this.handleChange}
-    //     // onFocus={this.handleFocus}
-    //     // onBlur={this.handleBlur}
-    //     tagName=""
-    //   />
-    // );
 
     const customTitle = (
       <textarea
@@ -283,7 +268,9 @@ class Editor extends Component {
         placeholder="Write Title Here..."
         onChange={this.handleChange}
         maxlength="60"
-      />
+      >
+        {this.state.title}
+      </textarea>
     );
     return (
       <div>

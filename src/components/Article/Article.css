@@ -46,6 +46,7 @@
   font-size: 1rem;
   margin-right: 10%;
   margin-left: auto;
+  text-transform: uppercase;
 }
 
 .PostContainer {
@@ -102,13 +103,14 @@
 
 .PostContent {
   width: 80%;
-  font-size: 1rem;
+  font-size: 18px;
   color: #333333;
   margin-bottom: 8%;
-  line-height: 1.4;
+  line-height: 1.4em;
+  max-height: calc(7em - 4px);
   font-family: "Domine";
+  overflow: hidden;
 }
-
 
 .ArticleButtonsContainer {
   width: 80%;

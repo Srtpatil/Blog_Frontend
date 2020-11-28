@@ -67,6 +67,7 @@
   font-size: max(20rem, 25vw);
   user-select: none;
   z-index: 1;
+  text-transform: uppercase;
 }
 
 .TitleTextBackground:active {

@@ -9,6 +9,21 @@ export const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+export const MonthList = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 export const NotificationManager = () => {
   const add = (text, type, title, duration) => {
     store.addNotification({

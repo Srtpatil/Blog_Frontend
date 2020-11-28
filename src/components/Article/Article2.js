@@ -5,7 +5,7 @@ import UserManager from "../../Utils";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NotificationManager, API_DEV } from "../../Utils";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const secondButtonHandler = (blog, history) => {
   const post_id = blog.post_id;
@@ -43,9 +43,9 @@ const Article2Header = (props) => {
   return (
     <div className="Post2Header">
       <span className="Post2HeaderFirstLetter">{blog.title[0]}</span>
-      <a href={link} className="PostLink">
+      <Link to={link} className="PostLink">
         {blog.title}
-      </a>
+      </Link>
       <p
         style={{
           color: "#aaaaaa",
@@ -53,9 +53,9 @@ const Article2Header = (props) => {
         }}
       >
         By{" "}
-        <a href="#" className="AuthorLink">
+        <Link to="#" className="AuthorLink">
           {blog.author}
-        </a>
+        </Link>
       </p>
     </div>
   );
@@ -74,12 +74,9 @@ const Article2 = (props) => {
         <div className="Post2Container">
           {UserManager.isLoggedin() &&
           blog.authorId == UserManager.getUserId() ? (
-            <Article2Header
-              blog={blog}
-              link={`http://localhost:8887/new-story/${blog.post_id}`}
-            />
+            <Article2Header blog={blog} link={`/new-story/${blog.post_id}`} />
           ) : (
-            <Article2Header blog={blog} link={`post/${blog.post_id}`} />
+            <Article2Header blog={blog} link={`/post/${blog.post_id}`} />
           )}
           <div className="Post2Content">
             <p>{blog.summary}</p>
@@ -91,8 +88,8 @@ const Article2 = (props) => {
               href={
                 UserManager.isLoggedin() &&
                 blog.authorId == UserManager.getUserId()
-                  ? `http://localhost:8887/new-story/${blog.post_id}`
-                  : `http://localhost:8887/post/${blog.post_id}`
+                  ? `/new-story/${blog.post_id}`
+                  : `/post/${blog.post_id}`
               }
             >
               {props.firstButtonContent}

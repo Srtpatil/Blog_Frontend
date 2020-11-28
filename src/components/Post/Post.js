@@ -18,7 +18,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Content from "../Content/Content";
-import { API_DEV } from "../../Utils";
+import UserManager, { API_DEV } from "../../Utils";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { faBookmark as faSolidBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const SharePost = () => {
   return (
@@ -86,6 +88,8 @@ class Post extends Component {
       likesCount: null,
       PostData: null,
       loading: true,
+      bookmarked: false,
+      bookmarkLoading: false,
     };
 
     this.myRef = React.createRef();
@@ -94,12 +98,15 @@ class Post extends Component {
   componentDidMount() {
     console.log(this.props.match);
     const post_id = this.props.match.params.post_id;
-
     fetch(`${API_DEV}post/${post_id}`)
       .then((res) => {
         return res.json();
       })
-      .then((data) => {
+      .then(async (data) => {
+        const is_bookmarked = await this.checkBookmarked(
+          post_id,
+          UserManager.getUserId()
+        );
         const postData = {
           Title: data.post.title,
           Author: data.post.user.name,
@@ -107,18 +114,117 @@ class Post extends Component {
           AuthorDescription: "Someome",
           PostContent: data.post.content,
           AuthorId: data.post.user_id,
+          post_id,
         };
         this.setState({
           PostData: postData,
           likesCount: data.post.likes,
+          bookmarked: is_bookmarked,
           loading: false,
         });
         console.log(data);
       });
   }
 
+  checkBookmarked = (post_id, user_id) => {
+    if (!UserManager.isLoggedin()) {
+      return false;
+    }
+    return fetch(`${API_DEV}bookmark/isBookmark/${post_id}&${user_id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + UserManager.getToken(),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return data.is_bookmarked;
+      });
+  };
+
   executeScroll = () => {
     this.myRef.current.scrollIntoView();
+  };
+
+  addBookmark = () => {
+    if (UserManager.isLoggedin()) {
+      this.setState({
+        bookmarkLoading: true,
+      });
+      const data = {
+        post_id: this.state.PostData.post_id,
+        user_id: UserManager.getUserId(),
+      };
+
+      fetch(`${API_DEV}bookmark/add`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + UserManager.getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (!data.error) {
+            this.setState({
+              bookmarked: true,
+              bookmarkLoading: false,
+            });
+          } else {
+            this.setState({
+              bookmarkLoading: false,
+            });
+          }
+        })
+        .catch((err) => {
+          this.setState({
+            bookmarkLoading: false,
+          });
+        });
+    } else {
+      this.props.history.push("/login");
+    }
+  };
+
+  removeBookmark = () => {
+    const user_id = UserManager.getUserId();
+
+    fetch(
+      `${API_DEV}bookmark/delete/${this.state.PostData.post_id}&${user_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + UserManager.getToken(),
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        if (!data.error) {
+          this.setState({
+            bookmarked: false,
+            bookmarkLoading: false,
+          });
+        } else {
+          this.setState({
+            bookmarkLoading: false,
+          });
+        }
+      })
+      .catch((_) => {
+        this.setState({
+          bookmarkLoading: false,
+        });
+      });
   };
 
   render() {
@@ -134,8 +240,13 @@ class Post extends Component {
           white_button="Read Later"
           title={this.state.PostData.Title}
           author={this.state.PostData.Author}
-          // refProp={this.myRef}
           onPrimaryClick={this.executeScroll}
+          onSecondaryClick={
+            this.state.bookmarked ? this.removeBookmark : this.addBookmark
+          }
+          white_button={this.state.bookmarked ? "Bookmarked" : "Bookmark"}
+          secondaryIcon={this.state.bookmarked ? faSolidBookmark : faBookmark}
+          bookmarkLoading={this.state.bookmarkLoading}
         />
         <Content title="ENJOY YOUR READ !" refProp={this.myRef}>
           <EditorJs
@@ -192,72 +303,7 @@ class Post extends Component {
             </div>
           </div>
         </Content>
-        {/* <div className="SinglePostContainer">
-          <div className="SinglePostContent">
-            <SectionHeader>
-              <p>ENJOY YOUR READ !</p>
-              <SectionUnderline />
-            </SectionHeader>
-            <EditorJs
-              tools={EDITOR_JS_TOOLS}
-              data={PostData.PostContent}
-              readOnly={false}
-            />
 
-            <SectionHeader marginTop="0px">
-              Like the post
-              <SectionUnderline />
-            </SectionHeader>
-
-            <div className="LikePostContainer">
-              <StyledLogo
-                isLiked={this.state.liked}
-                onClick={() => {
-                  this.setState((prevState) => {
-                    let cnt = prevState.likesCount;
-                    if (prevState.liked) {
-                      cnt--;
-                    } else {
-                      cnt++;
-                    }
-                    return {
-                      liked: !prevState.liked,
-                      likesCount: cnt,
-                    };
-                  });
-                }}
-              />
-              <span className="LikesText">{this.state.likesCount} Likes</span>
-            </div>
-
-            <SharePost />
-            <SectionHeader>
-              About the author
-              <SectionUnderline />
-            </SectionHeader>
-            <div className="AboutAuthorContainer">
-              <div className="AboutAuthorImageContainer">
-                <div className="AboutAuthorImage"></div>
-              </div>
-              <div className="AboutAuthorDescription">
-                <div className="AboutAuthorName">
-                  <p
-                    style={{
-                      marginBottom: "4px",
-                    }}
-                  >
-                    {PostData.Author}
-                  </p>
-                </div>
-                <p className="AboutAuthorDescriptionText">
-                  {PostData.AuthorDescription}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <Footer />
-        </div> */}
         <Footer />
       </div>
     );

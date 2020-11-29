@@ -123,6 +123,9 @@ class Post extends Component {
           loading: false,
         });
         console.log(data);
+      })
+      .catch((err) => {
+        this.props.history.replace("/not_found");
       });
   }
 

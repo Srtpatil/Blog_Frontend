@@ -6,6 +6,8 @@ import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NotificationManager, API_DEV } from "../../Utils";
 import { Link, useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 const secondButtonHandler = (blog, history) => {
   const post_id = blog.post_id;
@@ -94,15 +96,68 @@ const Article2 = (props) => {
             >
               {props.firstButtonContent}
             </SecondaryButton>
-            <PrimaryButton
-              onClick={() => secondButtonHandler(blog, history)}
+            <Popup
+              trigger={
+                <PrimaryButton border>
+                  {props.secondButtonIcon ? (
+                    <FontAwesomeIcon icon={props.secondButtonIcon} />
+                  ) : null}
+                  {props.secondButtonContent}
+                </PrimaryButton>
+              }
+              modal
+              nested
+            >
+              {(close) => (
+                <div className="DeletePopup">
+                  <button className="DeletePopupCloseBtn" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="DeletePopupHeader">
+                    Are you absolutely sure ?
+                  </div>
+                  <div className="DeletePopupContent">
+                    <p>
+                      This action cannot be undone. This will permanently delete
+                      your post.
+                    </p>
+                  </div>
+                  <div className="ConfirmButtonContainer">
+                    <SecondaryButton
+                      border
+                      onClick={() => {
+                        secondButtonHandler(blog, history);
+                      }}
+                    >
+                      {props.secondButtonIcon ? (
+                        <FontAwesomeIcon icon={props.secondButtonIcon} />
+                      ) : null}
+                      {props.secondButtonContent}
+                    </SecondaryButton>
+
+                    <PrimaryButton
+                      border
+                      onClick={() => {
+                        close();
+                      }}
+                    >
+                      Close
+                    </PrimaryButton>
+                  </div>
+                </div>
+              )}
+            </Popup>
+            {/* <PrimaryButton
+              // onClick={() => {
+              //   secondButtonHandler(blog, history);
+              // }}
               border
             >
               {props.secondButtonIcon ? (
                 <FontAwesomeIcon icon={props.secondButtonIcon} />
               ) : null}
               {props.secondButtonContent}
-            </PrimaryButton>
+            </PrimaryButton> */}
           </div>
         </div>
       </div>

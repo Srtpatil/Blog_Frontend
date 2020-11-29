@@ -71,6 +71,12 @@ class Editor extends Component {
             authorName: data.post.user.name,
           });
           console.log("Data from editor: ", data);
+        })
+        .catch((err) => {
+          this.setState({
+            loading: false,
+          });
+          this.props.history.replace("/not_found");
         });
     }
   }

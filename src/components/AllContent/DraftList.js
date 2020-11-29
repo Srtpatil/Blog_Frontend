@@ -34,16 +34,16 @@ const secondButtonHandler = (blog) => {
     .then((resp) => resp.json())
     .then((res) => {
       // if (!res.error) {
-        NotificationManager().add(
-          "Draft Removed Successfully",
-          "success",
-          "Success",
-          1000
-        );
+      NotificationManager().add(
+        "Draft Removed Successfully",
+        "success",
+        "Success",
+        1000
+      );
 
-        // setTimeout(() => {
-        //   props.history.push("/");
-        // }, 500);
+      // setTimeout(() => {
+      //   props.history.push("/");
+      // }, 500);
       // }
     })
     .catch((err) => {
@@ -88,6 +88,9 @@ const DraftList = (props) => {
         setLoading(false);
         setContent(drafts);
         console.log(props.history);
+      })
+      .catch((err) => {
+        setLoading(false);
       });
   }, []);
 

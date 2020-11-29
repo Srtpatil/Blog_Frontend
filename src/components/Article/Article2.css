@@ -63,6 +63,56 @@
   font-size: 1rem;
 }
 
+/* Deltetion Model Popup */
+
+.DeletePopup {
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.DeletePopup > .ConfirmButtonContainer {
+  display: flex;
+  margin: 10px;
+}
+
+.DeletePopup > .DeletePopupHeader {
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+  font-size: 1.45rem;
+  text-align: center;
+  padding: 10px;
+  line-height: 1.6;
+  font-weight: bold;
+  background-color: #f6f8fa;
+}
+
+.DeletePopup > .DeletePopupContent {
+  width: 85%;
+  padding: 20px;
+  display: flex;
+  line-height: 1.4;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.15rem;
+}
+.DeletePopup > .DeletePopupCloseBtn {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+/* End Deletion Model */
 @media screen and (max-width: 1050px) {
   /* .Post2HeaderFirstLetter {
     font-size: 12rem;
@@ -89,5 +139,28 @@
 
   .Post2Header {
     padding: 10px 0;
+  }
+
+  .DeletePopup > .ConfirmButtonContainer {
+    /* flex-direction: column; */
+    width: 100%;
+    margin: 0;
+    margin-left: 20px;
+    justify-content: space-around;
+  }
+
+  .DeletePopup > .DeletePopupHeader {
+    font-size: 1.15rem;
+  }
+
+  .DeletePopup > .DeletePopupContent {
+    font-size: 1rem;
+  }
+
+  .popup-content {
+    width: 90% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
   }
 }

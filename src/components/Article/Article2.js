@@ -118,8 +118,8 @@ const Article2 = (props) => {
                   </div>
                   <div className="DeletePopupContent">
                     <p>
-                      This action cannot be undone. This will permanently delete
-                      your post.
+                      This action<b> cannot</b> be undone. This will
+                      <b> permanently delete</b> your post.
                     </p>
                   </div>
                   <div className="ConfirmButtonContainer">

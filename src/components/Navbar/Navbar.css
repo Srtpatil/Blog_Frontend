@@ -67,6 +67,17 @@
   margin-right: auto;
   font-weight: bold;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .bg-bulb {
+  fill-opacity: 1;
+} */
+
+.logoFill {
+  fill: #ffffff;
 }
 
 .navbarLogo:active {

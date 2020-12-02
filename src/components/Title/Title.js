@@ -1,10 +1,8 @@
 import "./Title.css";
 import React, { Component } from "react";
-import Divider from "../Divider/Divider";
 import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
 import { TitleContainer } from "../../StyledComponents/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import {
   faBookmark as faSolidBookmark,
   faSpinner,
@@ -20,7 +18,6 @@ class Title extends Component {
       : null;
   }
   render() {
-    console.log("Props -> ", this.props);
     return (
       <TitleContainer
         top={this.props.top}

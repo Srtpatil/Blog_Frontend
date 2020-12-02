@@ -60,8 +60,8 @@ class Profile extends Component {
             <SectionUnderline />
             <div className="authorDiscription">{this.state.description}</div>
           </div>
-          {/* <SectionHeader>USER BLOG</SectionHeader>
-          <SectionUnderline /> */}
+          <SectionHeader>{this.state.author}'s posts</SectionHeader>
+          <SectionUnderline />
           <div>{this.content}</div>
         </Content>
       </div>

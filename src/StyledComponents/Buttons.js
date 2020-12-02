@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { ReactComponent as HeartIcon } from "../assets/heart.svg";
+import { ReactComponent as OptimizeItLogo } from "../assets/Logo_2.svg";
 
 export const PrimaryButton = styled.div`
   min-width: 140px;
@@ -50,7 +51,7 @@ export const SocialButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   width: ${(props) => (props.width ? props.width : "80px")};
   height: ${(props) => (props.height ? props.height : "40px")};
   background: ${(props) => (props.background ? props.background : "#c62641")};
@@ -100,5 +101,25 @@ export const StyledLogo = styled(HeartIcon)`
   @media screen and (max-width: 450px) {
     width: 60px;
     height: 30px;
+  }
+`;
+
+export const CompanyLogo = styled(OptimizeItLogo)`
+  width: max(20vw, 200px);
+  display: flex;
+  padding-top: 5px;
+
+  &:hover {
+    .bg-bulb {
+      fill-opacity: 1;
+    }
+
+    .bg-bulb2 {
+      fill-opacity: 1;
+    }
+    .logoFill {
+      -webkit-filter: drop-shadow(12px 12px 10px rgba(0, 0, 0, 0.35));
+      filter: drop-shadow(12px 12px 10px rgba(0, 0, 0, 0.35));
+    }
   }
 `;

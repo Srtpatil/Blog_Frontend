@@ -35,7 +35,6 @@ class Editor extends Component {
   }
 
   componentDidMount() {
-    console.log("Match: ", this.props.match);
     this.post_id = this.props.match.params.post_id;
 
     if (!this.post_id) {
@@ -95,6 +94,9 @@ class Editor extends Component {
   };
 
   getEditorContext = (api, newData) => {
+    // console.log("API ", api);
+    
+    console.log(api.blocks.getCurrentBlockIndex());
     this.setState({
       blog: newData,
     });
@@ -273,7 +275,7 @@ class Editor extends Component {
         className="EditorTitleInputBox"
         placeholder="Write Title Here..."
         onChange={this.handleChange}
-        maxlength="60"
+        maxLength="60"
       >
         {this.state.title}
       </textarea>
@@ -298,8 +300,6 @@ class Editor extends Component {
         />
         <Content title="Write your Story!">
           <EditorJS
-            // hideToolbar={false}
-            // inlineToolbar={true}
             tools={EDITOR_JS_TOOLS}
             onChange={this.getEditorContext}
             placeholder={this.state.empty ? "Start Writing Here" : null}

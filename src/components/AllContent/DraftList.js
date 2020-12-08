@@ -73,6 +73,7 @@ const DraftList = (props) => {
             summary: post.summary,
             author: post.user.name,
             authorId: post.user_id,
+            content: post.content,
           };
 
           drafts.push(

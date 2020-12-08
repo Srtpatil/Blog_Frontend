@@ -18,6 +18,7 @@ const secondButtonHandler = (blog, history) => {
       Authorization: "Bearer " + UserManager.getToken(),
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(blog.content),
   })
     .then((resp) => resp.json())
     .then((res) => {
@@ -119,7 +120,7 @@ const Article2 = (props) => {
                   <div className="DeletePopupContent">
                     <p>
                       This action<b> cannot</b> be undone. This will
-                    <b> permanently delete</b> your post.
+                      <b> permanently delete</b> your post.
                     </p>
                   </div>
                   <div className="ConfirmButtonContainer">

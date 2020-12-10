@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Backdrop } from "../../StyledComponents/Container.js";
 import UserManager from "../../Utils";
-import { ReactComponent as OptimizeItLogo } from "../../assets/Logo_2.svg";
+// import { ReactComponent as OptimizeItLogo } from "../../assets/Logo_2.svg";
 import { CompanyLogo } from "../../StyledComponents/Buttons";
 
 import { NavLink, Link, Redirect } from "react-router-dom";

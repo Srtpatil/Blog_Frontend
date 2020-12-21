@@ -1,0 +1,51 @@
+.form textarea {
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: #dddddd;
+  border: none;
+  padding: 12px;
+  resize: vertical;
+  max-height: 150px;
+  min-height: 80px;
+}
+
+.form .submitButtonContainer {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+}
+
+.saveButton {
+  min-width: 140px;
+  height: 45px;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--primary-color);
+  border: 1px solid white;
+  z-index: 3;
+  margin-right: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+
+.saveButton:hover {
+  box-shadow: 0 10px 20px 0 rgba(1, 1, 1, 0.15);
+}
+
+@media screen and (max-width: 650px) {
+  .saveButton {
+    min-width: 45%;
+  }
+}
+
+/* .errorMessage {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: red;
+  padding-left: 10px;
+  position: absolute;
+  margin-top: 20px;
+} */

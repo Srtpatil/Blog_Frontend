@@ -27,9 +27,8 @@ const blog = {
 const getBookmarks = () => {
   return fetch(`${API_DEV}bookmark/${UserManager.getUserId()}`, {
     method: "GET",
-    headers: {
-      Authorization: "Bearer " + UserManager.getToken(),
-    },
+    credentials: "include",
+    headers: {},
   })
     .then((res) => res.json())
     .then((data) => {
@@ -39,6 +38,7 @@ const getBookmarks = () => {
 
 function HomePage(props) {
   const [content, setContent] = useState([]);
+  const [authenticated, setAuthenticated] = useState(false);
   const [quote, setQuote] = useState({
     text: "A house divided against itself cannot stand.",
     author: "Abraham Lincoln",
@@ -46,9 +46,49 @@ function HomePage(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // check user logged in status
+    fetch(`${API_DEV}auth/login/success`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Credentials": true,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then((responseJson) => {
+        //raise notification success login
+        console.log(responseJson);
+
+        if (responseJson.success) {
+          localStorage.setItem("isLoggedin", "true");
+          localStorage.setItem("user_id", responseJson.user.user_id);
+          setAuthenticated(true);
+        } else {
+          UserManager.clear();
+          setAuthenticated(false);
+        }
+      })
+      .catch((error) => {
+        //raise notification error
+        UserManager.clear();
+        setAuthenticated(false);
+        // this.setState({
+        //   authenticated: false,
+        //   error: "Failed to authenticate user",
+        // });
+      });
+
     const randomQuoteIndex = randomNumber(0, Quotes.length - 1);
 
-    fetch(`${API_DEV}post/latest_posts/1`)
+    fetch(`${API_DEV}post/latest_posts/1`, {
+      method: "GET",
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then(async (data) => {
         let posts = [];

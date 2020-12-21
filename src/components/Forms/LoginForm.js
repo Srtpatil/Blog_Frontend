@@ -8,6 +8,9 @@ import { API_DEV } from "../../Utils";
 import * as Yup from "yup";
 import { store } from "react-notifications-component";
 
+const facebookLoginUrl = "http://localhost:8081/auth/facebook";
+const googleLoginUrl = "http://localhost:8081/auth/google";
+
 class LoginForm extends Component {
   loginUser = (values) => {
     return fetch(`${API_DEV}user/login`, {
@@ -19,9 +22,9 @@ class LoginForm extends Component {
     });
   };
 
-  onEvent = (ev) => {
+  onEvent = (ev, loginUrl) => {
     ev.preventDefault();
-    window.open("http://localhost:8081/auth/google", "_self");
+    window.open(loginUrl, "_self");
   };
 
   render() {
@@ -128,7 +131,7 @@ class LoginForm extends Component {
           <p class="loginOptionsText">You can also login with:</p>
 
           <div class="loginIcons">
-            <a href="#">
+            <a href="#" onClick={(e) => this.onEvent(e, facebookLoginUrl)}>
               <FontAwesomeIcon
                 icon={faFacebookSquare}
                 size="2x"
@@ -137,7 +140,7 @@ class LoginForm extends Component {
                 }}
               />
             </a>
-            <a href="#" onClick={this.onEvent}>
+            <a href="#" onClick={(e) => this.onEvent(e, googleLoginUrl)}>
               <FontAwesomeIcon
                 icon={faGoogle}
                 size="2x"

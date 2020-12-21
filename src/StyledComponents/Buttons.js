@@ -123,3 +123,27 @@ export const CompanyLogo = styled(OptimizeItLogo)`
     }
   }
 `;
+
+export const LoginButton = styled.div`
+  background-color: ${(props) => props.backgroundColor};
+  max-width: 300px;
+  padding: 0 18px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* color: rgba(0, 0, 0, 0.84) !important; */
+  color: ${(props) => props.color};
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
+  outline: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  border: ${(props) => (props.border ? "1px solid rgba(0, 0, 0, 0.61)" : "0")};
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 10px 20px 0 rgba(1, 1, 1, 0.15);
+  }
+`;

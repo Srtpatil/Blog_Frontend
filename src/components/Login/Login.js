@@ -4,8 +4,10 @@ import Title from "../Title/Title";
 import Navbar from "../Navbar/Navbar";
 import UserManager from "../../Utils";
 import LoginForm from "../Forms/LoginForm";
+import AlternateLoginForm from "../Forms/AlternateLoginForm";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import Footer from "../Footer/Footer";
 
 class Login extends Component {
   render() {
@@ -21,7 +23,7 @@ class Login extends Component {
           <div className="mainContainer">
             {/* First Form Section */}
             <section className="formWrapper">
-              <LoginForm props={this.props} />
+              <AlternateLoginForm props={this.props} />
             </section>
             {/* Second image Section */}
             <div className="imageWrapper">
@@ -37,6 +39,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        <Footer bottom={1} />
       </div>
     );
   }

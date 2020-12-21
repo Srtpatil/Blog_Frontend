@@ -1,5 +1,4 @@
 import { store } from "react-notifications-component";
-
 export const API_DEV = "http://localhost:8081/";
 
 // Random number between range
@@ -48,16 +47,12 @@ export const NotificationManager = () => {
 };
 
 const UserManager = () => {
-  const getToken = () => {
-    return localStorage.getItem("authToken");
-  };
-
   const getUserId = () => {
     return localStorage.getItem("user_id");
   };
 
   const isLoggedin = () => {
-    if (localStorage.getItem("authToken")) {
+    if (localStorage.getItem("isLoggedin")) {
       return true;
     } else {
       return false;
@@ -72,6 +67,19 @@ const UserManager = () => {
     }
   };
 
+  function createCookie(name, value, days) {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      var expires = "; expires=" + date.toGMTString();
+    } else var expires = "";
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  function eraseCookie(name) {
+    createCookie(name, "", -1);
+  }
+
   const clear = () => {
     localStorage.clear();
   };
@@ -79,7 +87,6 @@ const UserManager = () => {
   const isSuperUser = () => {};
 
   return {
-    getToken,
     isLoggedin,
     isAuthor,
     isSuperUser,

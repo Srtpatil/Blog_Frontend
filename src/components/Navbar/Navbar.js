@@ -10,7 +10,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Backdrop } from "../../StyledComponents/Container.js";
-import UserManager from "../../Utils";
+import UserManager, { API_DEV } from "../../Utils";
 // import { ReactComponent as OptimizeItLogo } from "../../assets/Logo_2.svg";
 import { CompanyLogo } from "../../StyledComponents/Buttons";
 
@@ -97,10 +97,15 @@ function DropdownMenu(props) {
         icon={faSignOutAlt}
         clicked={() => {
           console.log("Logged Out");
+          fetch(`${API_DEV}auth/logout`, {
+            method: "GET",
+            credentials: "include",
+          });
+          // .then((resp) => resp.json())
+          // .then((data) => {
+          //   console.log(data);
+          // });
           UserManager.clear();
-
-          //refresh the page
-          window.location.reload(false);
         }}
       >
         Logout

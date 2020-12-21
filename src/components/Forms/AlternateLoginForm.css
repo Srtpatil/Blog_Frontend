@@ -1,0 +1,26 @@
+.AlternateButtonContainer {
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.AlternateButtonContainer .svgIcon {
+  fill: rgba(0, 0, 0, 0.54);
+  padding-right: 4px;
+  height: 40px;
+  display: inline-block;
+}
+
+.fa-facebook-square {
+  color: white;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 20%,
+    #3b5998 20%,
+    #3b5998 93%,
+    transparent 93%
+  );
+}

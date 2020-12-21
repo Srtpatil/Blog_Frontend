@@ -15,14 +15,17 @@ import {
   faFacebookF,
   faRedditAlien,
   faTwitter,
+  faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Content from "../Content/Content";
 import UserManager, { API_DEV } from "../../Utils";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faBookmark as faSolidBookmark } from "@fortawesome/free-solid-svg-icons";
+import { WhatsappShareButton, FacebookShareButton } from "react-share";
 
-const SharePost = () => {
+const SharePost = (props) => {
+  const post_url = `${API_DEV}post/${props.postId}`;
   return (
     <>
       <SectionHeader>
@@ -90,6 +93,7 @@ class Post extends Component {
       loading: true,
       bookmarked: false,
       bookmarkLoading: false,
+      post_id: "",
     };
 
     this.myRef = React.createRef();
@@ -121,6 +125,7 @@ class Post extends Component {
           likesCount: data.post.likes,
           bookmarked: is_bookmarked,
           loading: false,
+          post_id: post_id,
         });
         console.log(data);
       })
@@ -281,7 +286,7 @@ class Post extends Component {
             />
             <span className="LikesText">{this.state.likesCount} Likes</span>
           </div>
-          <SharePost />
+          <SharePost postId={this.state.post_id} />
           <SectionHeader>
             About the author
             <SectionUnderline />

@@ -87,7 +87,12 @@ function DropdownMenu(props) {
       <DropdownItem icon={faScroll} to={`/drafts/${UserManager.getUserId()}`}>
         Your Drafts
       </DropdownItem>
-      <DropdownItem icon={faFeatherAlt}>Saved Stories</DropdownItem>
+      <DropdownItem
+        icon={faFeatherAlt}
+        to={`/bookmarks/${UserManager.getUserId()}`}
+      >
+        Saved Stories
+      </DropdownItem>
       <DropdownItem
         icon={faSignOutAlt}
         clicked={() => {

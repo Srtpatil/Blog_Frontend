@@ -12,7 +12,7 @@ export const PrimaryButton = styled.div`
   color: var(--primary-color);
   z-index: 3;
   cursor: pointer;
-  margin-right: 20px;
+  // margin-right: 20px;
   text-decoration: none;
   border: ${(props) => (props.border ? "1px solid #c62641" : "")};
 

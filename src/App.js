@@ -8,6 +8,7 @@ import Signup from "./components/Signup/Signup";
 import Editor from "./components/Editor/Editor";
 import Profile from "./components/Profile/Profile";
 import DraftList from "./components/AllContent/DraftList";
+import BookmarkList from "./components/AllContent/BookmarkList";
 import PageNotFound from "./components/Static_Pages/Not_found";
 
 function App() {
@@ -22,6 +23,11 @@ function App() {
         <ProtectedRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/drafts/:user_id" component={DraftList} />
+        <ProtectedRoute
+          exact
+          path="/bookmarks/:user_id"
+          component={BookmarkList}
+        />
         <Route path="/not_found" component={PageNotFound} />
         <Route component={PageNotFound} />
       </Switch>

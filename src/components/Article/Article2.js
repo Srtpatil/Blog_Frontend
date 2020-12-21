@@ -9,37 +9,6 @@ import { Link, useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-const secondButtonHandler = (blog, history) => {
-  const post_id = blog.post_id;
-
-  fetch(`${API_DEV}post/${post_id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + UserManager.getToken(),
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(blog.content),
-  })
-    .then((resp) => resp.json())
-    .then((res) => {
-      if (!res.error) {
-        NotificationManager().add(
-          "Draft Removed Successfully",
-          "success",
-          "Success",
-          1000
-        );
-        // let history = useHistory();
-        setTimeout(() => {
-          history.push("/");
-        }, 500);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 const Article2Header = (props) => {
   const { blog, link } = props;
 
@@ -120,16 +89,11 @@ const Article2 = (props) => {
                   <div className="DeletePopupContent">
                     <p>
                       This action<b> cannot</b> be undone. This will
-                      <b> permanently delete</b> your post.
+                      <b> permanently delete</b> your {props.type}.
                     </p>
                   </div>
                   <div className="ConfirmButtonContainer">
-                    <SecondaryButton
-                      border
-                      onClick={() => {
-                        secondButtonHandler(blog, history);
-                      }}
-                    >
+                    <SecondaryButton border onClick={props.secondButtonHandler}>
                       {props.secondButtonIcon ? (
                         <FontAwesomeIcon icon={props.secondButtonIcon} />
                       ) : null}
@@ -148,17 +112,6 @@ const Article2 = (props) => {
                 </div>
               )}
             </Popup>
-            {/* <PrimaryButton
-              // onClick={() => {
-              //   secondButtonHandler(blog, history);
-              // }}
-              border
-            >
-              {props.secondButtonIcon ? (
-                <FontAwesomeIcon icon={props.secondButtonIcon} />
-              ) : null}
-              {props.secondButtonContent}
-            </PrimaryButton> */}
           </div>
         </div>
       </div>

@@ -50,6 +50,7 @@ export const EDITOR_JS_TOOLS = {
           // your own uploading logic here
           return fetch("http://localhost:5000/image/upload", {
             method: "POST",
+            credentials: "include",
             body: img,
           })
             .then((resp) => resp.json())

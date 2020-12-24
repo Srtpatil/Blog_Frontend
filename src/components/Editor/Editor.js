@@ -12,6 +12,7 @@ import ReactNotification, { store } from "react-notifications-component";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import { diffString, diff } from "json-diff";
 
 class Editor extends Component {
   constructor(props) {
@@ -43,7 +44,15 @@ class Editor extends Component {
         loading: false,
       });
     } else {
-      fetch(`${API_DEV}post/${this.post_id}`)
+      fetch(`${API_DEV}post/${this.post_id}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          // Accept: "application/json",
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Credentials": true,
+        },
+      })
         .then((res) => {
           return res.json();
         })
@@ -95,8 +104,20 @@ class Editor extends Component {
 
   getEditorContext = (api, newData) => {
     // console.log("API ", api);
-    
-    console.log(api.blocks.getCurrentBlockIndex());
+    // console.log("Diff -> ", diff(this.state.blog["blocks"], newData["blocks"]));
+    if (this.state.blog && this.state.blog["blocks"]) {
+      if (newData["blocks"].length < this.state.blog["blocks"].length) {
+        //deleted a block check if image was deleted\
+
+        const DataDiff = diff(this.state.blog["blocks"], newData["blocks"]);
+        for (let i = 0; i < DataDiff.length; i++) {
+          if (DataDiff[i][0] === "-" && DataDiff[i][1].type === "image") {
+            console.log("Remove Image from Server");
+          }
+        }
+      }
+    }
+
     this.setState({
       blog: newData,
     });
@@ -115,8 +136,8 @@ class Editor extends Component {
 
     fetch(`${API_DEV}post/edit/${this.post_id}`, {
       method: "PATCH",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -156,8 +177,9 @@ class Editor extends Component {
     } else {
       fetch(`${API_DEV}post/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
+          // Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -199,8 +221,9 @@ class Editor extends Component {
       console.log(data);
       fetch(`${API_DEV}post/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
+          // Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -238,8 +261,9 @@ class Editor extends Component {
 
     fetch(`${API_DEV}post/edit/${this.post_id}`, {
       method: "PATCH",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
+        // Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),

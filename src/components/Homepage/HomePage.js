@@ -28,7 +28,9 @@ const getBookmarks = () => {
   return fetch(`${API_DEV}bookmark/${UserManager.getUserId()}`, {
     method: "GET",
     credentials: "include",
-    headers: {},
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((res) => res.json())
     .then((data) => {
@@ -87,7 +89,11 @@ function HomePage(props) {
 
     fetch(`${API_DEV}post/latest_posts/1`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Credentials": true,
+      },
     })
       .then((res) => res.json())
       .then(async (data) => {

@@ -11,12 +11,10 @@ class EditProfileForm extends Component {
         <Formik
           initialValues={{
             name: this.props.profile.author,
-            username: this.props.profile.username,
             bio: this.props.profile.description,
           }}
           validationSchema={Yup.object().shape({
             name: Yup.string().required("Required"),
-            username: Yup.string().required("Required"),
             bio: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
@@ -26,19 +24,8 @@ class EditProfileForm extends Component {
           <Form className="form">
             <label className="nameLabel">Name : </label>
             <Field type="text" name="name" placeholder="Type your Name" />
-            {/* <ErrorMessage
-              name="name"
-              component="div"
-              className="errorMessage"
-            /> */}
-            <label className="nameLabel">Username : </label>
-            <Field
-              type="text"
-              name="username"
-              placeholder="Type your username"
-            />
             <ErrorMessage
-              name="username"
+              name="name"
               component="div"
               className="errorMessage"
             />
@@ -48,11 +35,7 @@ class EditProfileForm extends Component {
               name="bio"
               placeholder="Tell us about yourself"
             />
-            <ErrorMessage
-              name="bio"
-              component="div"
-              className="errorMessage"
-            />
+            <ErrorMessage name="bio" component="div" className="errorMessage" />
             <div className="submitButtonContainer">
               <button
                 type="submit"

@@ -17,8 +17,8 @@ import { useHistory } from "react-router-dom";
 const secondButtonHandler = (user_id, post_id, history) => {
   fetch(`${API_DEV}bookmark/delete/${post_id}&${user_id}`, {
     method: "DELETE",
+    credentials : "include",
     headers: {
-      Authorization: "Bearer " + UserManager.getToken(),
       "Content-Type": "application/json",
     },
   })
@@ -52,8 +52,8 @@ const BookmarkList = (props) => {
 
     fetch(`${API_DEV}bookmark/${user_id}`, {
       method: "GET",
+      credentials : "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
       },
     })

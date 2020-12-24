@@ -19,8 +19,8 @@ const secondButtonHandler = (blog, history) => {
   console.log("Here!");
   fetch(`${API_DEV}post/${post_id}`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
-      Authorization: "Bearer " + UserManager.getToken(),
       "Content-Type": "application/json",
     },
     body: JSON.stringify(blog.content),
@@ -54,7 +54,10 @@ const DraftList = (props) => {
   useEffect(() => {
     let user_id = UserManager.getUserId();
 
-    fetch(`${API_DEV}post/draft/${user_id}`)
+    fetch(`${API_DEV}post/draft/${user_id}`, {
+      method: "GET",
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((data) => {
         let drafts = [];

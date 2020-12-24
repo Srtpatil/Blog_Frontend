@@ -140,8 +140,9 @@ class Post extends Component {
     }
     return fetch(`${API_DEV}bookmark/isBookmark/${post_id}&${user_id}`, {
       method: "GET",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -166,8 +167,8 @@ class Post extends Component {
 
       fetch(`${API_DEV}bookmark/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -205,8 +206,8 @@ class Post extends Component {
       `${API_DEV}bookmark/delete/${this.state.PostData.post_id}&${user_id}`,
       {
         method: "DELETE",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
       }

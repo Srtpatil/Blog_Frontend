@@ -14,6 +14,7 @@ import { store } from "react-notifications-component";
 
 const facebookLoginUrl = "http://localhost:8081/auth/facebook";
 const googleLoginUrl = "http://localhost:8081/auth/google";
+const githubLoginUrl = "http://localhost:8081/auth/github";
 
 class AlternateLoginForm extends Component {
   loginUser = (values) => {
@@ -40,7 +41,12 @@ class AlternateLoginForm extends Component {
         </div>
 
         <div className="AlternateButtonContainer">
-          <LoginButton border>
+          <LoginButton
+            border
+            onClick={() => {
+              this.onEvent(googleLoginUrl);
+            }}
+          >
             <span className="svgIcon">
               <svg width="25" height="37" viewBox="0 0 25 25">
                 <g fill="none" fill-rule="evenodd">
@@ -85,7 +91,13 @@ class AlternateLoginForm extends Component {
           </LoginButton>
 
           {/* Github LOGIN BUTTON */}
-          <LoginButton color="white" backgroundColor="#0f1619">
+          <LoginButton
+            color="white"
+            backgroundColor="#0f1619"
+            onClick={() => {
+              this.onEvent(githubLoginUrl);
+            }}
+          >
             <FontAwesomeIcon
               icon={faGithub}
               size="2x"

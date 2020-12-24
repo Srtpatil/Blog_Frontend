@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Footer.css";
-
+import { ReactComponent as OptimizeItLogo } from "../../assets/Logo_Alt.svg";
 export default class Footer extends Component {
   render() {
     return (
@@ -10,7 +10,7 @@ export default class Footer extends Component {
           bottom: this.props.bottom ? this.props.bottom : "30px",
         }}
       >
-        <h2>Logo</h2>
+        <OptimizeItLogo />
         <p className="FooterBottomText">
           Powered by React <br /> All rights reserved
         </p>

@@ -16,6 +16,11 @@
   font-weight: 600;
 }
 
+.Footer use {
+  fill: #aaaaaa !important;
+  fill-opacity: 1 !important;
+}
+
 /* For Mobile */
 @media screen and (max-width: 650px) {
   .Footer {

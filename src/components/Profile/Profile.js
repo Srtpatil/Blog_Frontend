@@ -26,7 +26,6 @@ class Profile extends Component {
     super(props);
     this.state = {
       author: "",
-      username: "",
       description: "",
       content: [],
       page: 1,
@@ -72,7 +71,6 @@ class Profile extends Component {
 
         this.setState({
           author: res.user.name,
-          username: res.user.username,
           description: res.user.description
             ? res.user.description
             : "I get my inspiration from the fictional world. I'm a social geek. Completely exploit 24/365 catalysts for change whereas high standards in action items. Conveniently whiteboard multifunctional benefits without enabled leadership.",
@@ -87,8 +85,8 @@ class Profile extends Component {
     const post_id = blog.post_id;
     fetch(`${API_DEV}post/${post_id}`, {
       method: "DELETE",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(blog.content),
@@ -118,22 +116,21 @@ class Profile extends Component {
   };
 
   editProfileHandler = (values, close) => {
-    const { name, username, bio } = values;
+    const { name, bio } = values;
     this.setState(
       {
         author: name,
-        username: username,
         description: bio,
       },
       () => {
         const user_id = UserManager.getUserId();
         const data = {
           name: this.state.author,
-          username: this.state.username,
           description: this.state.description,
         };
         fetch(`${API_DEV}user/edit/${user_id}`, {
           method: "PATCH",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -208,7 +205,7 @@ class Profile extends Component {
             <SectionUnderline />
             <div className="authorDiscription">{this.state.description}</div>
           </div>
-          <SectionHeader>{this.state.username}'s posts</SectionHeader>
+          <SectionHeader>{this.state.author}'s posts</SectionHeader>
           <SectionUnderline />
           {this.state.content.length ? this.state.content : <EmptyContent />}
         </Content>

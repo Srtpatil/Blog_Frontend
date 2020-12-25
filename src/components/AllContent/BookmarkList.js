@@ -17,7 +17,7 @@ import { useHistory } from "react-router-dom";
 const secondButtonHandler = (user_id, post_id, history) => {
   fetch(`${API_DEV}bookmark/delete/${post_id}&${user_id}`, {
     method: "DELETE",
-    credentials : "include",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -52,7 +52,7 @@ const BookmarkList = (props) => {
 
     fetch(`${API_DEV}bookmark/${user_id}`, {
       method: "GET",
-      credentials : "include",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -87,6 +87,7 @@ const BookmarkList = (props) => {
               secondButtonHandler={() =>
                 secondButtonHandler(user_id, post_id, history)
               }
+              secondButtonVisible={true}
             />
           );
         });

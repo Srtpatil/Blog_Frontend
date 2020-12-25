@@ -25,7 +25,7 @@ const Article2Header = (props) => {
         }}
       >
         By{" "}
-        <Link to="#" className="AuthorLink">
+        <Link to={`/profile/${blog.authorId}`} className="AuthorLink">
           {blog.author}
         </Link>
       </p>
@@ -66,52 +66,57 @@ const Article2 = (props) => {
             >
               {props.firstButtonContent}
             </SecondaryButton>
-            <Popup
-              trigger={
-                <PrimaryButton border>
-                  {props.secondButtonIcon ? (
-                    <FontAwesomeIcon icon={props.secondButtonIcon} />
-                  ) : null}
-                  {props.secondButtonContent}
-                </PrimaryButton>
-              }
-              modal
-              nested
-            >
-              {(close) => (
-                <div className="DeletePopup">
-                  <button className="DeletePopupCloseBtn" onClick={close}>
-                    &times;
-                  </button>
-                  <div className="DeletePopupHeader">
-                    Are you absolutely sure ?
-                  </div>
-                  <div className="DeletePopupContent">
-                    <p>
-                      This action<b> cannot</b> be undone. This will
-                      <b> permanently delete</b> your {props.type}.
-                    </p>
-                  </div>
-                  <div className="ConfirmButtonContainer">
-                    <SecondaryButton border onClick={props.secondButtonHandler}>
-                      {props.secondButtonIcon ? (
-                        <FontAwesomeIcon icon={props.secondButtonIcon} />
-                      ) : null}
-                      {props.secondButtonContent}
-                    </SecondaryButton>
+            {props.secondButtonVisible ? (
+              <Popup
+                trigger={
+                  <PrimaryButton border>
+                    {props.secondButtonIcon ? (
+                      <FontAwesomeIcon icon={props.secondButtonIcon} />
+                    ) : null}
+                    {props.secondButtonContent}
+                  </PrimaryButton>
+                }
+                modal
+                nested
+              >
+                {(close) => (
+                  <div className="DeletePopup">
+                    <button className="DeletePopupCloseBtn" onClick={close}>
+                      &times;
+                    </button>
+                    <div className="DeletePopupHeader">
+                      Are you absolutely sure ?
+                    </div>
+                    <div className="DeletePopupContent">
+                      <p>
+                        This action<b> cannot</b> be undone. This will
+                        <b> permanently delete</b> your {props.type}.
+                      </p>
+                    </div>
+                    <div className="ConfirmButtonContainer">
+                      <SecondaryButton
+                        border
+                        onClick={props.secondButtonHandler}
+                      >
+                        {props.secondButtonIcon ? (
+                          <FontAwesomeIcon icon={props.secondButtonIcon} />
+                        ) : null}
+                        {props.secondButtonContent}
+                      </SecondaryButton>
 
-                    <PrimaryButton
-                      border
-                      onClick={() => {
-                        close();
-                      }}
-                    >
-                      Close
-                    </PrimaryButton>
+                      <PrimaryButton
+                        border
+                        onClick={() => {
+                          close();
+                        }}
+                      >
+                        Close
+                      </PrimaryButton>
+                    </div>
                   </div>
-                </div>
-              )}
-            </Popup>
+                )}
+              </Popup>
+            ) : null}
           </div>
         </div>
       </div>

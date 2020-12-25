@@ -32,8 +32,14 @@ class Profile extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.user_id !== this.props.match.params.user_id) {
+      window.location.reload();
+    }
+  }
+
   componentDidMount() {
-    const user_id = UserManager.getUserId();
+    const user_id = this.props.match.params.user_id;
     fetch(`${API_DEV}post/allPosts/${user_id}&${this.state.page}`, {
       method: "GET",
       headers: {
@@ -65,6 +71,9 @@ class Profile extends Component {
               secondButtonContent="Delete"
               secondButtonIcon={faTrash}
               secondButtonHandler={() => this.secondButtonHandler(blog)}
+              secondButtonVisible={
+                this.props.match.params.user_id === UserManager.getUserId()
+              }
             />
           );
         });
@@ -81,7 +90,6 @@ class Profile extends Component {
   }
 
   secondButtonHandler = (blog) => {
-    console.log("HERE!");
     const post_id = blog.post_id;
     fetch(`${API_DEV}post/${post_id}`, {
       method: "DELETE",
@@ -92,11 +100,9 @@ class Profile extends Component {
       body: JSON.stringify(blog.content),
     })
       .then((resp) => {
-        console.log(resp);
         return resp.json();
       })
       .then((res) => {
-        console.log("RES: ", res);
         if (!res.error) {
           NotificationManager().add(
             "Post Deleted Successfully",
@@ -138,7 +144,6 @@ class Profile extends Component {
         })
           .then((resp) => resp.json())
           .then((res) => {
-            console.log("RES: ", res);
             if (!res.error) {
               NotificationManager().add(
                 "Profile Updated Successfully",
@@ -178,30 +183,33 @@ class Profile extends Component {
                 AUTHOR &sdot; {this.state.author}
               </h3>
             </SectionHeader>
-            <Popup
-              trigger={<PrimaryButton border>Edit Profile</PrimaryButton>}
-              modal
-              nested
-            >
-              {(close) => (
-                <div className="DeletePopup">
-                  <button className="DeletePopupCloseBtn" onClick={close}>
-                    &times;
-                  </button>
-                  <div className="DeletePopupHeader">
-                    Are you absolutely sure ?
-                  </div>
+            {UserManager.isLoggedin &&
+            UserManager.getUserId() === this.props.match.params.user_id ? (
+              <Popup
+                trigger={<PrimaryButton border>Edit Profile</PrimaryButton>}
+                modal
+                nested
+              >
+                {(close) => (
+                  <div className="DeletePopup">
+                    <button className="DeletePopupCloseBtn" onClick={close}>
+                      &times;
+                    </button>
+                    <div className="DeletePopupHeader">
+                      Are you absolutely sure ?
+                    </div>
 
-                  <EditProfileForm
-                    profile={this.state}
-                    onClose={close}
-                    onSubmit={(values) =>
-                      this.editProfileHandler(values, close)
-                    }
-                  />
-                </div>
-              )}
-            </Popup>
+                    <EditProfileForm
+                      profile={this.state}
+                      onClose={close}
+                      onSubmit={(values) =>
+                        this.editProfileHandler(values, close)
+                      }
+                    />
+                  </div>
+                )}
+              </Popup>
+            ) : null}
             <SectionUnderline />
             <div className="authorDiscription">{this.state.description}</div>
           </div>

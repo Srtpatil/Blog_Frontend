@@ -26,7 +26,7 @@ const ArticleHeader = (props) => {
         }}
       >
         By{" "}
-        <Link to="#" className="AuthorLink">
+        <Link to={`/profile/${blog.authorId}`} className="AuthorLink">
           {blog.author}
         </Link>
       </p>

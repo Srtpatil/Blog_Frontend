@@ -87,6 +87,7 @@ const DraftList = (props) => {
               secondButtonHandler={() =>
                 secondButtonHandler(draftData, history)
               }
+              secondButtonVisible={true}
             />
           );
         });

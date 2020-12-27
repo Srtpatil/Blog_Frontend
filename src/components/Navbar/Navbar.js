@@ -81,7 +81,10 @@ function DropdownMenu(props) {
         "dropdownMenu--active": props.isActive,
       })}
     >
-      <DropdownItem icon={faUserCircle} to="/profile">
+      <DropdownItem
+        icon={faUserCircle}
+        to={`/profile/${UserManager.getUserId()}`}
+      >
         Profile
       </DropdownItem>
       <DropdownItem icon={faScroll} to={`/drafts/${UserManager.getUserId()}`}>

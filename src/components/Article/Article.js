@@ -26,7 +26,7 @@ const ArticleHeader = (props) => {
         }}
       >
         By{" "}
-        <Link to="#" className="AuthorLink">
+        <Link to={`/profile/${blog.authorId}`} className="AuthorLink">
           {blog.author}
         </Link>
       </p>
@@ -52,8 +52,8 @@ const Article = (props) => {
 
     fetch(`${API_DEV}bookmark/delete/${post_id}&${user_id}`, {
       method: "DELETE",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
         "Content-Type": "application/json",
       },
     })
@@ -82,8 +82,8 @@ const Article = (props) => {
 
       fetch(`${API_DEV}bookmark/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),

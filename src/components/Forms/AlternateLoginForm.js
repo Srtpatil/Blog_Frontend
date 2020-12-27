@@ -10,23 +10,11 @@ import {
 import { API_DEV } from "../../Utils";
 import { LoginButton } from "../../StyledComponents/Buttons";
 
-import { store } from "react-notifications-component";
-
-const facebookLoginUrl = "http://localhost:8081/auth/facebook";
-const googleLoginUrl = "http://localhost:8081/auth/google";
-const githubLoginUrl = "http://localhost:8081/auth/github";
+const facebookLoginUrl = `${API_DEV}auth/facebook`;
+const googleLoginUrl = `${API_DEV}auth/google`;
+const githubLoginUrl = `${API_DEV}auth/github`;
 
 class AlternateLoginForm extends Component {
-  loginUser = (values) => {
-    return fetch(`${API_DEV}user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-  };
-
   onEvent = (loginUrl) => {
     window.open(loginUrl, "_self");
   };

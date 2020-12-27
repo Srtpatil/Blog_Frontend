@@ -23,6 +23,7 @@ import UserManager, { API_DEV } from "../../Utils";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faBookmark as faSolidBookmark } from "@fortawesome/free-solid-svg-icons";
 import { WhatsappShareButton, FacebookShareButton } from "react-share";
+import DefaultPicture from "../../assets/default-profile.png";
 
 const SharePost = (props) => {
   const post_url = `${API_DEV}post/${props.postId}`;
@@ -94,6 +95,7 @@ class Post extends Component {
       bookmarked: false,
       bookmarkLoading: false,
       post_id: "",
+      profile_picture: DefaultPicture,
     };
 
     this.myRef = React.createRef();
@@ -107,6 +109,7 @@ class Post extends Component {
         return res.json();
       })
       .then(async (data) => {
+        console.log("Data: ", data);
         const is_bookmarked = await this.checkBookmarked(
           post_id,
           UserManager.getUserId()
@@ -115,7 +118,7 @@ class Post extends Component {
           Title: data.post.title,
           Author: data.post.user.name,
           Likes: data.post.likes,
-          AuthorDescription: "Someome",
+          AuthorDescription: data.post.user.description,
           PostContent: data.post.content,
           AuthorId: data.post.user_id,
           post_id,
@@ -126,6 +129,9 @@ class Post extends Component {
           bookmarked: is_bookmarked,
           loading: false,
           post_id: post_id,
+          profile_picture: data.post.user.profilePicPath
+            ? data.post.user.profilePicPath
+            : DefaultPicture,
         });
         console.log(data);
       })
@@ -140,8 +146,9 @@ class Post extends Component {
     }
     return fetch(`${API_DEV}bookmark/isBookmark/${post_id}&${user_id}`, {
       method: "GET",
+      credentials: "include",
       headers: {
-        Authorization: "Bearer " + UserManager.getToken(),
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -166,8 +173,8 @@ class Post extends Component {
 
       fetch(`${API_DEV}bookmark/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -205,8 +212,8 @@ class Post extends Component {
       `${API_DEV}bookmark/delete/${this.state.PostData.post_id}&${user_id}`,
       {
         method: "DELETE",
+        credentials: "include",
         headers: {
-          Authorization: "Bearer " + UserManager.getToken(),
           "Content-Type": "application/json",
         },
       }
@@ -305,7 +312,8 @@ class Post extends Component {
           </SectionHeader>
           <div className="AboutAuthorContainer">
             <div className="AboutAuthorImageContainer">
-              <div className="AboutAuthorImage"></div>
+              {/* <div className="AboutAuthorImage"></div> */}
+              <img src={this.state.profile_picture} />
             </div>
             <div className="AboutAuthorDescription">
               <div className="AboutAuthorName">

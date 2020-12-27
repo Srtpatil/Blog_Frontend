@@ -87,6 +87,7 @@ const BookmarkList = (props) => {
               secondButtonHandler={() =>
                 secondButtonHandler(user_id, post_id, history)
               }
+              secondButtonVisible={true}
             />
           );
         });

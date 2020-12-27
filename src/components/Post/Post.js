@@ -22,11 +22,18 @@ import Content from "../Content/Content";
 import UserManager, { API_DEV } from "../../Utils";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faBookmark as faSolidBookmark } from "@fortawesome/free-solid-svg-icons";
-import { WhatsappShareButton, FacebookShareButton } from "react-share";
+import {
+  WhatsappShareButton,
+  FacebookShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from "react-share";
 import DefaultPicture from "../../assets/default-profile.png";
 
 const SharePost = (props) => {
-  const post_url = `${API_DEV}post/${props.postId}`;
+  const post_url = `http://localhost:8887/post/${props.postId}`;
   return (
     <>
       <SectionHeader>
@@ -34,37 +41,47 @@ const SharePost = (props) => {
         <SectionUnderline />
       </SectionHeader>
       <div className="SharePostContainer">
-        <SocialButton
-          width="28%"
-          height="80%"
-          background="#3E5B98"
-          as="a"
-          href="/login"
+        <FacebookShareButton
+          url={post_url}
+          quote={`Optimize it - ${props.title}`}
+          hashtag="#optimizeit"
+          className="SharePostButton"
+          style={{
+            backgroundColor: "#3B5998",
+          }}
         >
-          <FontAwesomeIcon
-            icon={faFacebookF}
-            size="2x"
+          <FacebookIcon size={47} round={true} />
+        </FacebookShareButton>
+        <WhatsappShareButton
+          url={post_url}
+          title={`Optimize it - ${props.title}`}
+          className="SharePostButton"
+          separator=" :: "
+          style={{
+            backgroundColor: "#25d366",
+          }}
+        >
+          <WhatsappIcon
+            size={45}
+            round={true}
             style={{
-              color: "white",
+              paddingTop: "4px",
             }}
           />
-        </SocialButton>
-        <SocialButton
-          width="28%"
-          height="80%"
-          background="#4DA7DE"
-          as="a"
-          href="/login"
+        </WhatsappShareButton>
+        <TwitterShareButton
+          url={post_url}
+          title={`Optimize it - ${props.title}`}
+          hashtag="#optimizeit"
+          className="SharePostButton"
+          style={{
+            backgroundColor: "#00ACED",
+          }}
         >
-          <FontAwesomeIcon
-            icon={faTwitter}
-            size="2x"
-            style={{
-              color: "white",
-            }}
-          />
-        </SocialButton>
-        <SocialButton
+          <TwitterIcon size={47} round={true} />
+        </TwitterShareButton>
+
+        {/* <SocialButton
           width="28%"
           height="80%"
           background="#E74A1E"
@@ -78,7 +95,7 @@ const SharePost = (props) => {
               color: "white",
             }}
           />
-        </SocialButton>
+        </SocialButton> */}
       </div>
     </>
   );
@@ -305,7 +322,10 @@ class Post extends Component {
               {this.state.likesCount === 1 ? "Like" : "Likes"}
             </span>
           </div>
-          <SharePost postId={this.state.post_id} />
+          <SharePost
+            postId={this.state.post_id}
+            title={this.state.PostData.Title}
+          />
           <SectionHeader>
             About the author
             <SectionUnderline />

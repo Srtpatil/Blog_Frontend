@@ -112,7 +112,16 @@ class Editor extends Component {
         const DataDiff = diff(this.state.blog["blocks"], newData["blocks"]);
         for (let i = 0; i < DataDiff.length; i++) {
           if (DataDiff[i][0] === "-" && DataDiff[i][1].type === "image") {
-            console.log("Remove Image from Server");
+            // console.log(DataDiff[i][1].data.file.url);
+            const path = DataDiff[i][1].data.file.url;
+            fetch(`http://localhost:5000/image/delete?path=${path}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((resp) => resp.json())
+              .then((res) => console.log(res));
           }
         }
       }

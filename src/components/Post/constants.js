@@ -45,6 +45,7 @@ export const EDITOR_JS_TOOLS = {
       // },
       uploader: {
         uploadByFile(file) {
+          console.log("IMG: ", file);
           const img = new FormData();
           img.append("image", file);
           // your own uploading logic here

@@ -89,3 +89,13 @@ export const PostContainer = styled.div`
     }
   }
 `;
+
+export const ImageContainer = styled.div`
+  // margin-top: 10vh;
+  width: 100px;
+  height: 100px;
+  background: ${(props) => "url('" + props.img + "')"};
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+`;

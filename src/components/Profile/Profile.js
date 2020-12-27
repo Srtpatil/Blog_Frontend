@@ -23,6 +23,7 @@ import ReactNotification, { store } from "react-notifications-component";
 import Popup from "reactjs-popup";
 import EditProfileForm from "../Forms/EditProfileForm";
 import { faEbay } from "@fortawesome/free-brands-svg-icons";
+
 import { ImageContainer } from "../../StyledComponents/Container";
 import DefaultPicture from "../../assets/default-profile.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -371,9 +372,9 @@ class Profile extends Component {
               UserManager.getUserId() === this.props.match.params.user_id ? (
                 <div>
                   <div class="dropdown">
-                    <button class="dropbtn">
-                      <RiEditLine size={25} />
-                    </button>
+                    <div class="dropbtn">
+                      <FontAwesomeIcon icon={faPen} size="2x" />
+                    </div>
                     <div class="dropdown-content">
                       <label htmlFor="upload">Upload</label>
                       <Popup trigger={<a dis>Remove</a>} modal nested>

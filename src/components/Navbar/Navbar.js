@@ -100,12 +100,12 @@ function DropdownMenu(props) {
           fetch(`${API_DEV}auth/logout`, {
             method: "GET",
             credentials: "include",
+          }).then((resp) => {
+            if (resp.ok && window) {
+              console.log(window);
+              window.location.href = "/";
+            }
           });
-          // .then((resp) => resp.json())
-          // .then((data) => {
-          //   console.log(data);
-          // });
-          UserManager.clear();
         }}
       >
         Logout

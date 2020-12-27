@@ -12,6 +12,9 @@ import FullscreenLoader from "../Static_Pages/FullscreenLoader";
 import { Quotes } from "../../DummyData/Quotes";
 import Loader from "../Static_Pages/Loader";
 import UserManager from "../../Utils";
+import { PaginationButton } from "../../StyledComponents/Buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const blog = {
   title:
@@ -46,6 +49,8 @@ function HomePage(props) {
     author: "Abraham Lincoln",
   });
   const [loading, setLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [lastPageNumber, setLastPageNumber] = useState(0);
 
   useEffect(() => {
     // check user logged in status
@@ -84,10 +89,14 @@ function HomePage(props) {
         //   error: "Failed to authenticate user",
         // });
       });
+  }, []);
 
+  useEffect(() => {
     const randomQuoteIndex = randomNumber(0, Quotes.length - 1);
 
-    fetch(`${API_DEV}post/latest_posts/1`, {
+    setLoading(true);
+
+    fetch(`${API_DEV}post/latest_posts/${pageNumber}`, {
       method: "GET",
       headers: {
         // Accept: "application/json",
@@ -105,7 +114,7 @@ function HomePage(props) {
         }
 
         console.log(data);
-        data.forEach((post) => {
+        data.posts.forEach((post) => {
           const date = new Date(post.updatedAt);
 
           let year = date.getFullYear();
@@ -137,16 +146,28 @@ function HomePage(props) {
           );
         });
 
+        let lastpage = Math.ceil(data.totalPosts / 10);
+
+        setLastPageNumber(lastpage);
         setContent(posts);
         setQuote(Quotes[randomQuoteIndex]);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLastPageNumber(1);
         setQuote(Quotes[randomQuoteIndex]);
         setLoading(false);
       });
-  }, []);
+  }, [pageNumber]);
+
+  const increasePageNumber = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  };
+
+  const decreasePageNumber = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber - 1);
+  };
 
   if (loading) {
     return <h1>LOading</h1>;
@@ -158,6 +179,45 @@ function HomePage(props) {
       <Title title={`"${quote.text}`} author={quote.author} quote />
       <Content title="Latest Stories">
         {content.length === 0 ? <EmptyContent /> : content}
+
+        <div className="paginationContainer">
+          {pageNumber === 1 ? null : (
+            <PaginationButton
+              onClick={decreasePageNumber}
+            >
+              {
+                <FontAwesomeIcon
+                  icon={faAngleLeft}
+                  style={{
+                    fontSize: "18px",
+                    marginBottom: "4px",
+                    marginRight: "8px",
+                  }}
+                />
+              }
+              previous
+            </PaginationButton>
+          )}
+
+          {lastPageNumber === pageNumber ? null : (
+            <PaginationButton
+              style={{ marginLeft: "auto" }}
+              onClick={increasePageNumber}
+            >
+              next{" "}
+              {
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  style={{
+                    fontSize: "18px",
+                    marginBottom: "4px",
+                    marginLeft: "8px",
+                  }}
+                />
+              }
+            </PaginationButton>
+          )}
+        </div>
       </Content>
       <Footer />
     </div>

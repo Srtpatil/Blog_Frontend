@@ -47,6 +47,26 @@ export const SecondaryButton = styled.div`
   }
 `;
 
+export const PaginationButton = styled.div`
+  min-width: 150px;
+  height: 45px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333333;
+  z-index: 3;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    box-shadow: 0 10px 20px 0 rgba(1, 1, 1, 0.15);
+  }
+
+  @media screen and (max-width: 650px) {
+    min-width: 45%;
+  }
+`;
+
 export const SocialButton = styled.div`
   display: flex;
   justify-content: center;
@@ -87,6 +107,7 @@ export const StyledLogo = styled(HeartIcon)`
   fill: ${(props) => (props.isLiked ? "#C11F23" : "white")};
   animation: ${(props) => (props.isLiked ? animation : "")};
   cursor: pointer;
+  pointer-events: ${(props) => (props.disabled ? "none" : "all")};
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;

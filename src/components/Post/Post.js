@@ -270,21 +270,33 @@ class Post extends Component {
             <StyledLogo
               isLiked={this.state.liked}
               onClick={() => {
+                //First change state
                 this.setState((prevState) => {
-                  let cnt = prevState.likesCount;
-                  if (prevState.liked) {
-                    cnt--;
-                  } else {
-                    cnt++;
-                  }
                   return {
-                    liked: !prevState.liked,
-                    likesCount: cnt,
+                    liked: true,
+                    likesCount: prevState.likesCount + 1,
                   };
                 });
+
+                //api call to update likes in the backend
+                fetch(`${API_DEV}post/like/${this.state.post_id}`, {
+                  method: "POST",
+                }).catch((err) => {
+                  // Notify failed error
+                  this.setState((prevState) => {
+                    return {
+                      liked: false,
+                      likesCount: prevState.likesCount - 1,
+                    };
+                  });
+                });
               }}
+              disabled={this.state.liked}
             />
-            <span className="LikesText">{this.state.likesCount} Likes</span>
+            <span className="LikesText">
+              {this.state.likesCount}{" "}
+              {this.state.likesCount === 1 ? "Like" : "Likes"}
+            </span>
           </div>
           <SharePost postId={this.state.post_id} />
           <SectionHeader>

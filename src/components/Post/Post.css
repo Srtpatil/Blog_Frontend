@@ -109,6 +109,13 @@
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.SharePostButton {
+  width: 28%;
+  height: 80%;
 }
 
 /* For Mobile */
@@ -170,5 +177,13 @@
 @media screen and (max-width: 450px) {
   .SharePostContainer {
     width: 90%;
+    background-color: #fff;
+  }
+
+  .SharePostButton {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 0.6rem;
   }
 }

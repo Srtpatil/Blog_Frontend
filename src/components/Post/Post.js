@@ -29,8 +29,10 @@ import {
   FacebookIcon,
   TwitterShareButton,
   TwitterIcon,
+  RedditShareButton,
 } from "react-share";
 import DefaultPicture from "../../assets/default-profile.png";
+import Loader from "../Static_Pages/Loader";
 
 const SharePost = (props) => {
   const post_url = `http://localhost:8887/post/${props.postId}`;
@@ -81,21 +83,23 @@ const SharePost = (props) => {
           <TwitterIcon size={47} round={true} />
         </TwitterShareButton>
 
-        {/* <SocialButton
-          width="28%"
-          height="80%"
-          background="#E74A1E"
-          as="a"
-          href="/login"
+        <RedditShareButton
+          url={post_url}
+          title={`Optimize it - ${props.title}`}
+          className="SharePostButton"
+          style={{
+            backgroundColor: "#FF4500",
+          }}
         >
           <FontAwesomeIcon
             icon={faRedditAlien}
             size="2x"
             style={{
+              backgroundColor: "#FF4500",
               color: "white",
             }}
           />
-        </SocialButton> */}
+        </RedditShareButton>
       </div>
     </>
   );
@@ -260,9 +264,6 @@ class Post extends Component {
   };
 
   render() {
-    if (this.state.loading) {
-      return <div>loading</div>;
-    }
     return (
       <div>
         <Navbar />
@@ -270,8 +271,12 @@ class Post extends Component {
           addButton={true}
           red_button="Read On"
           white_button="Read Later"
-          title={this.state.PostData.Title}
-          author={this.state.PostData.Author}
+          title={
+            this.state.PostData
+              ? this.state.PostData.Title
+              : "Here comes the title.."
+          }
+          author={this.state.PostData ? this.state.PostData.Author : "Author"}
           onPrimaryClick={this.executeScroll}
           onSecondaryClick={
             this.state.bookmarked ? this.removeBookmark : this.addBookmark
@@ -281,75 +286,81 @@ class Post extends Component {
           bookmarkLoading={this.state.bookmarkLoading}
         />
         <Content title="ENJOY YOUR READ !" refProp={this.myRef}>
-          <EditorJs
-            tools={EDITOR_JS_TOOLS}
-            data={this.state.PostData.PostContent}
-            readOnly={true}
-          />
-          <SectionHeader marginTop="0px">
-            Like the post
-            <SectionUnderline />
-          </SectionHeader>
-          <div className="LikePostContainer">
-            <StyledLogo
-              isLiked={this.state.liked}
-              onClick={() => {
-                //First change state
-                this.setState((prevState) => {
-                  return {
-                    liked: true,
-                    likesCount: prevState.likesCount + 1,
-                  };
-                });
+          {this.state.loading ? (
+            <Loader />
+          ) : (
+            <div>
+              <EditorJs
+                tools={EDITOR_JS_TOOLS}
+                data={this.state.PostData.PostContent}
+                readOnly={true}
+              />
+              <SectionHeader marginTop="0px">
+                Like the post
+                <SectionUnderline />
+              </SectionHeader>
+              <div className="LikePostContainer">
+                <StyledLogo
+                  isLiked={this.state.liked}
+                  onClick={() => {
+                    //First change state
+                    this.setState((prevState) => {
+                      return {
+                        liked: true,
+                        likesCount: prevState.likesCount + 1,
+                      };
+                    });
 
-                //api call to update likes in the backend
-                fetch(`${API_DEV}post/like/${this.state.post_id}`, {
-                  method: "POST",
-                }).catch((err) => {
-                  // Notify failed error
-                  this.setState((prevState) => {
-                    return {
-                      liked: false,
-                      likesCount: prevState.likesCount - 1,
-                    };
-                  });
-                });
-              }}
-              disabled={this.state.liked}
-            />
-            <span className="LikesText">
-              {this.state.likesCount}{" "}
-              {this.state.likesCount === 1 ? "Like" : "Likes"}
-            </span>
-          </div>
-          <SharePost
-            postId={this.state.post_id}
-            title={this.state.PostData.Title}
-          />
-          <SectionHeader>
-            About the author
-            <SectionUnderline />
-          </SectionHeader>
-          <div className="AboutAuthorContainer">
-            <div className="AboutAuthorImageContainer">
-              {/* <div className="AboutAuthorImage"></div> */}
-              <img src={this.state.profile_picture} />
-            </div>
-            <div className="AboutAuthorDescription">
-              <div className="AboutAuthorName">
-                <p
-                  style={{
-                    marginBottom: "4px",
+                    //api call to update likes in the backend
+                    fetch(`${API_DEV}post/like/${this.state.post_id}`, {
+                      method: "POST",
+                    }).catch((err) => {
+                      // Notify failed error
+                      this.setState((prevState) => {
+                        return {
+                          liked: false,
+                          likesCount: prevState.likesCount - 1,
+                        };
+                      });
+                    });
                   }}
-                >
-                  {this.state.PostData.Author}
-                </p>
+                  disabled={this.state.liked}
+                />
+                <span className="LikesText">
+                  {this.state.likesCount}{" "}
+                  {this.state.likesCount === 1 ? "Like" : "Likes"}
+                </span>
               </div>
-              <p className="AboutAuthorDescriptionText">
-                {this.state.PostData.AuthorDescription}
-              </p>
+              <SharePost
+                postId={this.state.post_id}
+                title={this.state.PostData.Title}
+              />
+              <SectionHeader>
+                About the author
+                <SectionUnderline />
+              </SectionHeader>
+              <div className="AboutAuthorContainer">
+                <div className="AboutAuthorImageContainer">
+                  {/* <div className="AboutAuthorImage"></div> */}
+                  <img src={this.state.profile_picture} />
+                </div>
+                <div className="AboutAuthorDescription">
+                  <div className="AboutAuthorName">
+                    <p
+                      style={{
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {this.state.PostData.Author}
+                    </p>
+                  </div>
+                  <p className="AboutAuthorDescriptionText">
+                    {this.state.PostData.AuthorDescription}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </Content>
 
         <Footer />

@@ -26,6 +26,7 @@ import { faEbay } from "@fortawesome/free-brands-svg-icons";
 import { ImageContainer } from "../../StyledComponents/Container";
 import DefaultPicture from "../../assets/default-profile.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loader from "../Static_Pages/Loader";
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +34,7 @@ class Profile extends Component {
       author: "",
       description: "",
       content: [],
+      loading: true,
       page: 1,
       profile_picture: DefaultPicture,
     };
@@ -93,6 +95,7 @@ class Profile extends Component {
           profile_picture: res.user.profilePicPath
             ? res.user.profilePicPath
             : DefaultPicture,
+          loading: false,
         });
       })
       .catch((err) => console.log(err));
@@ -365,109 +368,125 @@ class Profile extends Component {
         <Navbar />
         <Title top="25vh" disableFullScreen={true} />
         <Content>
-          <div className="authorContainer">
-            <div className="ImageUploadContainer">
-              {UserManager.isLoggedin() &&
-              UserManager.getUserId() === this.props.match.params.user_id ? (
-                <div>
-                  <div class="dropdown">
-                    <button class="dropbtn">
-                      <RiEditLine size={25} />
-                    </button>
-                    <div class="dropdown-content">
-                      <label htmlFor="upload">Upload</label>
-                      <Popup trigger={<a dis>Remove</a>} modal nested>
-                        {(close) => (
-                          <div className="DeletePopup">
-                            <button
-                              className="DeletePopupCloseBtn"
-                              onClick={close}
-                            >
-                              &times;
-                            </button>
-                            <div className="DeletePopupHeader">
-                              Are you absolutely sure ?
-                            </div>
-                            <div className="DeletePopupContent">
-                              <p>
-                                This action<b> cannot</b> be undone. This will
-                                <b> permanently delete</b> your Picture.
-                              </p>
-                            </div>
-                            <div className="ConfirmButtonContainer">
-                              <SecondaryButton
-                                border
-                                onClick={() => this.removePictureHandler(close)}
-                              >
-                                Remove
-                              </SecondaryButton>
-                              <PrimaryButton
-                                border
-                                onClick={() => {
-                                  close();
-                                }}
-                              >
-                                Close
-                              </PrimaryButton>
-                            </div>
-                          </div>
-                        )}
-                      </Popup>
+          {this.state.loading ? (
+            <Loader />
+          ) : (
+            <div>
+              <div className="authorContainer">
+                <div className="ImageUploadContainer">
+                  {UserManager.isLoggedin() &&
+                  UserManager.getUserId() ===
+                    this.props.match.params.user_id ? (
+                    <div>
+                      <div class="dropdown">
+                        <button class="dropbtn">
+                          <RiEditLine size={25} />
+                        </button>
+                        <div class="dropdown-content">
+                          <label htmlFor="upload">Upload</label>
+                          <Popup trigger={<a dis>Remove</a>} modal nested>
+                            {(close) => (
+                              <div className="DeletePopup">
+                                <button
+                                  className="DeletePopupCloseBtn"
+                                  onClick={close}
+                                >
+                                  &times;
+                                </button>
+                                <div className="DeletePopupHeader">
+                                  Are you absolutely sure ?
+                                </div>
+                                <div className="DeletePopupContent">
+                                  <p>
+                                    This action<b> cannot</b> be undone. This
+                                    will
+                                    <b> permanently delete</b> your Picture.
+                                  </p>
+                                </div>
+                                <div className="ConfirmButtonContainer">
+                                  <SecondaryButton
+                                    border
+                                    onClick={() =>
+                                      this.removePictureHandler(close)
+                                    }
+                                  >
+                                    Remove
+                                  </SecondaryButton>
+                                  <PrimaryButton
+                                    border
+                                    onClick={() => {
+                                      close();
+                                    }}
+                                  >
+                                    Close
+                                  </PrimaryButton>
+                                </div>
+                              </div>
+                            )}
+                          </Popup>
+                        </div>
+                      </div>
+                      <input
+                        type="file"
+                        id="upload"
+                        onChange={this.uploadPictureHandler}
+                      />
                     </div>
-                  </div>
-                  <input
-                    type="file"
-                    id="upload"
-                    onChange={this.uploadPictureHandler}
-                  />
+                  ) : null}
+                  <img src={this.state.profile_picture} />
                 </div>
-              ) : null}
-              <img src={this.state.profile_picture} />
+
+                <SectionHeader marginTop="40px">
+                  <h3
+                    style={{
+                      lineHeight: 1.2,
+                      fontSize: "18px",
+                    }}
+                  >
+                    AUTHOR &sdot; {this.state.author}
+                  </h3>
+                </SectionHeader>
+                {UserManager.isLoggedin() &&
+                UserManager.getUserId() === this.props.match.params.user_id ? (
+                  <Popup
+                    trigger={<PrimaryButton border>Edit Profile</PrimaryButton>}
+                    modal
+                    nested
+                  >
+                    {(close) => (
+                      <div className="DeletePopup">
+                        <button className="DeletePopupCloseBtn" onClick={close}>
+                          &times;
+                        </button>
+                        <div className="DeletePopupHeader">
+                          Are you absolutely sure ?
+                        </div>
+
+                        <EditProfileForm
+                          profile={this.state}
+                          onClose={close}
+                          onSubmit={(values) =>
+                            this.editProfileHandler(values, close)
+                          }
+                        />
+                      </div>
+                    )}
+                  </Popup>
+                ) : null}
+                <SectionUnderline />
+                <div className="authorDiscription">
+                  {this.state.description}
+                </div>
+              </div>
+              <SectionHeader>{this.state.author}'s posts</SectionHeader>
+              <SectionUnderline />
+              {this.state.content.length ? (
+                this.state.content
+              ) : (
+                <EmptyContent />
+              )}
             </div>
-
-            <SectionHeader marginTop="40px">
-              <h3
-                style={{
-                  lineHeight: 1.2,
-                  fontSize: "18px",
-                }}
-              >
-                AUTHOR &sdot; {this.state.author}
-              </h3>
-            </SectionHeader>
-            {UserManager.isLoggedin() &&
-            UserManager.getUserId() === this.props.match.params.user_id ? (
-              <Popup
-                trigger={<PrimaryButton border>Edit Profile</PrimaryButton>}
-                modal
-                nested
-              >
-                {(close) => (
-                  <div className="DeletePopup">
-                    <button className="DeletePopupCloseBtn" onClick={close}>
-                      &times;
-                    </button>
-                    <div className="DeletePopupHeader">
-                      Are you absolutely sure ?
-                    </div>
-
-                    <EditProfileForm
-                      profile={this.state}
-                      onClose={close}
-                      onSubmit={(values) =>
-                        this.editProfileHandler(values, close)
-                      }
-                    />
-                  </div>
-                )}
-              </Popup>
-            ) : null}
-            <SectionUnderline />
-            <div className="authorDiscription">{this.state.description}</div>
-          </div>
-          <SectionHeader>{this.state.author}'s posts</SectionHeader>
-          <SectionUnderline />
-          {this.state.content.length ? this.state.content : <EmptyContent />}
+          )}
         </Content>
       </div>
     );

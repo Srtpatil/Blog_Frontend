@@ -169,22 +169,22 @@ function HomePage(props) {
     setPageNumber((prevPageNumber) => prevPageNumber - 1);
   };
 
-  if (loading) {
-    return <h1>LOading</h1>;
-  }
-
   return (
     <div>
       <Navbar />
       <Title title={`"${quote.text}`} author={quote.author} quote />
       <Content title="Latest Stories">
-        {content.length === 0 ? <EmptyContent /> : content}
+        {loading ? (
+          <Loader />
+        ) : content.length === 0 ? (
+          <EmptyContent />
+        ) : (
+          content
+        )}
 
         <div className="paginationContainer">
           {pageNumber === 1 ? null : (
-            <PaginationButton
-              onClick={decreasePageNumber}
-            >
+            <PaginationButton onClick={decreasePageNumber}>
               {
                 <FontAwesomeIcon
                   icon={faAngleLeft}

@@ -13,6 +13,7 @@ import { EDITOR_JS_TOOLS } from "../Post/constants";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { diffString, diff } from "json-diff";
+import Loader from "../Static_Pages/Loader";
 
 class Editor extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Editor extends Component {
             secondaryButtonText: secondaryButtonText,
             authorName: data.post.user.name,
           });
-          console.log("Data from editor: ", data);
+          console.log("Data from editor: ", data, this.state.title);
         })
         .catch((err) => {
           this.setState({
@@ -91,14 +92,8 @@ class Editor extends Component {
 
   handleChange = (e) => {
     let newTitle = e.target.value;
-
     let newFirstLetter = e.target.value[0];
-    // if (newTitle === "<br>") {
-    //   // newTitle = "";
-    //   newFirstLetter = null;
-    // }
-
-    // console.log(newTitle);
+    console.log("title: ", newTitle);
     this.setState({ title: newTitle, firstLetter: newFirstLetter });
   };
 
@@ -299,19 +294,14 @@ class Editor extends Component {
   };
 
   render() {
-    if (this.state.loading) {
-      return <div>loading</div>;
-    }
-
     const customTitle = (
       <textarea
         className="EditorTitleInputBox"
         placeholder="Write Title Here..."
+        value={this.state.title}
         onChange={this.handleChange}
         maxLength="60"
-      >
-        {this.state.title}
-      </textarea>
+      />
     );
     return (
       <div>
@@ -332,12 +322,16 @@ class Editor extends Component {
           }
         />
         <Content title="Write your Story!">
-          <EditorJS
-            tools={EDITOR_JS_TOOLS}
-            onChange={this.getEditorContext}
-            placeholder={this.state.empty ? "Start Writing Here" : null}
-            data={this.state.blog}
-          />
+          {this.state.loading ? (
+            <Loader />
+          ) : (
+            <EditorJS
+              tools={EDITOR_JS_TOOLS}
+              onChange={this.getEditorContext}
+              placeholder={this.state.empty ? "Start Writing Here" : null}
+              data={this.state.blog}
+            />
+          )}
         </Content>
         <Footer />
       </div>

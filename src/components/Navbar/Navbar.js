@@ -105,7 +105,7 @@ function DropdownMenu(props) {
             credentials: "include",
           }).then((resp) => {
             if (resp.ok && window) {
-              console.log(window);
+              UserManager.clear();
               window.location.href = "/";
             }
           });

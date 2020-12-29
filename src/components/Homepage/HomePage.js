@@ -182,9 +182,7 @@ function HomePage(props) {
 
         <div className="paginationContainer">
           {pageNumber === 1 ? null : (
-            <PaginationButton
-              onClick={decreasePageNumber}
-            >
+            <PaginationButton onClick={decreasePageNumber}>
               {
                 <FontAwesomeIcon
                   icon={faAngleLeft}

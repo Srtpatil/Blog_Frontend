@@ -5,7 +5,11 @@ import Navbar from "../Navbar/Navbar";
 import Title from "../Title/Title";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import UserManager, {
   API_DEV,
   NotificationManager,
@@ -13,6 +17,8 @@ import UserManager, {
 } from "../../Utils";
 import ReactNotification, { store } from "react-notifications-component";
 import { useHistory } from "react-router-dom";
+import { PaginationButton } from "../../StyledComponents/Buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const secondButtonHandler = (blog, history) => {
   const post_id = blog.post_id;
@@ -49,20 +55,22 @@ const secondButtonHandler = (blog, history) => {
 const DraftList = (props) => {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(0);
+
   let history = useHistory();
 
   useEffect(() => {
     let user_id = UserManager.getUserId();
 
-    fetch(`${API_DEV}post/draft/${user_id}`, {
+    fetch(`${API_DEV}post/draft/${user_id}&${currentPage}`, {
       method: "GET",
       credentials: "include",
     })
       .then((resp) => resp.json())
       .then((data) => {
         let drafts = [];
-
-        data.forEach((post) => {
+        data.rows.forEach((post) => {
           const date = new Date(post.updatedAt);
           console.log(post);
           const draftData = {
@@ -91,6 +99,10 @@ const DraftList = (props) => {
             />
           );
         });
+
+        let lastpage = Math.ceil(data.count / 10);
+
+        setLastPage(lastpage);
         setLoading(false);
         setContent(drafts);
         console.log(props.history);
@@ -98,7 +110,15 @@ const DraftList = (props) => {
       .catch((err) => {
         setLoading(false);
       });
-  }, []);
+  }, [currentPage]);
+
+  const increasePageNumber = () => {
+    setCurrentPage((prevPageNumber) => prevPageNumber + 1);
+  };
+
+  const decreasePageNumber = () => {
+    setCurrentPage((prevPageNumber) => prevPageNumber - 1);
+  };
 
   return (
     <div>
@@ -113,6 +133,44 @@ const DraftList = (props) => {
         ) : (
           content
         )}
+        {content.length ? (
+          <div className="paginationContainer">
+            {currentPage === 1 ? null : (
+              <PaginationButton onClick={decreasePageNumber}>
+                {
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    style={{
+                      fontSize: "18px",
+                      marginBottom: "4px",
+                      marginRight: "8px",
+                    }}
+                  />
+                }
+                previous
+              </PaginationButton>
+            )}
+
+            {lastPage === currentPage ? null : (
+              <PaginationButton
+                style={{ marginLeft: "auto" }}
+                onClick={increasePageNumber}
+              >
+                next{" "}
+                {
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    style={{
+                      fontSize: "18px",
+                      marginBottom: "4px",
+                      marginLeft: "8px",
+                    }}
+                  />
+                }
+              </PaginationButton>
+            )}
+          </div>
+        ) : null}
       </Content>
     </div>
   );

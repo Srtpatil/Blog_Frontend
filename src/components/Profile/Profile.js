@@ -5,7 +5,11 @@ import Content from "../Content/Content";
 import Article from "../Article/Article";
 import Article2 from "../Article/Article2";
 import React, { Component } from "react";
-import { PrimaryButton, SecondaryButton } from "../../StyledComponents/Buttons";
+import {
+  PaginationButton,
+  PrimaryButton,
+  SecondaryButton,
+} from "../../StyledComponents/Buttons";
 import {
   SectionHeader,
   SectionUnderline,
@@ -16,7 +20,12 @@ import UserManager, {
   NotificationManager,
 } from "../../Utils";
 import EmptyContent from "../Static_Pages/EmptyContent";
-import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPen,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 // import { FiEdit2 } from "react-icons/fi";
 import { RiEditLine } from "react-icons/ri";
 import ReactNotification, { store } from "react-notifications-component";
@@ -35,20 +44,79 @@ class Profile extends Component {
       description: "",
       content: [],
       loading: true,
-      page: 1,
+      currentPage: 1,
+      lastPageNumber: 0,
       profile_picture: DefaultPicture,
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.user_id !== this.props.match.params.user_id) {
       window.location.reload();
+    }
+
+    if (prevState.currentPage !== this.state.currentPage) {
+      const user_id = this.props.match.params.user_id;
+      fetch(`${API_DEV}post/allPosts/${user_id}&${this.state.currentPage}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((resp) => resp.json())
+        .then((res) => {
+          let blogs = [];
+          res.posts.rows.forEach((post) => {
+            const date = new Date(post.updatedAt);
+            const blog = {
+              post_id: post.post_id,
+              title: post.title,
+              summary: post.summary,
+              day: date.getDate(),
+              month: MonthList[date.getMonth()],
+              year: date.getFullYear(),
+              author: res.user.name,
+              authorId: res.user.user_id,
+              content: post.content,
+            };
+
+            blogs.push(
+              <Article2
+                blog={blog}
+                type="Post"
+                firstButtonContent="Read on"
+                secondButtonContent="Delete"
+                secondButtonIcon={faTrash}
+                secondButtonHandler={() => this.secondButtonHandler(blog)}
+                secondButtonVisible={
+                  this.props.match.params.user_id === UserManager.getUserId()
+                }
+              />
+            );
+          });
+
+          let lastpage = Math.ceil(res.posts.count / 10);
+
+          this.setState({
+            author: res.user.name,
+            description: res.user.description
+              ? res.user.description
+              : "I get my inspiration from the fictional world. I'm a social geek. Completely exploit 24/365 catalysts for change whereas high standards in action items. Conveniently whiteboard multifunctional benefits without enabled leadership.",
+            content: blogs,
+            profile_picture: res.user.profilePicPath
+              ? res.user.profilePicPath
+              : DefaultPicture,
+            loading: false,
+            lastPageNumber: lastpage,
+          });
+        })
+        .catch((err) => console.log(err));
     }
   }
 
   componentDidMount() {
     const user_id = this.props.match.params.user_id;
-    fetch(`${API_DEV}post/allPosts/${user_id}&${this.state.page}`, {
+    fetch(`${API_DEV}post/allPosts/${user_id}&${this.state.currentPage}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,8 +124,9 @@ class Profile extends Component {
     })
       .then((resp) => resp.json())
       .then((res) => {
+        console.log("Posts: ", res);
         let blogs = [];
-        res.posts.forEach((post) => {
+        res.posts.rows.forEach((post) => {
           const date = new Date(post.updatedAt);
           const blog = {
             post_id: post.post_id,
@@ -86,6 +155,8 @@ class Profile extends Component {
           );
         });
 
+        let lastpage = Math.ceil(res.posts.count / 10);
+
         this.setState({
           author: res.user.name,
           description: res.user.description
@@ -96,6 +167,7 @@ class Profile extends Component {
             ? res.user.profilePicPath
             : DefaultPicture,
           loading: false,
+          lastPageNumber: lastpage,
         });
       })
       .catch((err) => console.log(err));
@@ -131,6 +203,22 @@ class Profile extends Component {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  increasePageNumber = () => {
+    this.setState((prevState) => {
+      return {
+        currentPage: prevState.currentPage + 1,
+      };
+    });
+  };
+
+  decreasePageNumber = () => {
+    this.setState((prevState) => {
+      return {
+        currentPage: prevState.currentPage - 1,
+      };
+    });
   };
 
   editProfileHandler = (values, close) => {
@@ -487,6 +575,45 @@ class Profile extends Component {
               )}
             </div>
           )}
+
+          {this.state.content.length ? (
+            <div className="paginationContainer">
+              {this.state.currentPage === 1 ? null : (
+                <PaginationButton onClick={this.decreasePageNumber}>
+                  {
+                    <FontAwesomeIcon
+                      icon={faAngleLeft}
+                      style={{
+                        fontSize: "18px",
+                        marginBottom: "4px",
+                        marginRight: "8px",
+                      }}
+                    />
+                  }
+                  previous
+                </PaginationButton>
+              )}
+
+              {this.state.lastPageNumber === this.state.currentPage ? null : (
+                <PaginationButton
+                  style={{ marginLeft: "auto" }}
+                  onClick={this.increasePageNumber}
+                >
+                  next{" "}
+                  {
+                    <FontAwesomeIcon
+                      icon={faAngleRight}
+                      style={{
+                        fontSize: "18px",
+                        marginBottom: "4px",
+                        marginLeft: "8px",
+                      }}
+                    />
+                  }
+                </PaginationButton>
+              )}
+            </div>
+          ) : null}
         </Content>
       </div>
     );

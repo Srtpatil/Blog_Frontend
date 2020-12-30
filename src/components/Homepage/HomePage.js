@@ -16,28 +16,18 @@ import { PaginationButton } from "../../StyledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-const blog = {
-  title:
-    "klorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, similique!",
-
-  day: "05",
-  month: "NOVEMBER",
-  year: "2020",
-  summary:
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora incidunt quas reprehenderit corporis amet nesciunt, a alias asperiores? Atque excepturi eum, similique officiis veniam consequuntur tempora, numquam in repudiandae assumenda quos vitae, dicta delectus. Molestiae fuga eaque temporibus labore, assumenda veritatis impedit quam magnam pariatur, totam eius, officiis numquam! Molestiae, eveniet quae recusandae aut a, qui maxime magnam iure, asperiores similique dolorem. Ea, officiis voluptatum quae quidem aliquam tempora doloribus odio nesciunt libero dicta fuga dolor. Alias officia laborum id!",
-  author: "Anonymous",
-};
 const getBookmarks = () => {
   return fetch(`${API_DEV}bookmark/${UserManager.getUserId()}`, {
     method: "GET",
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
   })
     .then((res) => res.json())
     .then((data) => {
-      return data;
+      let bookmarks = [];
+      if (data.posts) {
+        bookmarks = [...bookmarks, ...data.posts];
+      }
+      return bookmarks;
     });
 };
 
@@ -110,10 +100,8 @@ function HomePage(props) {
         let bookmarkedPosts = [];
         if (UserManager.isLoggedin()) {
           bookmarkedPosts = await getBookmarks();
-          console.log(bookmarkedPosts[0]);
         }
 
-        console.log(data);
         data.posts.forEach((post) => {
           const date = new Date(post.updatedAt);
 
@@ -182,42 +170,44 @@ function HomePage(props) {
           content
         )}
 
-        <div className="paginationContainer">
-          {pageNumber === 1 ? null : (
-            <PaginationButton onClick={decreasePageNumber}>
-              {
-                <FontAwesomeIcon
-                  icon={faAngleLeft}
-                  style={{
-                    fontSize: "18px",
-                    marginBottom: "4px",
-                    marginRight: "8px",
-                  }}
-                />
-              }
-              previous
-            </PaginationButton>
-          )}
+        {content.length ? (
+          <div className="paginationContainer">
+            {pageNumber === 1 ? null : (
+              <PaginationButton onClick={decreasePageNumber}>
+                {
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    style={{
+                      fontSize: "18px",
+                      marginBottom: "4px",
+                      marginRight: "8px",
+                    }}
+                  />
+                }
+                previous
+              </PaginationButton>
+            )}
 
-          {lastPageNumber === pageNumber ? null : (
-            <PaginationButton
-              style={{ marginLeft: "auto" }}
-              onClick={increasePageNumber}
-            >
-              next{" "}
-              {
-                <FontAwesomeIcon
-                  icon={faAngleRight}
-                  style={{
-                    fontSize: "18px",
-                    marginBottom: "4px",
-                    marginLeft: "8px",
-                  }}
-                />
-              }
-            </PaginationButton>
-          )}
-        </div>
+            {lastPageNumber === pageNumber ? null : (
+              <PaginationButton
+                style={{ marginLeft: "auto" }}
+                onClick={increasePageNumber}
+              >
+                next{" "}
+                {
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    style={{
+                      fontSize: "18px",
+                      marginBottom: "4px",
+                      marginLeft: "8px",
+                    }}
+                  />
+                }
+              </PaginationButton>
+            )}
+          </div>
+        ) : null}
       </Content>
       <Footer />
     </div>

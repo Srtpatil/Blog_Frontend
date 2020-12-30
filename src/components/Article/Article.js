@@ -41,7 +41,7 @@ const Article = (props) => {
 
   useEffect(() => {
     for (let i = 0; i < bookmarkedPosts.length; i++) {
-      if (bookmarkedPosts[i].data.post_id === blog.post_id) {
+      if (bookmarkedPosts[i] === blog.post_id) {
         setBookmarked(true);
       }
     }

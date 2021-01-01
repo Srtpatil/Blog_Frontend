@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import UserManager from "../Utils";
+import Loader from "./Static_Pages/Loader";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const [authenticate, setAuthenticated] = useState("wait");
+
+  useEffect(() => {
+    UserManager.isLoggedinWithApi()
+      .then((data) => {
+        console.log("logged in status");
+        if (!data.success) {
+          UserManager.clear();
+        }
+        setAuthenticated(data.success);
+      })
+      .catch((err) => {
+        UserManager.clear();
+        setAuthenticated(false);
+      });
+  }, []);
+
+  if (authenticate === "wait") {
+    return <Loader />;
+  }
+
   return (
     <Route
       {...rest}
       render={(props) => {
-        console.log(props);
-        if (UserManager.isLoggedin()) {
+        // console.log(props);
+        if (authenticate) {
           if (
             props.location.pathname === "/login" ||
             props.location.pathname === "/signup"

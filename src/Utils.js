@@ -59,6 +59,20 @@ const UserManager = () => {
     }
   };
 
+  const isLoggedinWithApi = () => {
+    return fetch(`${API_DEV}auth/login/success`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then((responseJson) => {
+        return responseJson;
+      });
+  };
+
   const isAuthor = () => {
     if (localStorage.getItem("Author_id")) {
       return true;
@@ -66,19 +80,6 @@ const UserManager = () => {
       return false;
     }
   };
-
-  function createCookie(name, value, days) {
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      var expires = "; expires=" + date.toGMTString();
-    } else var expires = "";
-    document.cookie = name + "=" + value + expires + "; path=/";
-  }
-
-  function eraseCookie(name) {
-    createCookie(name, "", -1);
-  }
 
   const clear = () => {
     localStorage.clear();
@@ -92,6 +93,7 @@ const UserManager = () => {
     isSuperUser,
     clear,
     getUserId,
+    isLoggedinWithApi,
   };
 };
 

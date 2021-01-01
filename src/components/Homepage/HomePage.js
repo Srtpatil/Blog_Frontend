@@ -72,18 +72,16 @@ function HomePage(props) {
         console.log(responseJson);
 
         if (responseJson.success) {
+          sessionStorage.setItem("loginNotification", "true");
           localStorage.setItem("isLoggedin", "true");
           localStorage.setItem("user_id", responseJson.user.user_id);
-          setAuthenticated(true);
         } else {
           UserManager.clear();
-          setAuthenticated(false);
         }
       })
       .catch((error) => {
         //raise notification error
         UserManager.clear();
-        setAuthenticated(false);
         // this.setState({
         //   authenticated: false,
         //   error: "Failed to authenticate user",

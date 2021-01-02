@@ -179,6 +179,21 @@ class Editor extends Component {
     if (this.state.is_drafted) {
       this.updatePost();
     } else {
+      if (
+        data.title === "" ||
+        data.content === null ||
+        this.state.blog.blocks.length <= 1
+      ) {
+        NotificationManager().add(
+          "Cannot have empty title or content for blog!",
+          "warning",
+          "Warning!",
+          1500
+        );
+
+        return;
+      }
+
       fetch(`${API_DEV}post/add`, {
         method: "POST",
         credentials: "include",
@@ -222,7 +237,20 @@ class Editor extends Component {
     if (this.state.is_published) {
       this.updateDraft();
     } else {
-      console.log(data);
+      if (
+        data.title === "" ||
+        data.content === null ||
+        this.state.blog.blocks.length <= 1
+      ) {
+        NotificationManager().add(
+          "Cannot have empty title or content for blog!",
+          "warning",
+          "Warning!",
+          1500
+        );
+
+        return;
+      }
       fetch(`${API_DEV}post/add`, {
         method: "POST",
         credentials: "include",

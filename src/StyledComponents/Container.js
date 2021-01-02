@@ -74,7 +74,7 @@ export const PostContainer = styled.div`
 
   &:before {
     content: "";
-    height: 90%;
+    height: calc(100% - 450px);
     position: absolute;
     width: 1px;
     background-color: rgb(236, 236, 236);

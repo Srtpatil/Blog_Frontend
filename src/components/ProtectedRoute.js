@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import UserManager from "../Utils";
-import Loader from "./Static_Pages/Loader";
+import FullscreenLoader from "./Static_Pages/FullscreenLoader";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [authenticate, setAuthenticated] = useState("wait");
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   }, []);
 
   if (authenticate === "wait") {
-    return <Loader />;
+    return <FullscreenLoader />;
   }
 
   return (

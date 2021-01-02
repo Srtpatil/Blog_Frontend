@@ -6,7 +6,12 @@ import Footer from "../Footer/Footer";
 import Article from "../Article/Article";
 import Article2 from "../Article/Article2";
 import { useEffect, useState } from "react";
-import { API_DEV, randomNumber, MonthList } from "../../Utils";
+import {
+  API_DEV,
+  randomNumber,
+  MonthList,
+  NotificationManager,
+} from "../../Utils";
 import EmptyContent from "../Static_Pages/EmptyContent";
 import FullscreenLoader from "../Static_Pages/FullscreenLoader";
 import { Quotes } from "../../DummyData/Quotes";
@@ -15,6 +20,8 @@ import UserManager from "../../Utils";
 import { PaginationButton } from "../../StyledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 const getBookmarks = () => {
   return fetch(`${API_DEV}bookmark/${UserManager.getUserId()}`, {
@@ -44,6 +51,7 @@ function HomePage(props) {
 
   useEffect(() => {
     // check user logged in status
+    setLoading(true);
     fetch(`${API_DEV}auth/login/success`, {
       method: "GET",
       credentials: "include",
@@ -58,19 +66,32 @@ function HomePage(props) {
         throw new Error("failed to authenticate user");
       })
       .then((responseJson) => {
-        //raise notification success login
-        console.log(responseJson);
+        // console.log(responseJson);
 
         if (responseJson.success) {
-          sessionStorage.setItem("loginNotification", "true");
+          //raise notification success login
+          if (!sessionStorage.getItem("loginNotification")) {
+            console.log("no notification");
+            NotificationManager().add(
+              "You are sucessfully logged in",
+              "success",
+              `Hello,  ${responseJson.user.name}`,
+              1500
+            );
+            sessionStorage.setItem("loginNotification", "true");
+          }
+
           localStorage.setItem("isLoggedin", "true");
           localStorage.setItem("user_id", responseJson.user.user_id);
         } else {
           UserManager.clear();
         }
+
+        setLoading(false);
       })
       .catch((error) => {
         //raise notification error
+        setLoading(false);
         UserManager.clear();
         // this.setState({
         //   authenticated: false,
@@ -138,6 +159,12 @@ function HomePage(props) {
         setContent(posts);
         setQuote(Quotes[randomQuoteIndex]);
         setLoading(false);
+        // NotificationManager().add(
+        //   "Sucessfully Logged in",
+        //   "success",
+        //   "Hello ",
+        //   1000
+        // );
       })
       .catch((err) => {
         console.log(err);
@@ -155,8 +182,18 @@ function HomePage(props) {
     setPageNumber((prevPageNumber) => prevPageNumber - 1);
   };
 
+  if (loading) {
+    return (
+      <div>
+        <ReactNotification />
+        <FullscreenLoader />
+      </div>
+    );
+  }
+
   return (
     <div>
+      <ReactNotification />
       <Navbar />
       <Title title={`"${quote.text}`} author={quote.author} quote />
       <Content title="Latest Stories">

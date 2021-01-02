@@ -39,8 +39,13 @@ export const NotificationManager = () => {
   };
 
   return {
+    /**
+     * @param  {string} text
+     * @param  {string} type
+     * @param  {string} title
+     * @param  {Number} duration
+     */
     add: (text, type, title, duration) => {
-      console.log(text);
       return add(text, type, title, duration);
     },
   };
@@ -83,6 +88,7 @@ const UserManager = () => {
 
   const clear = () => {
     localStorage.clear();
+    sessionStorage.clear();
   };
 
   const isSuperUser = () => {};

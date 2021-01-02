@@ -46,19 +46,17 @@ function HomePage(props) {
     author: "Abraham Lincoln",
   });
   const [loading, setLoading] = useState(true);
+  const [screenLoading, setScreenLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
   const [lastPageNumber, setLastPageNumber] = useState(0);
 
   useEffect(() => {
     // check user logged in status
-    setLoading(true);
     fetch(`${API_DEV}auth/login/success`, {
       method: "GET",
       credentials: "include",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
-        // "Access-Control-Allow-Credentials": true,
       },
     })
       .then((response) => {
@@ -66,8 +64,6 @@ function HomePage(props) {
         throw new Error("failed to authenticate user");
       })
       .then((responseJson) => {
-        // console.log(responseJson);
-
         if (responseJson.success) {
           //raise notification success login
           if (!sessionStorage.getItem("loginNotification")) {
@@ -76,27 +72,28 @@ function HomePage(props) {
               "You are sucessfully logged in",
               "success",
               `Hello,  ${responseJson.user.name}`,
-              1500
+              2000
             );
             sessionStorage.setItem("loginNotification", "true");
           }
-
           localStorage.setItem("isLoggedin", "true");
           localStorage.setItem("user_id", responseJson.user.user_id);
         } else {
           UserManager.clear();
         }
 
-        setLoading(false);
+        setScreenLoading(false);
       })
       .catch((error) => {
         //raise notification error
-        setLoading(false);
+        // NotificationManager().add(
+        //   "Failed to log in",
+        //   "warning",
+        //   `Failure`,
+        //   1500
+        // );
+        setScreenLoading(false);
         UserManager.clear();
-        // this.setState({
-        //   authenticated: false,
-        //   error: "Failed to authenticate user",
-        // });
       });
   }, []);
 
@@ -182,7 +179,7 @@ function HomePage(props) {
     setPageNumber((prevPageNumber) => prevPageNumber - 1);
   };
 
-  if (loading) {
+  if (screenLoading) {
     return (
       <div>
         <ReactNotification />

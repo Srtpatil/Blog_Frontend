@@ -12,6 +12,7 @@ import CheckList from "@editorjs/checklist";
 import Delimiter from "@editorjs/delimiter";
 import InlineCode from "@editorjs/inline-code";
 import SimpleImage from "@editorjs/simple-image";
+import { IMAGE_SERVICE } from "../../Utils";
 
 export const EDITOR_JS_TOOLS = {
   embed: {
@@ -49,7 +50,7 @@ export const EDITOR_JS_TOOLS = {
           const img = new FormData();
           img.append("image", file);
           // your own uploading logic here
-          return fetch("http://localhost:5000/image/upload", {
+          return fetch(`${IMAGE_SERVICE}image/upload`, {
             method: "POST",
             credentials: "include",
             body: img,
@@ -57,6 +58,9 @@ export const EDITOR_JS_TOOLS = {
             .then((resp) => resp.json())
             .then((resp) => {
               console.log(resp);
+              if (!resp.authenticated) {
+                throw new Error(resp.msg);
+              }
               return {
                 success: 1,
                 file: {

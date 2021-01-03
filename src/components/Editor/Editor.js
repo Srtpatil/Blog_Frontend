@@ -7,7 +7,11 @@ import EditorJS from "react-editor-js";
 import ContentEditable from "react-contenteditable";
 import Footer from "../Footer/Footer";
 import { PostData } from "../../DummyData/Post";
-import UserManager, { API_DEV, NotificationManager } from "../../Utils";
+import UserManager, {
+  API_DEV,
+  IMAGE_SERVICE,
+  NotificationManager,
+} from "../../Utils";
 import ReactNotification, { store } from "react-notifications-component";
 import { EDITOR_JS_TOOLS } from "../Post/constants";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
@@ -109,7 +113,7 @@ class Editor extends Component {
           if (DataDiff[i][0] === "-" && DataDiff[i][1].type === "image") {
             // console.log(DataDiff[i][1].data.file.url);
             const path = DataDiff[i][1].data.file.url;
-            fetch(`http://localhost:5000/image/delete?path=${path}`, {
+            fetch(`${IMAGE_SERVICE}image/delete?path=${path}`, {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",

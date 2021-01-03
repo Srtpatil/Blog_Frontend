@@ -1,5 +1,6 @@
 import { store } from "react-notifications-component";
 export const API_DEV = "http://localhost:8081/";
+export const IMAGE_SERVICE = "http://localhost:5000/";
 
 // Random number between range
 export const randomNumber = (min, max) => {

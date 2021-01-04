@@ -22,14 +22,14 @@ class EditProfileForm extends Component {
           }}
         >
           <Form className="form">
-            <label className="nameLabel">Name : </label>
+            <label className="editProfileLabel">Name : </label>
             <Field type="text" name="name" placeholder="Type your Name" />
             <ErrorMessage
               name="name"
               component="div"
               className="errorMessage"
             />
-            <label className="nameLabel">Bio : </label>
+            <label className="editProfileLabel">Bio : </label>
             <Field
               as="textarea"
               name="bio"

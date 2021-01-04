@@ -1,12 +1,33 @@
 .form textarea {
   width: 100%;
-  margin-bottom: 5px;
-  background-color: #dddddd;
+  background-color: #f6f8fa;
   border: none;
   padding: 12px;
   resize: vertical;
-  max-height: 150px;
-  min-height: 80px;
+  min-height: 150px;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  font-family: "Josefin Sans", sans-serif;
+  resize: none;
+}
+
+.form input {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #f6f8fa;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.form .editProfileLabel {
+  font-size: 18px;
+  padding: 8px 0;
+  margin-top: 5px;
+  font-weight: bold;
+  display: inline-block;
 }
 
 .form .submitButtonContainer {

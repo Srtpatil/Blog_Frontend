@@ -26,13 +26,13 @@
   font-weight: bold;
 }
 
-.form input {
+/* .form input {
   width: 100%;
   margin-bottom: 5px;
   background-color: #dddddd;
   border: none;
   padding: 12px;
-}
+} */
 
 .form input:focus {
   outline: 1px solid var(--primary-color);

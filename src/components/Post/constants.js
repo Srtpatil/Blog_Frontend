@@ -40,10 +40,6 @@ export const EDITOR_JS_TOOLS = {
     class: Image,
     inlineToolbar: true,
     config: {
-      // endpoints: {
-      //   byFile: "http://localhost:5000/image/upload",
-      //   byUrl: "http://localhost:5000/image/upload",
-      // },
       uploader: {
         uploadByFile(file) {
           console.log("IMG: ", file);

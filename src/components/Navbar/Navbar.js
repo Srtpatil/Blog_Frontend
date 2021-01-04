@@ -6,7 +6,7 @@ import {
   faTimes,
   faScroll,
   faUserCircle,
-  faFeatherAlt,
+  faBookmark,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Backdrop } from "../../StyledComponents/Container.js";
@@ -91,10 +91,10 @@ function DropdownMenu(props) {
         Your Drafts
       </DropdownItem>
       <DropdownItem
-        icon={faFeatherAlt}
+        icon={faBookmark}
         to={`/bookmarks/${UserManager.getUserId()}`}
       >
-        Saved Stories
+        Your Bookmarks
       </DropdownItem>
       <DropdownItem
         icon={faSignOutAlt}

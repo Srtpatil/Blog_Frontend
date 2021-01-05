@@ -22,7 +22,7 @@ function App() {
           <ProtectedRoute exact path="/new-story" component={Editor} />
           <ProtectedRoute exact path="/new-story/:post_id" component={Editor} />
           <ProtectedRoute exact path="/login" component={Login} />
-          <ProtectedRoute exact path="/signup" component={Signup} />
+          {/* <ProtectedRoute exact path="/signup" component={Signup} /> */}
           <ProtectedRoute exact path="/drafts/:user_id" component={DraftList} />
           <ProtectedRoute
             exact

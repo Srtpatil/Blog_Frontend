@@ -114,6 +114,7 @@ class Editor extends Component {
             const path = DataDiff[i][1].data.file.url;
             fetch(`${API_DEV}image/delete?path=${path}`, {
               method: "DELETE",
+              credentials : "include",
               headers: {
                 "Content-Type": "application/json",
               },

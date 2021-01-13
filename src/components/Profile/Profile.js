@@ -280,6 +280,7 @@ class Profile extends Component {
           `${API_DEV}image/delete?path=${this.state.profile_picture}`,
           {
             method: "DELETE",
+            credentials : "include",
             headers: {
               "Content-Type": "application/json",
             },
@@ -390,6 +391,7 @@ class Profile extends Component {
     if (this.state.profile_picture !== DefaultPicture) {
       fetch(`${API_DEV}image/delete?path=${this.state.profile_picture}`, {
         method: "DELETE",
+        credentials : "include",
         headers: {
           "Content-Type": "application/json",
         },

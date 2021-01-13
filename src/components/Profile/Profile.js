@@ -16,7 +16,6 @@ import {
 } from "../../StyledComponents/Headers";
 import UserManager, {
   API_DEV,
-  IMAGE_SERVICE,
   MonthList,
   NotificationManager,
 } from "../../Utils";
@@ -278,7 +277,7 @@ class Profile extends Component {
       img.append("image", file);
       if (this.state.profile_picture !== DefaultPicture) {
         fetch(
-          `${IMAGE_SERVICE}image/delete?path=${this.state.profile_picture}`,
+          `${API_DEV}image/delete?path=${this.state.profile_picture}`,
           {
             method: "DELETE",
             headers: {
@@ -289,7 +288,7 @@ class Profile extends Component {
           .then((resp) => resp.json())
           .then((res) => {
             console.log("First Delete: ", res);
-            fetch(`${IMAGE_SERVICE}image/upload`, {
+            fetch(`${API_DEV}image/upload`, {
               method: "POST",
               credentials: "include",
               body: img,
@@ -337,7 +336,7 @@ class Profile extends Component {
               });
           });
       } else {
-        fetch(`${IMAGE_SERVICE}image/upload`, {
+        fetch(`${API_DEV}image/upload`, {
           method: "POST",
           credentials: "include",
           body: img,
@@ -389,7 +388,7 @@ class Profile extends Component {
 
   removePictureHandler = (close) => {
     if (this.state.profile_picture !== DefaultPicture) {
-      fetch(`${IMAGE_SERVICE}image/delete?path=${this.state.profile_picture}`, {
+      fetch(`${API_DEV}image/delete?path=${this.state.profile_picture}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -1,8 +1,9 @@
 import { store } from "react-notifications-component";
+import axios from "axios";
 export const API_DEV =
-  "http://optimize-it-backend.centralindia.cloudapp.azure.com:8081/";
-export const IMAGE_SERVICE =
-  "http://optimizeit-image-service.centralindia.cloudapp.azure.com:5000/";
+  "http://localhost:8081/";
+// export const IMAGE_SERVICE =
+//   "https://optimizeit-image-service.centralindia.cloudapp.azure.com/";
 
 // Random number between range
 export const randomNumber = (min, max) => {
@@ -68,6 +69,13 @@ const UserManager = () => {
   };
 
   const isLoggedinWithApi = () => {
+    axios
+      .get(`${API_DEV}auth/login/success`, {
+        withCredentials: true,
+      })
+      .then((resp) => {
+        console.log("Axios responce -> ", resp);
+      });
     return fetch(`${API_DEV}auth/login/success`, {
       method: "GET",
       credentials: "include",
@@ -77,6 +85,7 @@ const UserManager = () => {
         throw new Error("failed to authenticate user");
       })
       .then((responseJson) => {
+        console.log("Fetch responce -> ", responseJson);
         return responseJson;
       });
   };

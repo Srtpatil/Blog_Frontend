@@ -276,16 +276,13 @@ class Profile extends Component {
       const img = new FormData();
       img.append("image", file);
       if (this.state.profile_picture !== DefaultPicture) {
-        fetch(
-          `${API_DEV}image/delete?path=${this.state.profile_picture}`,
-          {
-            method: "DELETE",
-            credentials : "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(`${API_DEV}image/delete?path=${this.state.profile_picture}`, {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((resp) => resp.json())
           .then((res) => {
             console.log("First Delete: ", res);
@@ -391,7 +388,7 @@ class Profile extends Component {
     if (this.state.profile_picture !== DefaultPicture) {
       fetch(`${API_DEV}image/delete?path=${this.state.profile_picture}`, {
         method: "DELETE",
-        credentials : "include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

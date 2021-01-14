@@ -1,9 +1,7 @@
 import { store } from "react-notifications-component";
 import axios from "axios";
 export const API_DEV =
-  "http://localhost:8081/";
-// export const IMAGE_SERVICE =
-//   "https://optimizeit-image-service.centralindia.cloudapp.azure.com/";
+  "https://optimizeit-backend.centralindia.cloudapp.azure.com/";
 
 // Random number between range
 export const randomNumber = (min, max) => {

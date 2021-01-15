@@ -67,13 +67,6 @@ const UserManager = () => {
   };
 
   const isLoggedinWithApi = () => {
-    axios
-      .get(`${API_DEV}auth/login/success`, {
-        withCredentials: true,
-      })
-      .then((resp) => {
-        console.log("Axios responce -> ", resp);
-      });
     return fetch(`${API_DEV}auth/login/success`, {
       method: "GET",
       credentials: "include",

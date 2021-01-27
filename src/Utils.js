@@ -1,8 +1,8 @@
 import { store } from "react-notifications-component";
 export const API_DEV =
-  "http://optimize-it-backend.centralindia.cloudapp.azure.com:8081/";
+  "https://optimize-it-backend.centralindia.cloudapp.azure.com/";
 export const IMAGE_SERVICE =
-  "http://optimizeit-image-service.centralindia.cloudapp.azure.com:5000/";
+  "https://optimizeit-image-service.centralindia.cloudapp.azure.com/";
 
 // Random number between range
 export const randomNumber = (min, max) => {

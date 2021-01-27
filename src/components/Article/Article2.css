@@ -58,9 +58,12 @@
   margin-bottom: 5%;
   padding: 0 5px;
 
-  line-height: 1.6;
+  /* line-height: 1.6; */
+  line-height: 1.4em;
   font-family: "Domine";
-  font-size: 1rem;
+  font-size: 18px;
+  max-height: calc(7em - 4px);
+  overflow: hidden;
 }
 
 /* Deltetion Model Popup */

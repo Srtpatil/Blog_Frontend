@@ -9,7 +9,6 @@ import Footer from "../Footer/Footer";
 import { PostData } from "../../DummyData/Post";
 import UserManager, {
   API_DEV,
-  IMAGE_SERVICE,
   NotificationManager,
 } from "../../Utils";
 import ReactNotification, { store } from "react-notifications-component";
@@ -113,8 +112,9 @@ class Editor extends Component {
           if (DataDiff[i][0] === "-" && DataDiff[i][1].type === "image") {
             // console.log(DataDiff[i][1].data.file.url);
             const path = DataDiff[i][1].data.file.url;
-            fetch(`${IMAGE_SERVICE}image/delete?path=${path}`, {
+            fetch(`${API_DEV}image/delete?path=${path}`, {
               method: "DELETE",
+              credentials : "include",
               headers: {
                 "Content-Type": "application/json",
               },

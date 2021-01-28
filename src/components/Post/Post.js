@@ -284,6 +284,9 @@ class Post extends Component {
           white_button={this.state.bookmarked ? "Bookmarked" : "Bookmark"}
           secondaryIcon={this.state.bookmarked ? faSolidBookmark : faBookmark}
           bookmarkLoading={this.state.bookmarkLoading}
+          firstLetter={
+            this.state.PostData ? this.state.PostData.Title[0] : null
+          }
         />
         <Content title="ENJOY YOUR READ !" refProp={this.myRef}>
           {this.state.loading ? (

@@ -21,7 +21,8 @@ export const PrimaryButton = styled.div`
   }
 
   @media screen and (max-width: 650px) {
-    min-width: 45%;
+    min-width: 42%;
+    height: 40px;
   }
 `;
 
@@ -43,7 +44,9 @@ export const SecondaryButton = styled.div`
   }
 
   @media screen and (max-width: 650px) {
-    min-width: 45%;
+    min-width: 42%;
+    height: 40px;
+    margin-right: 0px;
   }
 `;
 

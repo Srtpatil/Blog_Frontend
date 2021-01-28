@@ -1,5 +1,4 @@
 import { store } from "react-notifications-component";
-import axios from "axios";
 export const API_DEV =
   "https://optimizeit-backend.centralindia.cloudapp.azure.com/";
 

@@ -14,8 +14,6 @@ import InlineCode from "@editorjs/inline-code";
 import SimpleImage from "@editorjs/simple-image";
 import { API_DEV } from "../../Utils";
 
-import axios from "axios";
-
 export const EDITOR_JS_TOOLS = {
   embed: {
     class: Embed,

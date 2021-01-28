@@ -35,7 +35,7 @@ import DefaultPicture from "../../assets/default-profile.png";
 import Loader from "../Static_Pages/Loader";
 
 const SharePost = (props) => {
-  const post_url = `http://localhost:8887/post/${props.postId}`;
+  const post_url = `https://optimize-it.netlify.app/post/${props.postId}`;
   return (
     <>
       <SectionHeader>
